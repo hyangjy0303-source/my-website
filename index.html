@@ -2,64 +2,10 @@
 <html lang="ko">
 <head>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>디지털 마케팅 월간 성과 보고 — 템플릿</title>
+<title>B2B 마케팅 월간 성과 보고 — 2026년 6월</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
-
-<script>
-/* ════════════════════════════════════════════════════
-   ★ 매월 여기만 수정하세요 ★
-════════════════════════════════════════════════════ */
-const DATA = {
-
-  /* 헤더 */
-  period : '2026년 5월 16일 – 6월 15일',
-  month  : '2026년 6월',
-
-  /* 01 홈페이지 GA */
-  ga_curr   : 4649,          // 당월 활성 사용자
-  ga_prev   : 4088,          // 전월 활성 사용자
-  ga_labels : ['4/16~5/15','5/16~6/15'],   // 추이 X축 (왼→오)
-  ga_data   : [4088, 4649],                // 추이 데이터
-  session_total : '5,001',   // 도넛 중앙 세션
-  // 유입 소스 % [검색엔진, Direct, 광고, 뉴스레터, AI검색, 기타]
-  src : [37.7, 51.4, 5.3, 0.9, 3.8, 0.9],
-
-  /* 02 자료 다운로드 */
-  dl_valid : 115,   // 누적 유의미 (대내+대외)
-  dl_total : 343,   // 전체
-  dl_in    : 72,    // 대내
-  dl_out   : 43,    // 대외
-  dl_other : 228,   // 고객 外
-
-  // 월별 추이
-  dlc_labels : ['1월','2월','3월','4월','5월','6월'],
-  dlc_in     : [0,  1,  3, 45,  2, 21],
-  dlc_out    : [4, 11,  5,  7, 12,  4],
-  dlc_other  : [8, 27, 20, 45, 71, 57],
-
-  /* 03 뉴스레터 */
-  nl_kpi_title : '대내 뉴스레터 2호 (6/11)',
-  nl_open  : 34.7,   // 최신 호 열람률
-  nl_click : 8.5,    // 최신 호 클릭률
-  nl_sent  : 118,    // 최신 호 발송 수
-
-  nl_labels : ['0호 (5/27)','1호 (6/1)','2호 (6/11)'],
-  nl_opens  : [69.6, 43.4, 34.7],   // 빈칸 없는 경우 null 대신 수치
-  nl_clicks : [30.4,  6.7,  8.5],
-
-  /* 04 SNS */
-  sns_posts    : 2,
-  sns_imp      : 8591,   // 노출
-  sns_reach    : 5059,   // 도달
-  sns_eng      : 16.2,   // 평균 참여율 %
-  sns_page_avg : 6.32,   // 페이지 전체 평균 %
-
-};
-/* ════════════════════════════════════════════════════ */
-</script>
-
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -74,9 +20,11 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
 .hd-ttl{font-size:34px;font-weight:700;letter-spacing:-.03em;line-height:1.15}
 .hd-ttl span{color:var(--o)}
 .hd-r{text-align:right;font-size:13px;color:var(--ink3);line-height:2}
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);border:2px solid var(--o);border-radius:14px;overflow:hidden;background:var(--white);margin-bottom:24px}
 .kc{padding:24px 26px;border-right:1px solid var(--bd);position:relative}
 .kc:last-child{border-right:none}
-.kc-bar{position:absolute;top:0;left:0;right:0;height:4px;background:var(--o)}
+.kc-bar{position:absolute;top:0;left:0;right:0;height:4px;background:var(--omid)}
+.kc-bar.on{background:var(--o)}
 .sl{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px}
 .sl::after{content:'';flex:1;height:1px;background:var(--bd)}
 .sl-gap{margin-top:32px}
@@ -112,593 +60,892 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
 .cr-tg{font-size:11px;padding:2px 9px;border-radius:8px;white-space:nowrap;flex-shrink:0}
 .dv{height:1px;background:var(--bd);margin:14px 0}
 .ib{background:var(--olt);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--odk);line-height:1.7;margin:10px 0}
+.ib.gray{background:#EDEBE6;color:var(--ink2)}
 .cw{position:relative;width:100%}
+.src-row2{display:grid;grid-template-columns:1fr auto auto;gap:6px;align-items:center;padding:7px 0 7px 10px;border-bottom:1px solid var(--bd);border-left-width:3px;border-left-style:solid;margin-left:-10px}
+.src-row2:last-of-type{border-bottom:none}
+.src-nm2{font-size:13px;font-weight:500;color:var(--ink);display:flex;flex-direction:column}
+.src-sm2{font-size:11px;color:var(--ink3);font-weight:400}
+.src-v2{font-size:14px;font-weight:500;color:var(--ink);text-align:right;min-width:36px}
+.src-p2{font-size:13px;color:var(--ink3);text-align:right;min-width:32px}
+.kc-delta{font-size:13px;font-weight:500;white-space:nowrap}
+.kc-delta-ph{color:var(--ink4)}
+.kc-delta-up{color:#1D7A4F}
+.kc-delta-dn{color:#C03C10}
 .ft{margin-top:40px;padding-top:16px;border-top:1px solid var(--bd);display:flex;justify-content:space-between;font-size:13px;color:var(--ink4)}
-@media print{body{background:#fff}.page{padding:20px}}
 </style>
 </head>
 <body>
 <div class="page">
 
-<!-- 헤더 -->
-<div class="hd">
-  <div>
-    <div class="hd-eye">한화시스템 ICT부문 · 마케팅팀</div>
-    <div class="hd-ttl">디지털 마케팅 <span>월간 성과 보고</span></div>
+  <!-- ── 헤더 ── -->
+  <div class="hd">
+    <div>
+      <div class="hd-eye">한화시스템 ICT부문 · 마케팅팀</div>
+      <div class="hd-ttl">B2B 마케팅 <span>월간 성과 보고</span></div>
+    </div>
+    <div class="hd-r">
+      2026년 5월 16일 – 6월 15일<br>
+      홈페이지 GA · 자료 다운로드 · 뉴스레터 · LinkedIn<br>
+      4채널 통합 분석
+    </div>
   </div>
-  <div class="hd-r">
-    <span id="d-period"></span><br>
-    홈페이지 GA · 자료 다운로드 · 뉴스레터 · LinkedIn<br>
-    4채널 통합 분석
-  </div>
-</div>
 
-<!-- KPI -->
-<div style="display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto auto auto;border:2px solid var(--o);border-radius:14px;overflow:hidden;background:var(--white);margin-bottom:24px">
-  <!-- 타이틀 -->
-  <div class="kc" style="border-bottom:1px solid var(--bd);padding-bottom:10px"><div class="kc-bar"></div><div style="font-size:15px;font-weight:700;color:var(--ink);margin-top:6px">홈페이지 최근 한달 활성 사용자</div></div>
-  <div class="kc" style="border-bottom:1px solid var(--bd);padding-bottom:10px"><div class="kc-bar"></div><div style="font-size:15px;font-weight:700;color:var(--ink);margin-top:6px">홈페이지 고객 자료 다운로드</div></div>
-  <div class="kc" style="border-bottom:1px solid var(--bd);padding-bottom:10px"><div class="kc-bar"></div><div id="d-nl-kpi-title" style="font-size:15px;font-weight:700;color:var(--ink);margin-top:6px"></div></div>
-  <div class="kc" style="border-right:none;border-bottom:1px solid var(--bd);padding-bottom:10px"><div class="kc-bar"></div><div style="font-size:15px;font-weight:700;color:var(--ink);margin-top:6px">SNS 누적 포스팅</div></div>
-  <!-- 수치 -->
-  <div class="kc" style="border-bottom:1px solid var(--bd);padding:14px 26px;height:90px;display:flex;flex-direction:column;justify-content:center">
-    <div style="font-size:28px;color:var(--o);font-weight:700;line-height:1"><span id="d-ga-curr"></span><span style="font-size:14px;font-weight:500;color:var(--ink3);margin-left:3px">명</span></div>
-    <div id="d-ga-delta" style="font-size:11px;font-weight:500;margin-top:6px;text-align:right"></div>
-  </div>
-  <div class="kc" style="border-bottom:1px solid var(--bd);padding:14px 26px;height:90px;display:flex;flex-direction:column;justify-content:center">
-    <div style="font-size:28px;color:var(--o);font-weight:700;line-height:1">누적 <span id="d-dl-valid-kpi"></span><span style="font-size:14px;font-weight:500;color:var(--ink3);margin-left:3px">건</span></div>
-  </div>
-  <div class="kc" style="border-bottom:1px solid var(--bd);padding:14px 26px;height:90px;display:flex;flex-direction:column;justify-content:center">
-    <div style="display:flex;align-items:center">
-      <div style="flex:1;text-align:center">
-        <div style="font-size:12px;color:var(--ink3);margin-bottom:4px">열람률</div>
-        <div style="font-size:26px;color:var(--o);font-weight:700;line-height:1;white-space:nowrap"><span id="d-nl-open-kpi"></span><span style="font-size:13px;font-weight:500;color:var(--ink3);margin-left:2px">%</span></div>
-      </div>
-      <div style="width:1px;height:36px;background:var(--bd);flex-shrink:0;margin:0 4px"></div>
-      <div style="flex:1;text-align:center">
-        <div style="font-size:12px;color:var(--ink3);margin-bottom:4px">클릭률</div>
-        <div style="font-size:26px;color:var(--o);font-weight:700;line-height:1;white-space:nowrap"><span id="d-nl-click-kpi"></span><span style="font-size:13px;font-weight:500;color:var(--ink3);margin-left:2px">%</span></div>
-      </div>
-    </div>
-    <div id="d-nl-sent-kpi" style="font-size:11px;color:var(--ink4);margin-top:6px;text-align:right"></div>
-  </div>
-  <div class="kc" style="border-right:none;border-bottom:1px solid var(--bd);padding:14px 26px;height:90px;display:flex;flex-direction:column;justify-content:center">
-    <div style="display:flex;align-items:center">
-      <div style="flex:1;text-align:center">
-        <div style="font-size:12px;color:var(--ink3);margin-bottom:4px">노출</div>
-        <div style="font-size:26px;color:var(--o);font-weight:700;line-height:1;white-space:nowrap"><span id="d-sns-imp-kpi"></span><span style="font-size:13px;font-weight:500;color:var(--ink3);margin-left:2px">건</span></div>
-      </div>
-      <div style="width:1px;height:36px;background:var(--bd);flex-shrink:0;margin:0 4px"></div>
-      <div style="flex:1;text-align:center">
-        <div style="font-size:12px;color:var(--ink3);margin-bottom:4px">도달</div>
-        <div style="font-size:26px;color:var(--o);font-weight:700;line-height:1;white-space:nowrap"><span id="d-sns-reach-kpi"></span><span style="font-size:13px;font-weight:500;color:var(--ink3);margin-left:2px">명</span></div>
-      </div>
-    </div>
-    <div id="d-sns-posts-kpi" style="font-size:11px;color:var(--ink4);margin-top:6px;text-align:right"></div>
-  </div>
-  <!-- Source -->
-  <div class="kc" style="padding-top:10px;border-top:none"><div style="font-size:11px;color:var(--ink4)">Source : GA (Google Analytics)</div></div>
-  <div class="kc" style="padding-top:10px;border-top:none"><div style="font-size:11px;color:var(--ink4)">Source : 홈페이지 관리자 페이지</div></div>
-  <div class="kc" style="padding-top:10px;border-top:none"><div style="font-size:11px;color:var(--ink4)">Source : Stibee</div></div>
-  <div class="kc" style="border-right:none;padding-top:10px;border-top:none"><div style="font-size:11px;color:var(--ink4)">Source : LinkedIn</div></div>
-</div>
+  <!-- ── KPI ── -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto auto auto;border:2px solid var(--o);border-radius:14px;overflow:hidden;background:var(--white);margin-bottom:24px">
 
-<!-- 채널 현황 -->
-<div class="sl">채널 현황</div>
+    <!-- 타이틀 행 -->
+    <div class="kc" style="border-bottom:1px solid var(--bd);padding-bottom:10px">
+      <div class="kc-bar on"></div>
+      <div style="font-size:15px;font-weight:700;letter-spacing:.02em;color:var(--ink);margin-top:6px">홈페이지 최근 한달 활성 사용자</div>
+    </div>
+    <div class="kc" style="border-bottom:1px solid var(--bd);padding-bottom:10px">
+      <div class="kc-bar on"></div>
+      <div style="font-size:15px;font-weight:700;letter-spacing:.02em;color:var(--ink);margin-top:6px">홈페이지 고객 자료 다운로드</div>
+    </div>
+    <div class="kc" style="border-bottom:1px solid var(--bd);padding-bottom:10px">
+      <div class="kc-bar on"></div>
+      <div style="font-size:15px;font-weight:700;letter-spacing:.02em;color:var(--ink);margin-top:6px">대내 뉴스레터 2호 (6/11)</div>
+    </div>
+    <div class="kc" style="border-right:none;border-bottom:1px solid var(--bd);padding-bottom:10px">
+      <div class="kc-bar on"></div>
+      <div style="font-size:15px;font-weight:700;letter-spacing:.02em;color:var(--ink);margin-top:6px">SNS 누적 포스팅</div>
+    </div>
 
-<!-- 01 홈페이지 -->
-<div class="ch">
-  <div class="chh chh-ga"><span class="chh-n">01</span><span class="chh-t">홈페이지</span><span class="chh-tag">Source : 홈페이지 (Google Analytics)</span></div>
-  <div class="chb chb-ga" style="align-items:stretch;min-height:480px">
-    <div class="ic" style="display:flex;flex-direction:column">
-      <div class="ic-t" style="margin-bottom:12px">활성 사용자 추이</div>
-      <div class="cw" style="flex:1;min-height:220px"><canvas id="c_trend"></canvas></div>
-      <div id="d-ga-note" style="font-size:11px;color:var(--ink3);margin-top:10px;padding:8px 12px;background:var(--olt);border-radius:6px;flex-shrink:0;line-height:1.65"></div>
+    <!-- 수치 행 -->
+    <div class="kc" style="border-bottom:1px solid var(--bd);padding:14px 26px;height:90px;display:flex;flex-direction:column;justify-content:center">
+      <div style="font-size:28px;color:var(--o);font-weight:700;line-height:1">4,649<span style="font-size:14px;font-weight:500;color:var(--ink3);margin-left:3px">명</span></div>
+      <div style="font-size:11px;color:#1D7A4F;font-weight:500;margin-top:6px;text-align:right">▲ 561 전월비</div>
     </div>
-    <div class="ic" style="display:flex;flex-direction:column">
-      <div class="ic-t" style="margin-bottom:12px">인기 페이지 Top8 (당월)</div>
-      <div style="font-size:11px;font-weight:500;color:var(--ink3);margin-bottom:8px;display:flex;align-items:center;gap:5px;flex-shrink:0"><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--o)"></span>세션 기준 · 5/16~6/15</div>
-      <div class="pr" style="padding:7px 0"><span class="pr-nm b">App.Gen.Platform</span><div class="pr-tr"><div class="pr-fl" style="width:100%;background:var(--o)"></div></div><span class="pr-pc g">497세션</span><span class="pr-t">51초</span></div>
-      <div class="pr" style="padding:7px 0"><span class="pr-nm b">고객사례 뷰</span><div class="pr-tr"><div class="pr-fl" style="width:59%;background:var(--o)"></div></div><span class="pr-pc g">291세션</span><span class="pr-t">1분 15초</span></div>
-      <div class="pr" style="padding:7px 0"><span class="pr-nm b">Insight Report 뷰</span><div class="pr-tr"><div class="pr-fl" style="width:43%;background:var(--o)"></div></div><span class="pr-pc g">215세션</span><span class="pr-t">1분 18초</span></div>
-      <div class="pr" style="padding:7px 0"><span class="pr-nm">HRM</span><div class="pr-tr"><div class="pr-fl" style="width:40%;background:var(--omid)"></div></div><span class="pr-pc" style="color:var(--ink3)">199세션</span><span class="pr-t">58초</span></div>
-      <div class="pr" style="padding:7px 0"><span class="pr-nm">그룹웨어</span><div class="pr-tr"><div class="pr-fl" style="width:32%;background:var(--omid)"></div></div><span class="pr-pc" style="color:var(--ink3)">160세션</span><span class="pr-t">53초</span></div>
-      <div class="pr" style="padding:7px 0"><span class="pr-nm">고객사례 목록</span><div class="pr-tr"><div class="pr-fl" style="width:26%;background:var(--omid)"></div></div><span class="pr-pc" style="color:var(--ink3)">130세션</span><span class="pr-t">4초</span></div>
-      <div class="pr" style="padding:7px 0"><span class="pr-nm">MRO</span><div class="pr-tr"><div class="pr-fl" style="width:26%;background:var(--ink4)"></div></div><span class="pr-pc" style="color:var(--ink3)">129세션</span><span class="pr-t">49초</span></div>
-      <div class="pr" style="padding:7px 0;border-bottom:none"><span class="pr-nm">AI 데이터플랫폼</span><div class="pr-tr"><div class="pr-fl" style="width:21%;background:var(--ink4)"></div></div><span class="pr-pc" style="color:var(--ink3)">106세션</span><span class="pr-t">1분 24초</span></div>
-      <div style="flex:1"></div>
-      <div style="font-size:11px;color:var(--ink3);margin-top:12px;padding:8px 12px;background:var(--olt);border-radius:6px;flex-shrink:0;line-height:1.65">* 세션: 사용자가 홈페이지에 접속한 횟수<br>* 우측 시간: 페이지 평균 체류시간<br>* index·search·sales_pack·contact 페이지 제외</div>
+    <div class="kc" style="border-bottom:1px solid var(--bd);padding:14px 26px;height:90px;display:flex;flex-direction:column;justify-content:center">
+      <div style="font-size:28px;color:var(--o);font-weight:700;line-height:1">누적 115<span style="font-size:14px;font-weight:500;color:var(--ink3);margin-left:3px">건</span></div>
+
     </div>
-    <div class="ic" style="display:flex;flex-direction:column">
-      <div class="ic-t" style="margin-bottom:12px">최근 한달 기준 유입 소스 구성</div>
-      <div style="position:relative;height:190px;flex-shrink:0"><canvas id="c_src_donut"></canvas></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px 8px;margin-top:10px;flex-shrink:0">
-        <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink2)"><span style="width:9px;height:9px;background:#F05A28;border-radius:2px;flex-shrink:0;display:inline-block"></span>검색엔진</div>
-        <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink2)"><span style="width:9px;height:9px;background:#1A56A0;border-radius:2px;flex-shrink:0;display:inline-block"></span>Direct</div>
-        <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink2)"><span style="width:9px;height:9px;background:#BA7517;border-radius:2px;flex-shrink:0;display:inline-block"></span>광고</div>
-        <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink2)"><span style="width:9px;height:9px;background:#2D2D2D;border-radius:2px;flex-shrink:0;display:inline-block"></span>뉴스레터</div>
-        <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink2)"><span style="width:9px;height:9px;background:#00897B;border-radius:2px;flex-shrink:0;display:inline-block"></span>AI 검색</div>
-        <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink2)"><span style="width:9px;height:9px;background:#DEDAD4;border-radius:2px;flex-shrink:0;display:inline-block"></span>기타</div>
+    <div class="kc" style="border-bottom:1px solid var(--bd);padding:14px 26px;height:90px;display:flex;flex-direction:column;justify-content:center">
+      <div style="display:flex;align-items:center">
+        <div style="flex:1;text-align:center">
+          <div style="font-size:12px;color:var(--ink3);margin-bottom:4px">열람률</div>
+          <div style="font-size:26px;color:var(--o);font-weight:700;line-height:1;white-space:nowrap">34.7<span style="font-size:13px;font-weight:500;color:var(--ink3);margin-left:2px">%</span></div>
+        </div>
+        <div style="width:1px;height:36px;background:var(--bd);flex-shrink:0;margin:0 4px"></div>
+        <div style="flex:1;text-align:center">
+          <div style="font-size:12px;color:var(--ink3);margin-bottom:4px">클릭률</div>
+          <div style="font-size:26px;color:var(--o);font-weight:700;line-height:1;white-space:nowrap">8.5<span style="font-size:13px;font-weight:500;color:var(--ink3);margin-left:2px">%</span></div>
+        </div>
       </div>
-      <div class="dv" style="margin:12px 0;flex-shrink:0"></div>
-      <div style="flex-shrink:0">
-        <div style="font-size:10px;font-weight:500;color:var(--ink3);margin-bottom:8px;letter-spacing:.04em">월별 소스 구성 추이</div>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <div>
-            <div style="font-size:10px;color:var(--ink3);margin-bottom:4px">4월 (4/16~5/15) · 4,567세션</div>
-            <div style="display:flex;height:10px;border-radius:4px;overflow:hidden">
-              <div style="width:43.8%;background:#F05A28"></div><div style="width:46.4%;background:#1A56A0"></div>
-              <div style="width:5.2%;background:#BA7517"></div><div style="width:0.2%;background:#2D2D2D"></div>
-              <div style="width:3.6%;background:#00897B"></div><div style="width:0.8%;background:#DEDAD4"></div>
+      <div style="font-size:11px;color:var(--ink4);margin-top:6px;text-align:right">발송 118명 기준</div>
+    </div>
+    <div class="kc" style="border-right:none;border-bottom:1px solid var(--bd);padding:14px 26px;height:90px;display:flex;flex-direction:column;justify-content:center">
+      <div style="display:flex;align-items:center">
+        <div style="flex:1;text-align:center">
+          <div style="font-size:12px;color:var(--ink3);margin-bottom:4px">노출</div>
+          <div style="font-size:26px;color:var(--o);font-weight:700;line-height:1;white-space:nowrap">8,591<span style="font-size:13px;font-weight:500;color:var(--ink3);margin-left:2px">건</span></div>
+        </div>
+        <div style="width:1px;height:36px;background:var(--bd);flex-shrink:0;margin:0 4px"></div>
+        <div style="flex:1;text-align:center">
+          <div style="font-size:12px;color:var(--ink3);margin-bottom:4px">도달</div>
+          <div style="font-size:26px;color:var(--o);font-weight:700;line-height:1;white-space:nowrap">5,059<span style="font-size:13px;font-weight:500;color:var(--ink3);margin-left:2px">명</span></div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--ink4);margin-top:6px;text-align:right">게시물 2건 누적 기준</div>
+    </div>
+
+    <!-- Source 행 -->
+    <div class="kc" style="padding-top:10px;border-top:none">
+      <div style="font-size:11px;color:var(--ink4)">Source : GA (Google Analytics)</div>
+    </div>
+    <div class="kc" style="padding-top:10px;border-top:none">
+      <div style="font-size:11px;color:var(--ink4)">Source : 홈페이지 관리자 페이지</div>
+    </div>
+    <div class="kc" style="padding-top:10px;border-top:none">
+      <div style="font-size:11px;color:var(--ink4)">Source : Stibee</div>
+    </div>
+    <div class="kc" style="border-right:none;padding-top:10px;border-top:none">
+      <div style="font-size:11px;color:var(--ink4)">Source : LinkedIn</div>
+    </div>
+
+  </div>
+
+  <!-- ── 채널 현황 ── -->
+  <div class="sl">채널 현황</div>
+
+  <!-- 01 홈페이지 -->
+  <div class="ch">
+    <div class="chh chh-ga">
+      <span class="chh-n">01</span>
+      <span class="chh-t">홈페이지</span>
+      <span class="chh-tag">Source : 홈페이지 (Google Analytics)</span>
+    </div>
+    <div class="chb chb-ga" style="align-items:stretch;min-height:480px">
+
+      <!-- 열 1: 활성 사용자 추이 -->
+      <div class="ic" style="display:flex;flex-direction:column">
+        <div class="ic-t" style="margin-bottom:12px">활성 사용자 추이</div>
+        <div class="cw" style="flex:1;min-height:220px"><canvas id="c_trend"></canvas></div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:10px;padding:8px 12px;background:var(--olt);border-radius:6px;flex-shrink:0;line-height:1.65">
+          * 기간 기준: 전월 16일 ~ 당월 15일 · /ict/ 경로 필터 적용<br>
+          * 전월(4/16~5/15) 대비 +561명 증가
+        </div>
+      </div>
+
+      <!-- 열 2: 인기 페이지 -->
+      <div class="ic" style="display:flex;flex-direction:column">
+        <div class="ic-t" style="margin-bottom:12px">인기 페이지 Top8 (당월)</div>
+        <div style="font-size:11px;font-weight:500;color:var(--ink3);margin-bottom:8px;display:flex;align-items:center;gap:5px;flex-shrink:0">
+          <span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--o)"></span>세션 기준 · 5/16~6/15
+        </div>
+        <div class="pr" style="padding:7px 0"><span class="pr-nm b">App.Gen.Platform</span><div class="pr-tr"><div class="pr-fl" style="width:100%;background:var(--o)"></div></div><span class="pr-pc g">497세션</span><span class="pr-t">51초</span></div>
+        <div class="pr" style="padding:7px 0"><span class="pr-nm b">고객사례 뷰</span><div class="pr-tr"><div class="pr-fl" style="width:59%;background:var(--o)"></div></div><span class="pr-pc g">291세션</span><span class="pr-t">1분 15초</span></div>
+        <div class="pr" style="padding:7px 0"><span class="pr-nm b">Insight Report 뷰</span><div class="pr-tr"><div class="pr-fl" style="width:43%;background:var(--o)"></div></div><span class="pr-pc g">215세션</span><span class="pr-t">1분 18초</span></div>
+        <div class="pr" style="padding:7px 0"><span class="pr-nm">HRM</span><div class="pr-tr"><div class="pr-fl" style="width:40%;background:var(--omid)"></div></div><span class="pr-pc" style="color:var(--ink3)">199세션</span><span class="pr-t">58초</span></div>
+        <div class="pr" style="padding:7px 0"><span class="pr-nm">그룹웨어</span><div class="pr-tr"><div class="pr-fl" style="width:32%;background:var(--omid)"></div></div><span class="pr-pc" style="color:var(--ink3)">160세션</span><span class="pr-t">53초</span></div>
+        <div class="pr" style="padding:7px 0"><span class="pr-nm">고객사례 목록</span><div class="pr-tr"><div class="pr-fl" style="width:26%;background:var(--omid)"></div></div><span class="pr-pc" style="color:var(--ink3)">130세션</span><span class="pr-t">4초</span></div>
+        <div class="pr" style="padding:7px 0"><span class="pr-nm">MRO</span><div class="pr-tr"><div class="pr-fl" style="width:26%;background:var(--ink4)"></div></div><span class="pr-pc" style="color:var(--ink3)">129세션</span><span class="pr-t">49초</span></div>
+        <div class="pr" style="padding:7px 0;border-bottom:none"><span class="pr-nm">AI 데이터플랫폼</span><div class="pr-tr"><div class="pr-fl" style="width:21%;background:var(--ink4)"></div></div><span class="pr-pc" style="color:var(--ink3)">106세션</span><span class="pr-t">1분 24초</span></div>
+        <div style="flex:1"></div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:12px;padding:8px 12px;background:var(--olt);border-radius:6px;flex-shrink:0;line-height:1.65">
+          * 세션: 사용자가 홈페이지에 접속한 횟수<br>* 우측 시간: 페이지 평균 체류시간 (해당 페이지에 머문 평균 시간)<br>* index·search·sales_pack·contact 페이지 제외
+        </div>
+      </div>
+
+      <!-- 열 3: 유입 소스 -->
+      <div class="ic" style="display:flex;flex-direction:column">
+        <div class="ic-t" style="margin-bottom:12px">최근 한달 기준 유입 소스 구성</div>
+        <div style="position:relative;height:190px;flex-shrink:0">
+          <canvas id="c_src_donut"></canvas>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px 8px;margin-top:10px;flex-shrink:0">
+          <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink2)"><span style="width:9px;height:9px;background:#F05A28;border-radius:2px;flex-shrink:0;display:inline-block"></span>검색엔진</div>
+          <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink2)"><span style="width:9px;height:9px;background:#1A56A0;border-radius:2px;flex-shrink:0;display:inline-block"></span>Direct</div>
+          <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink2)"><span style="width:9px;height:9px;background:#BA7517;border-radius:2px;flex-shrink:0;display:inline-block"></span>광고</div>
+          <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink2)"><span style="width:9px;height:9px;background:#2D2D2D;border-radius:2px;flex-shrink:0;display:inline-block"></span>뉴스레터</div>
+          <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink2)"><span style="width:9px;height:9px;background:#00897B;border-radius:2px;flex-shrink:0;display:inline-block"></span>AI 검색</div>
+          <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink2)"><span style="width:9px;height:9px;background:#DEDAD4;border-radius:2px;flex-shrink:0;display:inline-block"></span>기타</div>
+        </div>
+        <div class="dv" style="margin:12px 0;flex-shrink:0"></div>
+        <div style="flex-shrink:0">
+          <div style="font-size:10px;font-weight:500;color:var(--ink3);margin-bottom:8px;letter-spacing:.04em">월별 소스 구성 추이</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div>
+              <div style="font-size:10px;color:var(--ink3);margin-bottom:4px">4월 (4/16~5/15) · 4,567세션</div>
+              <div style="display:flex;height:10px;border-radius:4px;overflow:hidden">
+                <div style="width:43.8%;background:#F05A28"></div>
+                <div style="width:46.4%;background:#1A56A0"></div>
+                <div style="width:5.2%;background:#BA7517"></div>
+                <div style="width:0.2%;background:#2D2D2D"></div>
+                <div style="width:3.6%;background:#00897B"></div>
+                <div style="width:0.8%;background:#DEDAD4"></div>
+              </div>
             </div>
-          </div>
-          <div>
-            <div style="font-size:10px;color:var(--ink3);margin-bottom:4px">5월 (5/16~6/15) · 5,001세션</div>
-            <div style="display:flex;height:10px;border-radius:4px;overflow:hidden">
-              <div style="width:37.7%;background:#F05A28"></div><div style="width:51.4%;background:#1A56A0"></div>
-              <div style="width:5.3%;background:#BA7517"></div><div style="width:0.9%;background:#2D2D2D"></div>
-              <div style="width:3.8%;background:#00897B"></div><div style="width:0.9%;background:#DEDAD4"></div>
+            <div>
+              <div style="font-size:10px;color:var(--ink3);margin-bottom:4px">5월 (5/16~6/15) · 5,001세션</div>
+              <div style="display:flex;height:10px;border-radius:4px;overflow:hidden">
+                <div style="width:37.7%;background:#F05A28"></div>
+                <div style="width:51.4%;background:#1A56A0"></div>
+                <div style="width:5.3%;background:#BA7517"></div>
+                <div style="width:0.9%;background:#2D2D2D"></div>
+                <div style="width:3.8%;background:#00897B"></div>
+                <div style="width:0.9%;background:#DEDAD4"></div>
+              </div>
             </div>
           </div>
         </div>
+        <div style="flex:1"></div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:12px;padding:7px 10px;background:var(--olt);border-radius:6px;flex-shrink:0;line-height:1.65">
+          * 채용사이트(recruit) 유입 기타에 포함 (5월 65세션)<br>
+          * AI 검색: chatgpt · perplexity · claude.ai · gemini 포함<br>
+          * 뉴스레터: stibee + group_outlook 합산
+        </div>
       </div>
-      <div style="flex:1"></div>
-      <div style="font-size:10px;color:var(--ink3);margin-top:12px;padding:7px 10px;background:var(--olt);border-radius:6px;flex-shrink:0;line-height:1.65">* 채용사이트(recruit) 유입 기타에 포함 (5월 65세션)<br>* AI 검색: chatgpt · perplexity · claude.ai · gemini 포함<br>* 뉴스레터: stibee + group_outlook 합산</div>
     </div>
   </div>
-</div>
 
-<!-- 02 자료 다운로드 -->
-<div class="ch">
-  <div class="chh chh-dl"><span class="chh-n">02</span><span class="chh-t">홈페이지 자료 다운로드</span><span class="chh-tag">Source : 홈페이지 관리자 페이지</span></div>
-  <div class="chb chb-dl" style="align-items:stretch">
-    <div class="ic" style="display:flex;flex-direction:column;gap:0">
-      <div class="ic-t" style="margin-bottom:8px">총 다운로드 대비 유의미</div>
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-        <div>
-          <div style="font-size:34px;font-weight:300;letter-spacing:-.04em;color:var(--o);line-height:1"><span id="d-dl-valid"></span><span style="font-size:14px;margin-left:2px;color:var(--ink3)">건</span></div>
-          <div style="font-size:10px;color:var(--ink3);margin-top:2px">/ 전체 <span id="d-dl-total"></span>건</div>
+  <!-- 02 자료 다운로드 -->
+  <div class="ch">
+    <div class="chh chh-dl">
+      <span class="chh-n">02</span>
+      <span class="chh-t">홈페이지 자료 다운로드</span>
+      <span class="chh-tag">Source : 홈페이지 관리자 페이지</span>
+    </div>
+    <div class="chb chb-dl" style="align-items:stretch">
+
+      <!-- 열 1: 유의미 비율 + 월별 추이 -->
+      <div class="ic" style="display:flex;flex-direction:column;gap:0">
+        <div class="ic-t" style="margin-bottom:8px">총 다운로드 대비 유의미</div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+          <div>
+            <div style="font-size:34px;font-weight:300;letter-spacing:-.04em;color:var(--o);line-height:1">115<span style="font-size:14px;margin-left:2px;color:var(--ink3)">건</span></div>
+            <div style="font-size:10px;color:var(--ink3);margin-top:2px">/ 전체 343건</div>
+          </div>
+          <div style="flex:1">
+            <div style="font-size:10px;color:var(--ink3);margin-bottom:4px">유의미 (대내+대외)</div>
+            <div style="height:22px;border-radius:5px;overflow:hidden;display:flex">
+              <div style="width:33.5%;background:var(--o);display:flex;align-items:center;justify-content:center">
+                <span style="font-size:10px;font-weight:500;color:#fff">33.5%</span>
+              </div>
+              <div style="width:66.5%;background:#E8E6E0;display:flex;align-items:center;justify-content:center">
+                <span style="font-size:10px;color:var(--ink3)">고객 外 66.5%</span>
+              </div>
+            </div>
+          </div>
         </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;flex-shrink:0">
+          <div style="background:var(--white);border-radius:6px;padding:8px 10px;border-top:2px solid var(--ink4);text-align:center">
+            <div style="font-size:10px;color:var(--ink3);margin-bottom:2px">대내</div>
+            <div style="font-size:18px;font-weight:300">72<span style="font-size:10px;color:var(--ink3);margin-left:1px">건</span></div>
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:8px 10px;border-top:2px solid var(--o);text-align:center">
+            <div style="font-size:10px;color:var(--ink3);margin-bottom:2px">대외</div>
+            <div style="font-size:18px;font-weight:300;color:var(--o)">43<span style="font-size:10px;color:var(--ink3);margin-left:1px">건</span></div>
+          </div>
+          <div style="background:var(--white);border-radius:6px;padding:8px 10px;border-top:2px solid var(--bd);text-align:center">
+            <div style="font-size:10px;color:var(--ink3);margin-bottom:2px">고객 外</div>
+            <div style="font-size:18px;font-weight:300;color:var(--ink4)">228<span style="font-size:10px;color:var(--ink3);margin-left:1px">건</span></div>
+          </div>
+        </div>
+        <div class="dv" style="margin-bottom:8px;flex-shrink:0"></div>
+        <div class="ic-t" style="margin-bottom:6px;flex-shrink:0">월별 다운로드 추이</div>
+        <div class="cw" style="flex:1;min-height:130px"><canvas id="c_dlc"></canvas></div>
+        <div style="display:flex;gap:10px;margin-top:6px;font-size:10px;color:var(--ink3);flex-shrink:0">
+          <span style="display:flex;align-items:center;gap:3px"><span style="width:8px;height:8px;background:var(--ink4);border-radius:2px;display:inline-block"></span>대내</span>
+          <span style="display:flex;align-items:center;gap:3px"><span style="width:8px;height:8px;background:var(--o);border-radius:2px;display:inline-block"></span>대외</span>
+          <span style="display:flex;align-items:center;gap:3px"><span style="width:8px;height:8px;background:#E8E6E0;border-radius:2px;display:inline-block"></span>고객 外</span>
+        </div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:7px;padding:5px 8px;background:var(--olt);border-radius:5px;line-height:1.6;flex-shrink:0">
+          * 월 기준: 전월 16일~당월 15일 (1월은 1/1~1/15)<br>
+          * 4월 대내 급증(45건): 한화오션 Physical AI 집중 다운로드<br>
+          * 고객 外: 학생·경쟁SI·IT기업 등 비타겟
+        </div>
+      </div>
+
+      <!-- 열 2: 누적 인기 자료 -->
+      <div class="ic" style="display:flex;flex-direction:column;gap:0">
+        <div class="ic-t" style="margin-bottom:8px">누적 인기 자료 (대내+대외 합산)</div>
+        <div style="display:flex;gap:6px;margin-bottom:8px;flex-shrink:0">
+          <div style="display:inline-flex;align-items:center;gap:5px;border:1.5px solid #1A56A0;border-radius:5px;padding:3px 9px;background:#EEF4FB">
+            <span style="width:7px;height:7px;background:#1A56A0;border-radius:1px;flex-shrink:0;display:inline-block"></span>
+            <span style="font-size:10px;font-weight:700;color:#1A56A0">Insight Report</span>
+            <span style="font-size:10px;color:var(--ink3)">3종</span>
+          </div>
+          <div style="display:inline-flex;align-items:center;gap:5px;border:1.5px solid var(--o);border-radius:5px;padding:3px 9px;background:#FFF3EE">
+            <span style="width:7px;height:7px;background:var(--o);border-radius:1px;flex-shrink:0;display:inline-block"></span>
+            <span style="font-size:10px;font-weight:700;color:var(--o)">Sales Pack</span>
+            <span style="font-size:10px;color:var(--ink3)">11종</span>
+          </div>
+        </div>
+        <div class="cw" style="flex:1;min-height:260px"><canvas id="c_dlf"></canvas></div>
+        <div style="display:flex;gap:14px;margin-top:6px;font-size:10px;flex-shrink:0">
+          <div style="display:flex;align-items:center;gap:4px;color:#1A56A0;font-weight:500">
+            <span style="width:8px;height:8px;background:#1A56A0;border-radius:2px;display:inline-block"></span>대외 (Insight)
+            <span style="width:8px;height:8px;background:#C8DAF0;border-radius:2px;display:inline-block;margin-left:3px"></span>대내 (Insight)
+          </div>
+          <div style="display:flex;align-items:center;gap:4px;color:var(--o);font-weight:500">
+            <span style="width:8px;height:8px;background:var(--o);border-radius:2px;display:inline-block"></span>대외 (Sales)
+            <span style="width:8px;height:8px;background:var(--omid);border-radius:2px;display:inline-block;margin-left:3px"></span>대내 (Sales)
+          </div>
+        </div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:6px;padding:5px 8px;background:var(--olt);border-radius:5px;line-height:1.6;flex-shrink:0">
+          * AGP: App. Gen. Platform · SF: Smart Factory
+        </div>
+      </div>
+
+      <!-- 열 3: 당월 주요 포인트 -->
+      <div class="ic" style="display:flex;flex-direction:column;gap:0">
+        <div class="ic-t" style="margin-bottom:8px">당월 주요 포인트 (5/16~6/15)</div>
+        <div style="background:var(--white);border-radius:7px;padding:10px 12px;margin-bottom:7px;border-left:3px solid var(--ink4)">
+          <div style="font-size:10px;font-weight:500;color:var(--ink);margin-bottom:6px;display:flex;align-items:center;gap:4px">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--ink4);flex-shrink:0;display:inline-block"></span>대내 — 계열사별 관심 자료
+          </div>
+          <div class="cr" style="padding:3px 0"><span class="cr-n" style="font-size:11px;min-width:80px">한화시스템(방산)</span><span class="cr-d" style="font-size:11px">8종 소개서 일괄 (9건)</span></div>
+          <div class="cr" style="padding:3px 0"><span class="cr-n" style="font-size:11px;min-width:80px">한화에어로스페이스</span><span class="cr-d" style="font-size:11px">SF·AGP·AI Agent·한화RM 등 (8건)</span></div>
+          <div class="cr" style="padding:3px 0"><span class="cr-n" style="font-size:11px;min-width:80px">(주)한화</span><span class="cr-d" style="font-size:11px">AGP·제조DI·Ent.Mod (3건)</span></div>
+          <div class="cr" style="padding:3px 0;border-bottom:none"><span class="cr-n" style="font-size:11px;min-width:80px">한화오션</span><span class="cr-d" style="font-size:11px">MRO(TOMMS) (1건)</span></div>
+        </div>
+        <div style="background:var(--white);border-radius:7px;padding:10px 12px;border-left:3px solid var(--o)">
+          <div style="font-size:10px;font-weight:500;color:var(--ink);margin-bottom:6px;display:flex;align-items:center;gap:4px">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--o);flex-shrink:0;display:inline-block"></span>대외 — 기업별 관심 자료
+          </div>
+          <div class="cr" style="padding:3px 0"><span class="cr-n" style="font-size:11px;min-width:80px">우리은행</span><span class="cr-d" style="font-size:11px">MMDM 리포트·SF·제조DI (3건)</span></div>
+          <div class="cr" style="padding:3px 0;border-bottom:none"><span class="cr-n" style="font-size:11px;min-width:80px">KS인더스트리</span><span class="cr-d" style="font-size:11px">MRO(TOMMS) (1건)</span></div>
+        </div>
+        <div style="flex:1"></div>
+        <div style="font-size:10px;color:var(--ink3);margin-top:8px;padding:5px 8px;background:var(--olt);border-radius:5px;line-height:1.6;flex-shrink:0">
+          유의미 = 실제 도입·구매 검토 가능성 있는 대내·대외 고객 기준
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 뉴스레터 -->
+  <div class="ch">
+    <div class="chh chh-nl">
+      <span class="chh-n">03</span>
+      <span class="chh-t">대내 뉴스레터</span>
+      <span class="chh-tag">Source : Stibee</span>
+    </div>
+    <div class="chb chb-nl" style="align-items:stretch">
+      <!-- 좌: 호별 열람률·클릭률 차트 -->
+      <div class="ic" style="display:flex;flex-direction:column">
+        <div class="ic-t">호별 열람률 · 클릭률</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;flex-shrink:0">
+          <div style="background:var(--white);border-radius:8px;padding:10px 12px;border-top:3px solid var(--ink4)">
+            <div style="font-size:10px;color:var(--ink3);margin-bottom:3px">0호 · 46명</div>
+            <div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:2px">컨퍼런스 자료 공유</div>
+            <div style="font-size:10px;color:var(--ink3)">AX Innovation<br>참석자 대상</div>
+          </div>
+          <div style="background:var(--white);border-radius:8px;padding:10px 12px;border-top:3px solid var(--ink3)">
+            <div style="font-size:10px;color:var(--ink3);margin-bottom:3px">1호 · 343명</div>
+            <div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:2px">AgentOne 홍보</div>
+            <div style="font-size:10px;color:var(--ink3)">계열사 IT·AX<br>주요 보직자</div>
+          </div>
+          <div style="background:var(--white);border-radius:8px;padding:10px 12px;border-top:3px solid var(--o)">
+            <div style="font-size:10px;color:var(--ink3);margin-bottom:3px">2호 · 118명 · 6/11</div>
+            <div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:2px">GPUaaS 홍보</div>
+            <div style="font-size:10px;color:var(--ink3)">IT팀·유관부서<br>+ GPUaaS 문의자</div>
+          </div>
+        </div>
+        <div class="cw" style="flex:1;min-height:150px"><canvas id="c_nl"></canvas></div>
+        <div style="display:flex;gap:14px;margin-top:10px;font-size:11px;color:var(--ink3);flex-shrink:0">
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:12px;height:10px;background:var(--o);border-radius:2px;display:inline-block"></span>열람률(%)</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:12px;height:10px;background:#1A56A0;border-radius:2px;display:inline-block"></span>클릭률(%)</span>
+        </div>
+        <div class="ib" style="margin-top:10px;flex-shrink:0">
+          * 호별 발송 대상이 달라 수치 직접 비교 불가<br>
+          * 2호 열람률 34.7% · 클릭률 8.5%<br>
+          * 한화에어로스페이스는 사회적 이슈로 2호 발송 대상 제외
+        </div>
+      </div>
+
+      <!-- 우: 호별 고관심 계열사 + 시사점 -->
+      <div class="ic" style="display:flex;flex-direction:column">
+        <div class="ic-t">호별 고관심 계열사</div>
+        <div style="margin-bottom:10px;flex-shrink:0">
+          <div style="font-size:11px;font-weight:500;color:var(--ink2);margin-bottom:6px;display:flex;align-items:center;gap:6px">
+            <span style="background:var(--o);color:#fff;font-size:10px;padding:1px 8px;border-radius:10px">2호 · GPUaaS</span>
+          </div>
+          <div class="cr">
+            <span class="cr-n" style="font-size:12px;min-width:88px">한화오션</span>
+            <span class="cr-d">오픈 75회 · 클릭 10회 · 19명 수신</span>
+            <span class="cr-tg" style="background:var(--olt);color:var(--odk)">최고관심</span>
+          </div>
+          <div class="cr">
+            <span class="cr-n" style="font-size:12px;min-width:88px">한화에너지</span>
+            <span class="cr-d">오픈 22회 · 클릭 3회 · 팀장급</span>
+            <span class="cr-tg" style="background:var(--olt);color:var(--odk)">최고관심</span>
+          </div>
+          <div class="cr">
+            <span class="cr-n" style="font-size:12px;min-width:88px">한화엔진</span>
+            <span class="cr-d">오픈 14회 · 클릭 1회 · 정보보안팀</span>
+            <span class="cr-tg" style="background:#EDEBE6;color:var(--ink2)">고관심</span>
+          </div>
+          <div class="cr">
+            <span class="cr-n" style="font-size:12px;min-width:88px">한화토탈에너지스</span>
+            <span class="cr-d">오픈 2회 · 클릭 3회 · DL 경험자</span>
+            <span class="cr-tg" style="background:#EDEBE6;color:var(--ink2)">고관심</span>
+          </div>
+        </div>
+        <div class="dv" style="flex-shrink:0"></div>
+        <div style="flex-shrink:0">
+          <div style="font-size:11px;font-weight:500;color:var(--ink2);margin-bottom:6px;display:flex;align-items:center;gap:6px">
+            <span style="background:var(--ink3);color:#fff;font-size:10px;padding:1px 8px;border-radius:10px">1호 · AgentOne</span>
+          </div>
+          <div class="cr">
+            <span class="cr-n" style="font-size:12px;min-width:88px">한화오션 AX사업부</span>
+            <span class="cr-d">열람 56회 · 클릭 11회</span>
+            <span class="cr-tg" style="background:var(--olt);color:var(--odk)">최고관심</span>
+          </div>
+          <div class="cr">
+            <span class="cr-n" style="font-size:12px;min-width:88px">한화NxMD IT파트</span>
+            <span class="cr-d">클릭 11회 · 팀 단위 반응</span>
+            <span class="cr-tg" style="background:var(--olt);color:var(--odk)">최고관심</span>
+          </div>
+          <div class="cr">
+            <span class="cr-n" style="font-size:12px;min-width:88px">한화토탈에너지스</span>
+            <span class="cr-d">클릭 8회 · 2부서 동시</span>
+            <span class="cr-tg" style="background:#EDEBE6;color:var(--ink2)">고관심</span>
+          </div>
+        </div>
+        <div class="dv" style="flex-shrink:0"></div>
         <div style="flex:1">
-          <div style="font-size:10px;color:var(--ink3);margin-bottom:4px">유의미 (대내+대외)</div>
-          <div style="height:22px;border-radius:5px;overflow:hidden;display:flex">
-            <div id="d-dl-bar-v" style="background:var(--o);display:flex;align-items:center;justify-content:center"><span id="d-dl-pct-v" style="font-size:10px;font-weight:500;color:#fff"></span></div>
-            <div id="d-dl-bar-o" style="background:#E8E6E0;display:flex;align-items:center;justify-content:center"><span id="d-dl-pct-o" style="font-size:10px;color:var(--ink3)"></span></div>
+          <div style="font-size:11px;font-weight:500;color:var(--ink2);margin-bottom:8px">시사점</div>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="display:flex;align-items:flex-start;gap:7px">
+              <div style="width:6px;height:6px;border-radius:50%;background:var(--o);flex-shrink:0;margin-top:4px"></div>
+              <div style="font-size:12px;color:var(--ink2);line-height:1.55">한화오션은 1·2호 연속 최고관심 — AgentOne·GPUaaS 모두 반응. 실무 조직 단위의 지속적 관심 확인</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:7px">
+              <div style="width:6px;height:6px;border-radius:50%;background:var(--o);flex-shrink:0;margin-top:4px"></div>
+              <div style="font-size:12px;color:var(--ink2);line-height:1.55">한화에너지·한화엔진은 2호 첫 등장 — GPUaaS 수요 있는 신규 계열사로 후속 확인 필요</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:7px">
+              <div style="width:6px;height:6px;border-radius:50%;background:var(--ink4);flex-shrink:0;margin-top:4px"></div>
+              <div style="font-size:12px;color:var(--ink3);line-height:1.55"><b>2호 열람률(34.7%)이 1호(43.4%) 대비 낮은 것은</b> GPUaaS가 IT 인프라 특화 주제인 만큼 IT팀 내에서도 관심도 편차가 있었을 가능성 있음. 제목·후킹 문구가 수신자의 일상 업무와 직결되는 표현이 아니었을 수 있어 다음 호 기획 시 고려 필요</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:7px">
+              <div style="width:6px;height:6px;border-radius:50%;background:var(--ink4);flex-shrink:0;margin-top:4px"></div>
+              <div style="font-size:12px;color:var(--ink3);line-height:1.55">한화에어로스페이스는 이슈로 2호 제외 — 상황 안정 후 별도 발송 검토</div>
+            </div>
           </div>
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;flex-shrink:0">
-        <div style="background:var(--white);border-radius:6px;padding:8px 10px;border-top:2px solid var(--ink4);text-align:center"><div style="font-size:10px;color:var(--ink3);margin-bottom:2px">대내</div><div style="font-size:18px;font-weight:300"><span id="d-dl-in"></span><span style="font-size:10px;color:var(--ink3);margin-left:1px">건</span></div></div>
-        <div style="background:var(--white);border-radius:6px;padding:8px 10px;border-top:2px solid var(--o);text-align:center"><div style="font-size:10px;color:var(--ink3);margin-bottom:2px">대외</div><div style="font-size:18px;font-weight:300;color:var(--o)"><span id="d-dl-out"></span><span style="font-size:10px;color:var(--ink3);margin-left:1px">건</span></div></div>
-        <div style="background:var(--white);border-radius:6px;padding:8px 10px;border-top:2px solid var(--bd);text-align:center"><div style="font-size:10px;color:var(--ink3);margin-bottom:2px">고객 外</div><div style="font-size:18px;font-weight:300;color:var(--ink4)"><span id="d-dl-other"></span><span style="font-size:10px;color:var(--ink3);margin-left:1px">건</span></div></div>
-      </div>
-      <div class="dv" style="margin-bottom:8px;flex-shrink:0"></div>
-      <div class="ic-t" style="margin-bottom:6px;flex-shrink:0">월별 다운로드 추이</div>
-      <div class="cw" style="flex:1;min-height:130px"><canvas id="c_dlc"></canvas></div>
-      <div style="display:flex;gap:10px;margin-top:6px;font-size:10px;color:var(--ink3);flex-shrink:0">
-        <span style="display:flex;align-items:center;gap:3px"><span style="width:8px;height:8px;background:var(--ink4);border-radius:2px;display:inline-block"></span>대내</span>
-        <span style="display:flex;align-items:center;gap:3px"><span style="width:8px;height:8px;background:var(--o);border-radius:2px;display:inline-block"></span>대외</span>
-        <span style="display:flex;align-items:center;gap:3px"><span style="width:8px;height:8px;background:#E8E6E0;border-radius:2px;display:inline-block"></span>고객 外</span>
-      </div>
-      <div style="font-size:10px;color:var(--ink3);margin-top:7px;padding:5px 8px;background:var(--olt);border-radius:5px;line-height:1.6;flex-shrink:0">* 월 기준: 전월 16일~당월 15일 (1월은 1/1~1/15)<br>* 4월 대내 급증(45건): 한화오션 Physical AI 집중 다운로드<br>* 고객 外: 학생·경쟁SI·IT기업 등 비타겟</div>
-    </div>
-    <div class="ic" style="display:flex;flex-direction:column;gap:0">
-      <div class="ic-t" style="margin-bottom:8px">누적 인기 자료 (대내+대외 합산)</div>
-      <div style="display:flex;gap:6px;margin-bottom:8px;flex-shrink:0">
-        <div style="display:inline-flex;align-items:center;gap:5px;border:1.5px solid #1A56A0;border-radius:5px;padding:3px 9px;background:#EEF4FB"><span style="width:7px;height:7px;background:#1A56A0;border-radius:1px;flex-shrink:0;display:inline-block"></span><span style="font-size:10px;font-weight:700;color:#1A56A0">Insight Report</span><span style="font-size:10px;color:var(--ink3)">3종</span></div>
-        <div style="display:inline-flex;align-items:center;gap:5px;border:1.5px solid var(--o);border-radius:5px;padding:3px 9px;background:#FFF3EE"><span style="width:7px;height:7px;background:var(--o);border-radius:1px;flex-shrink:0;display:inline-block"></span><span style="font-size:10px;font-weight:700;color:var(--o)">Sales Pack</span><span style="font-size:10px;color:var(--ink3)">11종</span></div>
-      </div>
-      <div class="cw" style="flex:1;min-height:260px"><canvas id="c_dlf"></canvas></div>
-      <div style="display:flex;gap:14px;margin-top:6px;font-size:10px;flex-shrink:0">
-        <div style="display:flex;align-items:center;gap:4px;color:#1A56A0;font-weight:500"><span style="width:8px;height:8px;background:#1A56A0;border-radius:2px;display:inline-block"></span>대외 (Insight)<span style="width:8px;height:8px;background:#C8DAF0;border-radius:2px;display:inline-block;margin-left:3px"></span>대내 (Insight)</div>
-        <div style="display:flex;align-items:center;gap:4px;color:var(--o);font-weight:500"><span style="width:8px;height:8px;background:var(--o);border-radius:2px;display:inline-block"></span>대외 (Sales)<span style="width:8px;height:8px;background:var(--omid);border-radius:2px;display:inline-block;margin-left:3px"></span>대내 (Sales)</div>
-      </div>
-      <div style="font-size:10px;color:var(--ink3);margin-top:6px;padding:5px 8px;background:var(--olt);border-radius:5px;line-height:1.6;flex-shrink:0">* AGP: App. Gen. Platform · SF: Smart Factory</div>
-    </div>
-    <div class="ic" style="display:flex;flex-direction:column;gap:0">
-      <div class="ic-t" style="margin-bottom:8px">당월 주요 포인트 (5/16~6/15)</div>
-      <div style="background:var(--white);border-radius:7px;padding:10px 12px;margin-bottom:7px;border-left:3px solid var(--ink4)">
-        <div style="font-size:10px;font-weight:500;color:var(--ink);margin-bottom:6px;display:flex;align-items:center;gap:4px"><span style="width:6px;height:6px;border-radius:50%;background:var(--ink4);flex-shrink:0;display:inline-block"></span>대내 — 계열사별 관심 자료</div>
-        <div class="cr" style="padding:3px 0"><span class="cr-n" style="font-size:11px;min-width:80px">한화시스템(방산)</span><span class="cr-d" style="font-size:11px">8종 소개서 일괄 (9건)</span></div>
-        <div class="cr" style="padding:3px 0"><span class="cr-n" style="font-size:11px;min-width:80px">한화에어로스페이스</span><span class="cr-d" style="font-size:11px">SF·AGP·AI Agent·HRM 등 (8건)</span></div>
-        <div class="cr" style="padding:3px 0"><span class="cr-n" style="font-size:11px;min-width:80px">(주)한화</span><span class="cr-d" style="font-size:11px">AGP·제조DI·Ent.Mod (3건)</span></div>
-        <div class="cr" style="padding:3px 0;border-bottom:none"><span class="cr-n" style="font-size:11px;min-width:80px">한화오션</span><span class="cr-d" style="font-size:11px">MRO(TOMMS) (1건)</span></div>
-      </div>
-      <div style="background:var(--white);border-radius:7px;padding:10px 12px;border-left:3px solid var(--o)">
-        <div style="font-size:10px;font-weight:500;color:var(--ink);margin-bottom:6px;display:flex;align-items:center;gap:4px"><span style="width:6px;height:6px;border-radius:50%;background:var(--o);flex-shrink:0;display:inline-block"></span>대외 — 기업별 관심 자료</div>
-        <div class="cr" style="padding:3px 0"><span class="cr-n" style="font-size:11px;min-width:80px">우리은행</span><span class="cr-d" style="font-size:11px">MMDM 리포트·SF·제조DI (3건)</span></div>
-        <div class="cr" style="padding:3px 0;border-bottom:none"><span class="cr-n" style="font-size:11px;min-width:80px">KS인더스트리</span><span class="cr-d" style="font-size:11px">MRO(TOMMS) (1건)</span></div>
-      </div>
-      <div style="flex:1"></div>
-      <div style="font-size:10px;color:var(--ink3);margin-top:8px;padding:5px 8px;background:var(--olt);border-radius:5px;line-height:1.6;flex-shrink:0">유의미 = 실제 도입·구매 검토 가능성 있는 대내·대외 고객 기준</div>
     </div>
   </div>
-</div>
 
-<!-- 03 뉴스레터 -->
-<div class="ch">
-  <div class="chh chh-nl"><span class="chh-n">03</span><span class="chh-t">대내 뉴스레터</span><span class="chh-tag">Source : Stibee</span></div>
-  <div class="chb chb-nl" style="align-items:stretch">
-    <div class="ic" style="display:flex;flex-direction:column">
-      <div class="ic-t">호별 열람률 · 클릭률</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;flex-shrink:0">
-        <div style="background:var(--white);border-radius:8px;padding:10px 12px;border-top:3px solid var(--ink4)"><div style="font-size:10px;color:var(--ink3);margin-bottom:3px">0호 · 46명</div><div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:2px">컨퍼런스 자료 공유</div><div style="font-size:10px;color:var(--ink3)">AX Innovation<br>참석자 대상</div></div>
-        <div style="background:var(--white);border-radius:8px;padding:10px 12px;border-top:3px solid var(--ink3)"><div style="font-size:10px;color:var(--ink3);margin-bottom:3px">1호 · 343명</div><div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:2px">AgentOne 홍보</div><div style="font-size:10px;color:var(--ink3)">계열사 IT·AX<br>주요 보직자</div></div>
-        <div style="background:var(--white);border-radius:8px;padding:10px 12px;border-top:3px solid var(--o)"><div style="font-size:10px;color:var(--ink3);margin-bottom:3px">2호 · 118명 · 6/11</div><div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:2px">GPUaaS 홍보</div><div style="font-size:10px;color:var(--ink3)">IT팀·유관부서<br>+ GPUaaS 문의자</div></div>
-      </div>
-      <div class="cw" style="flex:1;min-height:150px"><canvas id="c_nl"></canvas></div>
-      <div style="display:flex;gap:14px;margin-top:10px;font-size:11px;color:var(--ink3);flex-shrink:0">
-        <span style="display:flex;align-items:center;gap:4px"><span style="width:12px;height:10px;background:var(--o);border-radius:2px;display:inline-block"></span>열람률(%)</span>
-        <span style="display:flex;align-items:center;gap:4px"><span style="width:12px;height:10px;background:#1A56A0;border-radius:2px;display:inline-block"></span>클릭률(%)</span>
-      </div>
-      <div class="ib" style="margin-top:10px;flex-shrink:0">* 호별 발송 대상이 달라 수치 직접 비교 불가<br>* 2호 열람률 34.7% · 클릭률 8.5%<br>* 한화에어로스페이스는 사회적 이슈로 2호 발송 대상 제외</div>
+  <!-- 04 LinkedIn -->
+  <div class="ch">
+    <div class="chh chh-li">
+      <span class="chh-n">04</span>
+      <span class="chh-t">SNS</span>
+      <span class="chh-tag">Source : LinkedIn</span>
     </div>
-    <div class="ic" style="display:flex;flex-direction:column">
-      <div class="ic-t">호별 고관심 계열사</div>
-      <div style="margin-bottom:10px;flex-shrink:0">
-        <div style="font-size:11px;font-weight:500;color:var(--ink2);margin-bottom:6px;display:flex;align-items:center;gap:6px"><span style="background:var(--o);color:#fff;font-size:10px;padding:1px 8px;border-radius:10px">2호 · GPUaaS</span></div>
-        <div class="cr"><span class="cr-n" style="font-size:12px;min-width:88px">한화오션</span><span class="cr-d">오픈 75회 · 클릭 10회 · 19명 수신</span><span class="cr-tg" style="background:var(--olt);color:var(--odk)">최고관심</span></div>
-        <div class="cr"><span class="cr-n" style="font-size:12px;min-width:88px">한화에너지</span><span class="cr-d">오픈 22회 · 클릭 3회 · 팀장급</span><span class="cr-tg" style="background:var(--olt);color:var(--odk)">최고관심</span></div>
-        <div class="cr"><span class="cr-n" style="font-size:12px;min-width:88px">한화엔진</span><span class="cr-d">오픈 14회 · 클릭 1회 · 정보보안팀</span><span class="cr-tg" style="background:#EDEBE6;color:var(--ink2)">고관심</span></div>
-        <div class="cr"><span class="cr-n" style="font-size:12px;min-width:88px">한화토탈에너지스</span><span class="cr-d">오픈 2회 · 클릭 3회 · DL 경험자</span><span class="cr-tg" style="background:#EDEBE6;color:var(--ink2)">고관심</span></div>
-      </div>
-      <div class="dv" style="flex-shrink:0"></div>
-      <div style="flex-shrink:0">
-        <div style="font-size:11px;font-weight:500;color:var(--ink2);margin-bottom:6px;display:flex;align-items:center;gap:6px"><span style="background:var(--ink3);color:#fff;font-size:10px;padding:1px 8px;border-radius:10px">1호 · AgentOne</span></div>
-        <div class="cr"><span class="cr-n" style="font-size:12px;min-width:88px">한화오션 AX사업부</span><span class="cr-d">열람 56회 · 클릭 11회</span><span class="cr-tg" style="background:var(--olt);color:var(--odk)">최고관심</span></div>
-        <div class="cr"><span class="cr-n" style="font-size:12px;min-width:88px">한화NxMD IT파트</span><span class="cr-d">클릭 11회 · 팀 단위 반응</span><span class="cr-tg" style="background:var(--olt);color:var(--odk)">최고관심</span></div>
-        <div class="cr"><span class="cr-n" style="font-size:12px;min-width:88px">한화토탈에너지스</span><span class="cr-d">클릭 8회 · 2부서 동시</span><span class="cr-tg" style="background:#EDEBE6;color:var(--ink2)">고관심</span></div>
-      </div>
-      <div class="dv" style="flex-shrink:0"></div>
-      <div style="flex:1">
-        <div style="font-size:11px;font-weight:500;color:var(--ink2);margin-bottom:8px">시사점</div>
-        <div style="display:flex;flex-direction:column;gap:7px">
-          <div style="display:flex;align-items:flex-start;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--o);flex-shrink:0;margin-top:4px"></div><div style="font-size:12px;color:var(--ink2);line-height:1.55">한화오션은 1·2호 연속 최고관심 — AgentOne·GPUaaS 모두 반응. 실무 조직 단위의 지속적 관심 확인</div></div>
-          <div style="display:flex;align-items:flex-start;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--o);flex-shrink:0;margin-top:4px"></div><div style="font-size:12px;color:var(--ink2);line-height:1.55">한화에너지·한화엔진은 2호 첫 등장 — GPUaaS 수요 있는 신규 계열사로 후속 확인 필요</div></div>
-          <div style="display:flex;align-items:flex-start;gap:7px"><div style="width:6px;height:6px;border-radius:50%;background:var(--ink4);flex-shrink:0;margin-top:4px"></div><div style="font-size:12px;color:var(--ink3);line-height:1.55">한화에어로스페이스는 이슈로 2호 제외 — 상황 안정 후 별도 발송 검토</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+    <div class="chb chb-li" style="align-items:stretch">
 
-<!-- 04 LinkedIn -->
-<div class="ch">
-  <div class="chh chh-li"><span class="chh-n">04</span><span class="chh-t">SNS</span><span class="chh-tag">Source : LinkedIn</span></div>
-  <div class="chb chb-li" style="align-items:stretch">
-    <div class="ic" style="display:flex;flex-direction:column">
-      <div class="ic-t" style="margin-bottom:16px">당월 성과 요약</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px">
-        <div style="background:var(--white);border-radius:10px;padding:14px;border-top:3px solid var(--ink4);text-align:center"><div style="font-size:10px;color:var(--ink3);margin-bottom:5px">당월 게시물</div><div style="font-size:26px;font-weight:300;color:var(--ink);line-height:1"><span id="d-sns-posts"></span><span style="font-size:12px;color:var(--ink3);margin-left:2px">건</span></div></div>
-        <div style="background:var(--white);border-radius:10px;padding:14px;border-top:3px solid #0A66C2;text-align:center"><div style="font-size:10px;color:var(--ink3);margin-bottom:5px">노출 (누적)</div><div style="font-size:22px;font-weight:300;letter-spacing:-.03em;color:#0A66C2;line-height:1"><span id="d-sns-imp"></span></div></div>
-        <div style="background:var(--white);border-radius:10px;padding:14px;border-top:3px solid var(--o);text-align:center"><div style="font-size:10px;color:var(--ink3);margin-bottom:5px">도달 (누적)</div><div style="font-size:22px;font-weight:300;letter-spacing:-.03em;color:var(--o);line-height:1"><span id="d-sns-reach"></span></div></div>
-      </div>
-      <div style="background:var(--white);border-radius:10px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-left:3px solid var(--o)">
-        <div><div style="font-size:10px;color:var(--ink3);margin-bottom:3px">평균 참여율</div><div id="d-sns-avg-label" style="font-size:10px;color:var(--ink4)"></div></div>
-        <div style="font-size:32px;font-weight:300;letter-spacing:-.03em;color:var(--o)"><span id="d-sns-eng"></span><span style="font-size:15px">%</span></div>
-      </div>
-      <div style="border:1px solid var(--bd);border-radius:10px;padding:12px 16px;margin-top:8px">
-        <div style="font-size:10px;color:var(--ink3);font-weight:500;margin-bottom:10px;letter-spacing:.04em">한화시스템 페이지 평균 대비</div>
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-          <div style="font-size:11px;color:var(--ink3);min-width:100px">전략마케팅팀 평균</div>
-          <div style="flex:1;height:6px;background:var(--bd);border-radius:3px;overflow:hidden"><div style="width:100%;height:100%;background:var(--o);border-radius:3px"></div></div>
-          <div id="d-sns-eng2" style="font-size:14px;font-weight:500;color:var(--o);min-width:40px;text-align:right"></div>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-          <div style="font-size:11px;color:var(--ink3);min-width:100px">페이지 전체 평균</div>
-          <div style="flex:1;height:6px;background:var(--bd);border-radius:3px;overflow:hidden"><div id="d-sns-page-bar" style="height:100%;background:var(--ink4);border-radius:3px"></div></div>
-          <div id="d-sns-page-avg" style="font-size:14px;font-weight:300;color:var(--ink3);min-width:40px;text-align:right"></div>
-        </div>
-        <div style="border-top:1px solid var(--bd);padding-top:8px;display:flex;justify-content:flex-end;align-items:center;gap:6px">
-          <div style="font-size:10px;color:var(--ink3)">페이지 평균 대비</div>
-          <div id="d-sns-ratio" style="font-size:13px;font-weight:700;color:var(--o)"></div>
-        </div>
-      </div>
-      <div style="flex:1"></div>
-      <div style="font-size:10px;color:var(--ink3);padding:7px 10px;background:var(--olt);border-radius:6px;line-height:1.65;margin-top:12px">* 노출·도달: 당월 전체 게시물 누적 합산<br>* 참여율: 게시물별 참여율 평균</div>
-    </div>
-    <div class="ic" style="display:flex;flex-direction:column;gap:0">
-      <div class="ic-t" style="margin-bottom:12px">대표 게시물</div>
-      <div style="background:var(--white);border-radius:10px;border:.5px solid var(--bd);padding:12px 14px;margin-bottom:6px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-          <div style="width:28px;height:28px;background:#0A66C2;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;flex-shrink:0">in</div>
-          <div style="flex:1"><div style="font-size:12px;font-weight:500;color:var(--ink)">🔶 [ICT] AI 도입이 활발해지고 있지만, 대부분의 기업은 아직 'Step 1'</div><div style="font-size:10px;color:var(--ink3)">2026. 6. 18 게시 · 노출 2,204 · 도달 1,330</div></div>
-        </div>
-        <div style="font-size:11px;color:var(--ink2);line-height:1.55">매일 쌓이는 반복 업무와 형식적으로 대답하는 AI의 한계에 머물러 있진 않나요?</div>
-        <div style="margin-top:10px">
-          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--ink3);margin-bottom:3px"><span>참여율</span><span style="font-weight:500;color:var(--o)">5.0%</span></div>
-          <div style="height:6px;background:var(--bd);border-radius:3px;overflow:hidden;margin-bottom:6px"><div style="width:5%;height:100%;background:var(--o);border-radius:3px"></div></div>
-          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--ink3);margin-bottom:3px"><span>클릭률</span><span style="font-weight:500;color:#0A66C2">3.4%</span></div>
-          <div style="height:6px;background:var(--bd);border-radius:3px;overflow:hidden"><div style="width:3.4%;height:100%;background:#0A66C2;border-radius:3px"></div></div>
-        </div>
-      </div>
-      <div style="background:var(--white);border-radius:10px;border:.5px solid var(--bd);padding:12px 14px;margin-bottom:10px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-          <div style="width:28px;height:28px;background:#0A66C2;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;flex-shrink:0">in</div>
-          <div style="flex:1"><div style="font-size:12px;font-weight:500;color:var(--ink)">🎙️ [ICT] 에이로봇, 마이크로소프트, Kearney, 한화시스템 ICT가 모였다!</div><div style="font-size:10px;color:var(--ink3)">2026. 6. 12 게시 · 노출 6,387 · 도달 3,729</div></div>
-        </div>
-        <div style="font-size:11px;color:var(--ink2);line-height:1.55">지난 5/21 플라자호텔에서 열린 AX Innovation 컨퍼런스 주요 내용 공유</div>
-        <div style="margin-top:10px">
-          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--ink3);margin-bottom:3px"><span>참여율</span><span style="font-weight:500;color:var(--o)">27.4%</span></div>
-          <div style="height:6px;background:var(--bd);border-radius:3px;overflow:hidden;margin-bottom:6px"><div style="width:27.4%;height:100%;background:var(--o);border-radius:3px"></div></div>
-          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--ink3);margin-bottom:3px"><span>클릭률</span><span style="font-weight:500;color:#0A66C2">26.2%</span></div>
-          <div style="height:6px;background:var(--bd);border-radius:3px;overflow:hidden"><div style="width:26.2%;height:100%;background:#0A66C2;border-radius:3px"></div></div>
-        </div>
-      </div>
-      <div style="flex:1"></div>
-      <div style="font-size:10px;color:var(--ink3);padding:7px 10px;background:var(--olt);border-radius:6px;line-height:1.65">* 집계 기준일: 2026. 6. 23 · 노출·도달: 게시물 누적 합산</div>
-    </div>
-  </div>
-</div>
+      <!-- 좌측: 당월 누적 지표 -->
+      <div class="ic" style="display:flex;flex-direction:column">
+        <div class="ic-t" style="margin-bottom:16px">당월 성과 요약</div>
 
-<!-- 주요 인사이트 -->
-<div class="sl sl-gap">주요 인사이트</div>
-<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
-  <div style="background:var(--white);border:1px solid var(--bd);border-radius:12px;overflow:hidden">
-    <div style="background:linear-gradient(90deg,var(--odk),var(--o));padding:14px 20px;display:flex;align-items:center;gap:10px">
-      <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="color:#fff;font-size:16px">👁</span></div>
-      <div><div style="font-size:10px;color:rgba(255,255,255,.7);letter-spacing:.08em;margin-bottom:2px">이달의 주목 신호</div><div style="font-size:14px;font-weight:500;color:#fff">What caught our eye</div></div>
-    </div>
-    <div style="padding:18px 20px;display:flex;flex-direction:column;gap:10px">
-      <div style="display:flex;align-items:flex-start;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--bd)"><div style="width:6px;height:6px;border-radius:50%;background:var(--o);flex-shrink:0;margin-top:5px"></div><div><div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px">한화오션, 뉴스레터·자료 다운로드 전 채널 1위</div><div style="font-size:12px;color:var(--ink3);line-height:1.6">1호 오픈 56·클릭 11, 2호 오픈 75·클릭 10. Physical AI 누적 DL 30건으로 압도적 1위. AX사업부·설계지능화팀 등 실무 조직 단위 반응 지속</div></div></div>
-      <div style="display:flex;align-items:flex-start;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--bd)"><div style="width:6px;height:6px;border-radius:50%;background:var(--o);flex-shrink:0;margin-top:5px"></div><div><div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px">홈페이지 DL 경험자, 뉴스레터 오픈의 49% 차지</div><div style="font-size:12px;color:var(--ink3);line-height:1.6">2호 열람자 41명 중 DL 경험자 16명이 오픈 71회(49%) 담당. 자료를 먼저 찾아본 계열사 담당자가 뉴스레터에도 더 적극 반응 — 채널 간 연계 패턴 확인</div></div></div>
-      <div style="display:flex;align-items:flex-start;gap:10px"><div style="width:6px;height:6px;border-radius:50%;background:var(--o);flex-shrink:0;margin-top:5px"></div><div><div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px">한화에너지, 2호 첫 등장 — GPUaaS 관심 확인</div><div style="font-size:12px;color:var(--ink3);line-height:1.6">오픈 22회·클릭 3회, 팀장급·컨퍼런스 참석자. 기존 뉴스레터 수신 이력 없던 계열사에서 이번 호에 처음 반응</div></div></div>
-    </div>
-  </div>
-  <div style="background:var(--white);border:1px solid var(--bd);border-radius:12px;overflow:hidden">
-    <div style="background:linear-gradient(90deg,#0D3B75,#1A56A0);padding:14px 20px;display:flex;align-items:center;gap:10px">
-      <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="color:#fff;font-size:16px">📡</span></div>
-      <div><div style="font-size:10px;color:rgba(255,255,255,.7);letter-spacing:.08em;margin-bottom:2px">외부 수요 신호</div><div style="font-size:14px;font-weight:500;color:#fff">External Demand Signal</div></div>
-    </div>
-    <div style="padding:18px 20px;display:flex;flex-direction:column;gap:10px">
-      <div style="display:flex;align-items:flex-start;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--bd)"><div style="width:6px;height:6px;border-radius:50%;background:#1A56A0;flex-shrink:0;margin-top:5px"></div><div><div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px">AI 검색 유입 189세션 — 5개 플랫폼으로 다변화</div><div style="font-size:12px;color:var(--ink3);line-height:1.6">전월(166세션) 대비 +14%. ChatGPT·Perplexity·Claude·Gemini·Copilot 모두 유입. B2B 솔루션을 AI로 탐색하는 트렌드 본격화</div></div></div>
-      <div style="display:flex;align-items:flex-start;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--bd)"><div style="width:6px;height:6px;border-radius:50%;background:#1A56A0;flex-shrink:0;margin-top:5px"></div><div><div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px">우리은행, 2개월 연속 다운로드 — 실수요 가능성</div><div style="font-size:12px;color:var(--ink3);line-height:1.6">제조 데이터 표준화·스마트팩토리·데이터 인텔리전스 자료 반복 다운로드. 채널 무관한 일관된 관심 확인 — 영업팀과의 정보 공유 검토 필요</div></div></div>
-      <div style="display:flex;align-items:flex-start;gap:10px"><div style="width:6px;height:6px;border-radius:50%;background:#1A56A0;flex-shrink:0;margin-top:5px"></div><div><div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px">App.Gen.Platform, 2개월 연속 방문 1위</div><div style="font-size:12px;color:var(--ink3);line-height:1.6">4월 444세션 → 5월 497세션. 다양한 유입 경로에서 일관되게 가장 많이 방문한 솔루션 페이지 — 외부의 지속적인 관심 확인</div></div></div>
-    </div>
-  </div>
-  <div style="background:var(--white);border:1px solid var(--bd);border-radius:12px;overflow:hidden">
-    <div style="background:linear-gradient(90deg,#1a1a1a,#333);padding:14px 20px;display:flex;align-items:center;gap:10px">
-      <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="color:#fff;font-size:16px">⚙️</span></div>
-      <div><div style="font-size:10px;color:rgba(255,255,255,.7);letter-spacing:.08em;margin-bottom:2px">개선 과제</div><div style="font-size:14px;font-weight:500;color:#fff">What to improve next</div></div>
-    </div>
-    <div style="padding:18px 20px;display:flex;flex-direction:column;gap:10px">
-      <div style="display:flex;align-items:flex-start;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--bd)"><div style="width:6px;height:6px;border-radius:50%;background:#444;flex-shrink:0;margin-top:5px"></div><div><div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px">뉴스레터 → 홈페이지 연결 강화 검토</div><div style="font-size:12px;color:var(--ink3);line-height:1.6">향후 뉴스레터에서도 홈페이지를 연동시켜 채널 간 시너지 확대 예정</div></div></div>
-      <div style="display:flex;align-items:flex-start;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--bd)"><div style="width:6px;height:6px;border-radius:50%;background:#444;flex-shrink:0;margin-top:5px"></div><div><div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px">홈페이지 검색 최적화 진단 중</div><div style="font-size:12px;color:var(--ink3);line-height:1.6">현재 별도 최적화 작업 없이도 ChatGPT, Perplexity 등 AI를 통한 유입이 189세션 발생했으나, 6월 진단 마친 후 7월부터 본격 최적화 작업 통해 8월 개선사항 모니터링 예정</div></div></div>
-      <div style="display:flex;align-items:flex-start;gap:10px"><div style="width:6px;height:6px;border-radius:50%;background:#444;flex-shrink:0;margin-top:5px"></div><div><div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px">뉴스레터 열람률 개선을 위한 제목 A/B test 진행 예정</div><div style="font-size:12px;color:var(--ink3);line-height:1.6">2호 열람률(34.7%)이 1호(43.4%) 대비 낮아, 제목 문구의 수신자 관심도 영향 가능성 확인. 3호부터 동일 발송 대상 내 제목 2안을 분할 발송해 열람률 차이를 측정하고, 결과 기반으로 이후 호 제목 기획에 반영 예정</div></div></div>
-    </div>
-  </div>
-</div>
+        <!-- 게시물 수 + 노출 + 도달 한 라인 -->
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px">
+          <div style="background:var(--white);border-radius:10px;padding:14px;border-top:3px solid var(--ink4);text-align:center">
+            <div style="font-size:10px;color:var(--ink3);margin-bottom:5px">당월 게시물</div>
+            <div style="font-size:26px;font-weight:300;color:var(--ink);line-height:1">2<span style="font-size:12px;color:var(--ink3);margin-left:2px">건</span></div>
+          </div>
+          <div style="background:var(--white);border-radius:10px;padding:14px;border-top:3px solid #0A66C2;text-align:center">
+            <div style="font-size:10px;color:var(--ink3);margin-bottom:5px">노출 (누적)</div>
+            <div style="font-size:22px;font-weight:300;letter-spacing:-.03em;color:#0A66C2;line-height:1">8,591</div>
+          </div>
+          <div style="background:var(--white);border-radius:10px;padding:14px;border-top:3px solid var(--o);text-align:center">
+            <div style="font-size:10px;color:var(--ink3);margin-bottom:5px">도달 (누적)</div>
+            <div style="font-size:22px;font-weight:300;letter-spacing:-.03em;color:var(--o);line-height:1">5,059</div>
+          </div>
+        </div>
 
-<div class="ft">
-  <span>한화시스템 ICT부문 마케팅팀</span>
-  <span id="d-month"></span> · 내부 보고용
-</div>
-</div>
+        <div style="background:var(--white);border-radius:10px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-left:3px solid var(--o)">
+          <div>
+            <div style="font-size:10px;color:var(--ink3);margin-bottom:3px">평균 참여율</div>
+            <div style="font-size:10px;color:var(--ink4)">2개 게시물 평균</div>
+          </div>
+          <div style="font-size:32px;font-weight:300;letter-spacing:-.03em;color:var(--o)">16.2<span style="font-size:15px">%</span></div>
+        </div>
 
+        <!-- 페이지 평균 대비 비교 -->
+        <div style="border:1px solid var(--bd);border-radius:10px;padding:12px 16px;margin-top:8px">
+          <div style="font-size:10px;color:var(--ink3);font-weight:500;margin-bottom:10px;letter-spacing:.04em">한화시스템 페이지 평균 대비</div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+            <div style="font-size:11px;color:var(--ink3);min-width:100px">전략마케팅팀 평균</div>
+            <div style="flex:1;height:6px;background:var(--bd);border-radius:3px;overflow:hidden">
+              <div style="width:100%;height:100%;background:var(--o);border-radius:3px"></div>
+            </div>
+            <div style="font-size:14px;font-weight:500;color:var(--o);min-width:40px;text-align:right">16.2%</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+            <div style="font-size:11px;color:var(--ink3);min-width:100px">페이지 전체 평균</div>
+            <div style="flex:1;height:6px;background:var(--bd);border-radius:3px;overflow:hidden">
+              <div style="width:39.0%;height:100%;background:var(--ink4);border-radius:3px"></div>
+            </div>
+            <div style="font-size:14px;font-weight:300;color:var(--ink3);min-width:40px;text-align:right">6.32%</div>
+          </div>
+          <div style="border-top:1px solid var(--bd);padding-top:8px;display:flex;justify-content:flex-end;align-items:center;gap:6px">
+            <div style="font-size:10px;color:var(--ink3)">페이지 평균 대비</div>
+            <div style="font-size:13px;font-weight:700;color:var(--o)">2.6배 ↑</div>
+          </div>
+        </div>
+
+        <div style="flex:1"></div>
+        <div style="font-size:10px;color:var(--ink3);padding:7px 10px;background:var(--olt);border-radius:6px;line-height:1.65;margin-top:12px">
+          * 노출·도달: 당월 전체 게시물 누적 합산<br>
+          * 참여율: 게시물별 참여율 평균
+        </div>
+      </div>
+
+      <!-- 우측: 게시물 카드 2개 + 참여율·클릭률 바 -->
+      <div class="ic" style="display:flex;flex-direction:column;gap:0">
+        <div class="ic-t" style="margin-bottom:12px">대표 게시물</div>
+
+        <!-- 게시물 1 (최신순: 6/18) -->
+        <div style="background:var(--white);border-radius:10px;border:.5px solid var(--bd);padding:12px 14px;margin-bottom:6px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <div style="width:28px;height:28px;background:#0A66C2;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;flex-shrink:0">in</div>
+            <div style="flex:1">
+              <div style="font-size:12px;font-weight:500;color:var(--ink)">🔶 [ICT] AI 도입이 활발해지고 있지만, 대부분의 기업은 아직 'Step 1'</div>
+              <div style="font-size:10px;color:var(--ink3)">2026. 6. 18 게시 · 노출 2,204 · 도달 1,330</div>
+            </div>
+          </div>
+          <div style="font-size:11px;color:var(--ink2);line-height:1.55">
+            매일 쌓이는 반복 업무와 형식적으로 대답하는 AI의 한계에 머물러 있진 않나요?
+          </div>
+          <!-- 참여율 바 -->
+          <div style="margin-top:10px">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--ink3);margin-bottom:3px">
+              <span>참여율</span><span style="font-weight:500;color:var(--o)">5.0%</span>
+            </div>
+            <div style="height:6px;background:var(--bd);border-radius:3px;overflow:hidden;margin-bottom:6px">
+              <div style="width:5.0%;height:100%;background:var(--o);border-radius:3px"></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--ink3);margin-bottom:3px">
+              <span>클릭률</span><span style="font-weight:500;color:#0A66C2">3.4%</span>
+            </div>
+            <div style="height:6px;background:var(--bd);border-radius:3px;overflow:hidden">
+              <div style="width:3.4%;height:100%;background:#0A66C2;border-radius:3px"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 게시물 2 (6/12) -->
+        <div style="background:var(--white);border-radius:10px;border:.5px solid var(--bd);padding:12px 14px;margin-bottom:10px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <div style="width:28px;height:28px;background:#0A66C2;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;flex-shrink:0">in</div>
+            <div style="flex:1">
+              <div style="font-size:12px;font-weight:500;color:var(--ink)">🎙️ [ICT] 에이로봇, 마이크로소프트, Kearney, 한화시스템 ICT가 모였다!</div>
+              <div style="font-size:10px;color:var(--ink3)">2026. 6. 12 게시 · 노출 6,387 · 도달 3,729</div>
+            </div>
+          </div>
+          <div style="font-size:11px;color:var(--ink2);line-height:1.55">
+            지난 5/21 플라자호텔에서 열린 AX Innovation 컨퍼런스 주요 내용 공유
+          </div>
+          <!-- 참여율 바 -->
+          <div style="margin-top:10px">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--ink3);margin-bottom:3px">
+              <span>참여율</span><span style="font-weight:500;color:var(--o)">27.4%</span>
+            </div>
+            <div style="height:6px;background:var(--bd);border-radius:3px;overflow:hidden;margin-bottom:6px">
+              <div style="width:27.4%;height:100%;background:var(--o);border-radius:3px"></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--ink3);margin-bottom:3px">
+              <span>클릭률</span><span style="font-weight:500;color:#0A66C2">26.2%</span>
+            </div>
+            <div style="height:6px;background:var(--bd);border-radius:3px;overflow:hidden">
+              <div style="width:26.2%;height:100%;background:#0A66C2;border-radius:3px"></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex:1"></div>
+        <div style="font-size:10px;color:var(--ink3);padding:7px 10px;background:var(--olt);border-radius:6px;line-height:1.65">
+          * 집계 기준일: 2026. 6. 23 · 노출·도달: 게시물 누적 합산
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 주요 인사이트 ── -->
+  <div class="sl sl-gap">주요 인사이트</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+
+    <!-- 01 이달의 주목 신호 -->
+    <div style="background:var(--white);border:1px solid var(--bd);border-radius:12px;overflow:hidden">
+      <div style="background:linear-gradient(90deg,var(--odk),var(--o));padding:14px 20px;display:flex;align-items:center;gap:10px">
+        <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+          <span style="color:#fff;font-size:16px">👁</span>
+        </div>
+        <div>
+          <div style="font-size:10px;color:rgba(255,255,255,.7);letter-spacing:.08em;margin-bottom:2px">이달의 주목 신호</div>
+          <div style="font-size:14px;font-weight:500;color:#fff">What caught our eye</div>
+        </div>
+      </div>
+      <div style="padding:18px 20px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:flex-start;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--bd)">
+          <div style="width:6px;height:6px;border-radius:50%;background:var(--o);flex-shrink:0;margin-top:5px"></div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px">한화오션, 뉴스레터·자료 다운로드 전 채널 1위</div>
+            <div style="font-size:12px;color:var(--ink3);line-height:1.6">1호 오픈 56·클릭 11, 2호 오픈 75·클릭 10. Physical AI 누적 DL 30건으로 압도적 1위. AX사업부·설계지능화팀 등 실무 조직 단위 반응 지속</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--bd)">
+          <div style="width:6px;height:6px;border-radius:50%;background:var(--o);flex-shrink:0;margin-top:5px"></div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px">홈페이지 DL 경험자, 뉴스레터 오픈의 49% 차지</div>
+            <div style="font-size:12px;color:var(--ink3);line-height:1.6">2호 열람자 41명 중 DL 경험자 16명이 오픈 71회(49%) 담당. 자료를 먼저 찾아본 계열사 담당자가 뉴스레터에도 더 적극 반응 — 채널 간 연계 패턴 확인</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:10px">
+          <div style="width:6px;height:6px;border-radius:50%;background:var(--o);flex-shrink:0;margin-top:5px"></div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px">한화에너지, 2호 첫 등장 — GPUaaS 관심 확인</div>
+            <div style="font-size:12px;color:var(--ink3);line-height:1.6">오픈 22회·클릭 3회, 팀장급·컨퍼런스 참석자. 기존 뉴스레터 수신 이력 없던 계열사에서 이번 호에 처음 반응</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 외부 수요 신호 -->
+    <div style="background:var(--white);border:1px solid var(--bd);border-radius:12px;overflow:hidden">
+      <div style="background:linear-gradient(90deg,#0D3B75,#1A56A0);padding:14px 20px;display:flex;align-items:center;gap:10px">
+        <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+          <span style="color:#fff;font-size:16px">📡</span>
+        </div>
+        <div>
+          <div style="font-size:10px;color:rgba(255,255,255,.7);letter-spacing:.08em;margin-bottom:2px">외부 수요 신호</div>
+          <div style="font-size:14px;font-weight:500;color:#fff">External Demand Signal</div>
+        </div>
+      </div>
+      <div style="padding:18px 20px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:flex-start;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--bd)">
+          <div style="width:6px;height:6px;border-radius:50%;background:#1A56A0;flex-shrink:0;margin-top:5px"></div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px">AI 검색 유입 189세션 — 5개 플랫폼으로 다변화</div>
+            <div style="font-size:12px;color:var(--ink3);line-height:1.6">전월(166세션) 대비 +14%. ChatGPT·Perplexity·Claude·Gemini·Copilot 모두 유입. B2B 솔루션을 AI로 탐색하는 트렌드 본격화</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--bd)">
+          <div style="width:6px;height:6px;border-radius:50%;background:#1A56A0;flex-shrink:0;margin-top:5px"></div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px">우리은행, 2개월 연속 다운로드 — 실수요 가능성</div>
+            <div style="font-size:12px;color:var(--ink3);line-height:1.6">제조 데이터 표준화·스마트팩토리·데이터 인텔리전스 자료 반복 다운로드. 채널 무관한 일관된 관심 확인 — 영업팀과의 정보 공유 검토 필요</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:10px">
+          <div style="width:6px;height:6px;border-radius:50%;background:#1A56A0;flex-shrink:0;margin-top:5px"></div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px">App.Gen.Platform, 2개월 연속 방문 1위</div>
+            <div style="font-size:12px;color:var(--ink3);line-height:1.6">4월 444세션 → 5월 497세션. 다양한 유입 경로에서 일관되게 가장 많이 방문한 솔루션 페이지 — 외부의 지속적인 관심 확인</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 우리의 개선 내용 -->
+    <div style="background:var(--white);border:1px solid var(--bd);border-radius:12px;overflow:hidden">
+      <div style="background:linear-gradient(90deg,#1a1a1a,#333);padding:14px 20px;display:flex;align-items:center;gap:10px">
+        <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+          <span style="color:#fff;font-size:16px">⚙️</span>
+        </div>
+        <div>
+          <div style="font-size:10px;color:rgba(255,255,255,.7);letter-spacing:.08em;margin-bottom:2px">개선 과제</div>
+          <div style="font-size:14px;font-weight:500;color:#fff">What to improve next</div>
+        </div>
+      </div>
+      <div style="padding:18px 20px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:flex-start;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--bd)">
+          <div style="width:6px;height:6px;border-radius:50%;background:#444;flex-shrink:0;margin-top:5px"></div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px">뉴스레터 → 홈페이지 연결 강화 검토</div>
+            <div style="font-size:12px;color:var(--ink3);line-height:1.6">향후 뉴스레터에서도 홈페이지를 연동시켜 채널 간 시너지 확대 예정</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--bd)">
+          <div style="width:6px;height:6px;border-radius:50%;background:#444;flex-shrink:0;margin-top:5px"></div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px">홈페이지 검색 최적화 진단 중</div>
+            <div style="font-size:12px;color:var(--ink3);line-height:1.6">현재 별도 최적화 작업 없이도 ChatGPT, Perplexity 등 AI를 통한 유입이 189세션 발생했으나, 6월 진단 마친 후 7월부터 본격 최적화 작업 통해 8월 개선사항 모니터링 예정</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:10px">
+          <div style="width:6px;height:6px;border-radius:50%;background:#444;flex-shrink:0;margin-top:5px"></div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px">뉴스레터 열람률 개선을 위한 제목 A/B test 진행 예정</div>
+            <div style="font-size:12px;color:var(--ink3);line-height:1.6">3호부터 동일 발송 대상 내 제목 2안을 분할 발송해 열람률 차이를 측정하고, 결과 기반으로 이후 호 제목 기획에 반영 예정</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="ft">
+    <span>한화시스템 ICT부문 마케팅팀</span>
+    <span>2026년 6월 · 내부 보고용</span>
+  </div>
+
+</div>
 <script>
-/* ── 차트 공통 상수 ── */
+Chart.register(ChartDataLabels);
 const O='#F05A28',OM='#FFD5C2',GR='#BBBBBB',BG='#E0DDD6';
 const F={size:11,family:"'Noto Sans KR',sans-serif"};
-const base={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},datalabels:{display:false}}};
+const base={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}};
 
-/* ── 헬퍼 ── */
-function el(id){return document.getElementById(id);}
-function fmt(n){return Number(n).toLocaleString();}
-
-/* ── DATA → DOM ── */
-function render(){
-  const D = DATA;
-
-  /* 헤더 / 푸터 */
-  el('d-period').textContent = D.period;
-  el('d-month').textContent  = D.month;
-
-  /* KPI GA */
-  const delta = D.ga_curr - D.ga_prev;
-  el('d-ga-curr').textContent = fmt(D.ga_curr);
-  const de = el('d-ga-delta');
-  if(delta > 0){ de.style.color='#1D7A4F'; de.textContent=`▲ ${fmt(Math.abs(delta))} 전월비`; }
-  else if(delta < 0){ de.style.color='#C03C10'; de.textContent=`▼ ${fmt(Math.abs(delta))} 전월비`; }
-  else { de.style.color='var(--ink4)'; de.textContent='─ 전월 동일'; }
-
-  el('d-ga-note').innerHTML =
-    `* 기간 기준: 전월 16일 ~ 당월 15일 · /ict/ 경로 필터 적용<br>` +
-    `* 전월 대비 ${delta>=0?'+':''}${fmt(delta)}명 ${delta>=0?'증가':'감소'}`;
-
-  /* KPI DL */
-  el('d-dl-valid-kpi').textContent = fmt(D.dl_valid);
-
-  /* KPI NL */
-  el('d-nl-kpi-title').textContent   = D.nl_kpi_title;
-  el('d-nl-open-kpi').textContent    = D.nl_open;
-  el('d-nl-click-kpi').textContent   = D.nl_click;
-  el('d-nl-sent-kpi').textContent    = `발송 ${D.nl_sent}명 기준`;
-
-  /* KPI SNS */
-  el('d-sns-imp-kpi').textContent    = fmt(D.sns_imp);
-  el('d-sns-reach-kpi').textContent  = fmt(D.sns_reach);
-  el('d-sns-posts-kpi').textContent  = `게시물 ${D.sns_posts}건 누적 기준`;
-
-  /* DL 수치 */
-  el('d-dl-valid').textContent  = fmt(D.dl_valid);
-  el('d-dl-total').textContent  = fmt(D.dl_total);
-  el('d-dl-in').textContent     = fmt(D.dl_in);
-  el('d-dl-out').textContent    = fmt(D.dl_out);
-  el('d-dl-other').textContent  = fmt(D.dl_other);
-  const pv = D.dl_total > 0 ? Math.round(D.dl_valid / D.dl_total * 1000) / 10 : 0;
-  const po = Math.round((100 - pv) * 10) / 10;
-  el('d-dl-bar-v').style.width  = pv + '%';
-  el('d-dl-pct-v').textContent  = pv + '%';
-  el('d-dl-bar-o').style.width  = po + '%';
-  el('d-dl-pct-o').textContent  = `고객 外 ${po}%`;
-
-  /* SNS 좌측 */
-  el('d-sns-posts').textContent    = D.sns_posts;
-  el('d-sns-imp').textContent      = fmt(D.sns_imp);
-  el('d-sns-reach').textContent    = fmt(D.sns_reach);
-  el('d-sns-eng').textContent      = D.sns_eng;
-  el('d-sns-eng2').textContent     = D.sns_eng + '%';
-  el('d-sns-avg-label').textContent= `${D.sns_posts}개 게시물 평균`;
-  el('d-sns-page-avg').textContent = D.sns_page_avg + '%';
-  const ratio = D.sns_page_avg > 0 ? Math.round(D.sns_eng / D.sns_page_avg * 10) / 10 : 0;
-  el('d-sns-ratio').textContent    = ratio + '배 ↑';
-  el('d-sns-page-bar').style.width = Math.min(D.sns_page_avg / D.sns_eng * 100, 100) + '%';
-}
-
-/* ── 차트 렌더 ── */
-function renderCharts(){
-  const D = DATA;
-
-  /* GA 추이 */
-  new Chart(el('c_trend'), {
-    type:'bar',
-    data:{
-      labels: D.ga_labels,
-      datasets:[
-        { type:'bar', label:'활성 사용자', data: D.ga_data,
-          backgroundColor: D.ga_data.map((_,i) => i===D.ga_data.length-1 ? O : O+'66'),
-          borderRadius:4, borderSkipped:false, order:2,
-          datalabels:{display:true, anchor:'end', align:'top', color:'#555',
-            font:{size:11,weight:'700',family:"'Noto Sans KR',sans-serif"},
-            formatter: v => v ? fmt(v) : null}},
-        { type:'line', label:'추세선', data: D.ga_data,
-          borderColor:'#555', backgroundColor:'transparent',
-          borderWidth:1.5, borderDash:[4,3], pointRadius:0, tension:.3, order:1,
-          datalabels:{display:false}}
-      ]
+/* 01 홈페이지 - 활성 사용자 추이 */
+new Chart(document.getElementById('c_trend'),{
+  type:'bar',
+  data:{
+    labels:['4/16~5/15','5/16~6/15'],
+    datasets:[
+      {type:'bar',label:'활성 사용자',
+        data:[4088,4649],
+        backgroundColor:[O+'88',O],
+        borderRadius:4,borderSkipped:false,order:2,
+        datalabels:{anchor:'end',align:'top',color:'#555',
+          font:{size:11,weight:'700',family:"'Noto Sans KR',sans-serif"},
+          formatter:v=>v?v.toLocaleString():null}},
+      {type:'line',label:'추세선',
+        data:[4088,4649],
+        borderColor:'#555',backgroundColor:'transparent',
+        borderWidth:1.5,borderDash:[4,3],
+        pointRadius:0,tension:.3,order:1,
+        datalabels:{display:false}}
+    ]
+  },
+  options:{...base,
+    plugins:{...base.plugins,
+      legend:{display:false},
+      datalabels:{display:true},
+      tooltip:{mode:'index',intersect:false,
+        callbacks:{label:d=>d.dataset.label==='추세선'?null:`${d.dataset.label}: ${d.raw.toLocaleString()}명`}}
     },
-    options:{...base,
-      plugins:{...base.plugins,
-        datalabels:{display:true},
-        tooltip:{mode:'index',intersect:false,
-          callbacks:{label:d=>d.dataset.label==='추세선'?null:`${d.dataset.label}: ${fmt(d.raw)}명`}}
-      },
-      scales:{
-        x:{grid:{display:false},ticks:{font:F,color:'#999'}},
-        y:{grid:{color:'rgba(0,0,0,.05)',drawBorder:false},
-          ticks:{font:F,color:'#999',callback:v=>v?fmt(v):v},min:0}
-      }
+    scales:{
+      x:{grid:{display:false},ticks:{font:F,color:'#999'}},
+      y:{grid:{color:'rgba(0,0,0,.05)',drawBorder:false},
+        ticks:{font:F,color:'#999',callback:v=>v?v.toLocaleString():v},
+        min:0,max:6000}
     }
-  });
+  }
+});
 
-  /* 도넛 */
-  new Chart(el('c_src_donut'), {
-    type:'doughnut',
-    data:{
-      labels:['검색엔진','Direct','광고','뉴스레터','AI 검색','기타'],
-      datasets:[{data:D.src,
-        backgroundColor:[O,'#1A56A0','#BA7517','#2D2D2D','#00897B',BG],
-        borderWidth:2,borderColor:'#FAFCFF',hoverOffset:4}]
-    },
-    options:{responsive:true,maintainAspectRatio:false,cutout:'58%',
-      plugins:{legend:{display:false},datalabels:{display:false},
-        tooltip:{callbacks:{label:d=>`${d.label}: ${d.raw}%`}}}
-    },
-    plugins:[{id:'ct',beforeDraw(c){
+/* 01 유입 소스 도넛 - 5월(당월) 실제 데이터 */
+new Chart(document.getElementById('c_src_donut'),{
+  type:'doughnut',
+  data:{
+    labels:['검색엔진','Direct','광고','뉴스레터','AI 검색','기타'],
+    datasets:[{
+      data:[37.7,51.4,5.3,0.9,3.8,0.9],
+      backgroundColor:[O,'#1A56A0','#BA7517','#2D2D2D','#00897B',BG],
+      borderWidth:2,borderColor:'#FAFCFF',hoverOffset:4
+    }]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,cutout:'58%',
+    plugins:{
+      legend:{display:false},
+      tooltip:{callbacks:{label:d=>`${d.label}: ${d.raw}%`}}
+    }
+  },
+  plugins:[{
+    id:'ct',
+    beforeDraw(c){
       const {ctx,chartArea:{width:w,height:h,left:l,top:t}}=c;
-      const cx=l+w/2,cy=t+h/2;
+      const cx=l+w/2, cy=t+h/2;
       ctx.save();
       ctx.font=`700 15px 'Noto Sans KR',sans-serif`;
-      ctx.fillStyle=O;ctx.textAlign='center';ctx.textBaseline='middle';
-      ctx.fillText(D.session_total,cx,cy-10);
+      ctx.fillStyle='#F05A28';ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText('5,001',cx,cy-10);
       ctx.font=`400 10px 'Noto Sans KR',sans-serif`;
-      ctx.fillStyle='#999';ctx.fillText('총 세션',cx,cy+8);
+      ctx.fillStyle='#999';
+      ctx.fillText('총 세션',cx,cy+8);
       ctx.restore();
-    }}]
-  });
-
-  /* DL 월별 추이 */
-  new Chart(el('c_dlc'), {
-    type:'bar',
-    data:{
-      labels: D.dlc_labels,
-      datasets:[
-        {label:'대내',   data:D.dlc_in,    backgroundColor:GR,        borderRadius:0,       borderSkipped:false,
-          datalabels:{display:true,color:'#333',font:{size:10,weight:'700',family:"'Noto Sans KR',sans-serif"},formatter:v=>v>0?v:null,anchor:'center',align:'center'}},
-        {label:'대외',   data:D.dlc_out,   backgroundColor:O,         borderRadius:0,       borderSkipped:false,
-          datalabels:{display:true,color:'#fff',font:{size:10,weight:'700',family:"'Noto Sans KR',sans-serif"},formatter:v=>v>0?v:null,anchor:'center',align:'center'}},
-        {label:'고객 外',data:D.dlc_other, backgroundColor:'#E8E6E0', borderRadius:[3,3,0,0],borderSkipped:false,
-          datalabels:{display:true,color:'#555',font:{size:10,weight:'700',family:"'Noto Sans KR',sans-serif"},formatter:v=>v>0?v:null,anchor:'center',align:'center'}}
-      ]
-    },
-    options:{...base,
-      plugins:{...base.plugins,
-        legend:{display:true,position:'bottom',labels:{font:F,color:'#999',boxWidth:10,boxHeight:10}},
-        datalabels:{display:true},
-        tooltip:{callbacks:{label:d=>`${d.dataset.label}: ${d.raw}건`}}
-      },
-      scales:{
-        x:{grid:{display:false},ticks:{font:F,color:'#999'},stacked:true},
-        y:{grid:{color:'rgba(0,0,0,.05)',drawBorder:false},ticks:{font:F,color:'#999'},stacked:true}
-      }
     }
-  });
+  }]
+});
 
-  /* DL 누적 인기 자료 (고정) */
-  const dlf_outer=[2,2,0,10,6,7,2,3,3,2,2,2];
-  const dlf_inner=[30,11,2,2,5,2,6,5,2,3,1,1];
-  new Chart(el('c_dlf'), {
-    type:'bar',
-    data:{
-      labels:['▌Physical AI','▌MMDM','▌멀티AI Agent','│Smart Factory','│제조 DI','│Smart 물류','│HARU','│AI Agent','│MRO','│AGP','│Ent.Mod','│그룹웨어'],
-      datasets:[
-        {label:'대외',data:dlf_outer,
-          backgroundColor:['#1A56A0','#1A56A0','#1A56A0',O,O,O,O,O,O,O,O,O],
-          borderRadius:0,borderSkipped:false,
-          datalabels:{display:true,color:'#fff',font:{size:10,weight:'700',family:"'Noto Sans KR',sans-serif"},formatter:v=>v>1?v:null,anchor:'center',align:'center'}},
-        {label:'대내',data:dlf_inner,
-          backgroundColor:['#C8DAF0','#C8DAF0','#C8DAF0',OM,OM,OM,OM,OM,OM,OM,OM,OM],
-          borderRadius:[3,3,0,0],borderSkipped:false,
-          datalabels:{display:true,
-            formatter:(v,ctx)=>{const t=dlf_inner[ctx.dataIndex]+dlf_outer[ctx.dataIndex];return ctx.datasetIndex===1?t:null;},
-            anchor:'end',align:'right',color:'#555',font:{size:10,weight:'700',family:"'Noto Sans KR',sans-serif"}
-          }}
-      ]
+/* 02 다운로드 - 월별 추이 (실제 데이터) */
+new Chart(document.getElementById('c_dlc'),{
+  type:'bar',
+  data:{
+    labels:['1월','2월','3월','4월','5월','6월'],
+    datasets:[
+      {label:'대내',data:[0,1,3,45,2,21],backgroundColor:GR,borderRadius:0,borderSkipped:false,
+        datalabels:{color:'#333',font:{size:10,weight:'700',family:"'Noto Sans KR',sans-serif"},
+          formatter:v=>v>0?v:null,anchor:'center',align:'center'}},
+      {label:'대외',data:[4,11,5,7,12,4],backgroundColor:O,borderRadius:0,borderSkipped:false,
+        datalabels:{color:'#fff',font:{size:10,weight:'500',family:"'Noto Sans KR',sans-serif"},
+          formatter:v=>v>0?v:null,anchor:'center',align:'center'}},
+      {label:'고객 外',data:[8,27,20,45,71,57],backgroundColor:'#E8E6E0',borderRadius:[3,3,0,0],borderSkipped:false,
+        datalabels:{color:'#555',font:{size:10,weight:'700',family:"'Noto Sans KR',sans-serif"},
+          formatter:v=>v>0?v:null,anchor:'center',align:'center'}}
+    ]
+  },
+  options:{...base,
+    plugins:{...base.plugins,
+      legend:{display:true,position:'bottom',labels:{font:F,color:'#999',boxWidth:10,boxHeight:10}},
+      datalabels:{display:true},
+      tooltip:{callbacks:{label:d=>`${d.dataset.label}: ${d.raw}건`}}
     },
-    options:{...base,indexAxis:'y',
-      plugins:{...base.plugins,legend:{display:false},datalabels:{display:true},
-        tooltip:{callbacks:{label:d=>`${d.dataset.label}: ${d.raw}건`}}},
-      scales:{
-        x:{grid:{color:'rgba(0,0,0,.05)',drawBorder:false},ticks:{font:F,color:'#999',stepSize:5},stacked:true},
-        y:{grid:{display:false},stacked:true,
-          ticks:{font:{size:10,family:"'Noto Sans KR',sans-serif"},color:ctx=>ctx.tick.label.startsWith('▌')?'#1A56A0':'#888'}}
-      }
+    scales:{
+      x:{grid:{display:false},ticks:{font:F,color:'#999'},stacked:true},
+      y:{grid:{color:'rgba(0,0,0,.05)',drawBorder:false},ticks:{font:F,color:'#999'},stacked:true}
     }
-  });
+  }
+});
 
-  /* 뉴스레터 */
-  const n = D.nl_labels.length;
-  const oC = D.nl_labels.map((_,i)=>i===n-1?O:i===n-2?O+'88':O+'55');
-  const cC = D.nl_labels.map((_,i)=>i===n-1?'#1A56A0':i===n-2?'#1A56A088':'#1A56A055');
-  new Chart(el('c_nl'), {
-    type:'bar',
-    data:{
-      labels: D.nl_labels,
-      datasets:[
-        {label:'열람률',data:D.nl_opens,backgroundColor:oC,borderRadius:4,borderSkipped:false,
-          datalabels:{display:true,anchor:'end',align:'top',font:{size:11,weight:'700',family:"'Noto Sans KR',sans-serif"},color:O,formatter:v=>v!=null?v+'%':'미집계'}},
-        {label:'클릭률',data:D.nl_clicks,backgroundColor:cC,borderRadius:4,borderSkipped:false,
-          datalabels:{display:true,anchor:'end',align:'top',font:{size:11,weight:'700',family:"'Noto Sans KR',sans-serif"},color:'#1A56A0',formatter:v=>v!=null?v+'%':'미집계'}}
-      ]
+/* 02 다운로드 - 누적 인기 자료 (실제 데이터, 유의미 합산 기준 정렬) */
+new Chart(document.getElementById('c_dlf'),{
+  type:'bar',
+  data:{
+    labels:[
+      '▌Physical AI','▌MMDM','▌멀티AI Agent',
+      '│Smart Factory','│제조 DI','│Smart 물류',
+      '│HARU','│AI Agent','│MRO',
+      '│AGP','│Ent.Mod','│그룹웨어'
+    ],
+    datasets:[
+      {label:'대외',
+        data:[2,2,0, 10,6,7,2,3,3,2,2,2],
+        backgroundColor:['#1A56A0','#1A56A0','#1A56A0', O,O,O,O,O,O,O,O,O],
+        borderRadius:0,borderSkipped:false,
+        datalabels:{color:'#fff',font:{size:10,weight:'700',family:"'Noto Sans KR',sans-serif"},
+          formatter:v=>v>1?v:null,anchor:'center',align:'center'}},
+      {label:'대내',
+        data:[30,11,2, 2,5,2,6,5,2,3,1,1],
+        backgroundColor:['#C8DAF0','#C8DAF0','#C8DAF0', OM,OM,OM,OM,OM,OM,OM,OM,OM],
+        borderRadius:[3,3,0,0],borderSkipped:false,
+        datalabels:{
+          formatter:(v,ctx)=>{
+            const inner=[30,11,2,2,5,2,6,5,2,3,1,1];
+            const outer=[2,2,0,10,6,7,2,3,3,2,2,2];
+            const total=inner[ctx.dataIndex]+outer[ctx.dataIndex];
+            return ctx.datasetIndex===1?total:null;
+          },
+          anchor:'end',align:'right',color:'#555',
+          font:{size:10,weight:'700',family:"'Noto Sans KR',sans-serif"}
+        }}
+    ]
+  },
+  options:{...base,
+    indexAxis:'y',
+    plugins:{...base.plugins,
+      legend:{display:false},
+      datalabels:{display:true},
+      tooltip:{callbacks:{label:d=>`${d.dataset.label}: ${d.raw}건`}}
     },
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{
-        legend:{display:true,position:'bottom',labels:{font:F,color:'#999',boxWidth:10,boxHeight:10}},
-        datalabels:{display:true},
-        tooltip:{mode:'index',intersect:false,callbacks:{label:d=>d.raw!=null?`${d.dataset.label}: ${d.raw}%`:`${d.dataset.label}: 미집계`}}
-      },
-      scales:{
-        x:{grid:{display:false},ticks:{font:F,color:'#555'}},
-        y:{grid:{color:'rgba(0,0,0,.04)',drawBorder:false},ticks:{font:F,color:'#999',callback:v=>v+'%'},max:80,min:0}
-      }
+    scales:{
+      x:{grid:{color:'rgba(0,0,0,.05)',drawBorder:false},
+        ticks:{font:F,color:'#999',stepSize:5},stacked:true},
+      y:{grid:{display:false},stacked:true,
+        ticks:{
+          font:{size:10,family:"'Noto Sans KR',sans-serif"},
+          color:ctx=>ctx.tick.label.startsWith('▌')?'#1A56A0':'#888'
+        }}
     }
-  });
-}
+  }
+});
 
-/* ── 실행 ── */
-Chart.register(ChartDataLabels);
-render();
-renderCharts();
+/* 03 뉴스레터 */
+new Chart(document.getElementById('c_nl'),{
+  type:'bar',
+  data:{
+    labels:['0호 (5/27)','1호 (6/1)','2호 (6/11)'],
+    datasets:[
+      {label:'열람률',
+        data:[69.6,43.4,34.7],
+        backgroundColor:[O+'55',O+'88',O],
+        borderRadius:4,borderSkipped:false,
+        datalabels:{anchor:'end',align:'top',
+          font:{size:11,weight:'700',family:"'Noto Sans KR',sans-serif"},
+          color:O,formatter:v=>v!=null?v+'%':'미집계'}},
+      {label:'클릭률',
+        data:[30.4,6.7,8.5],
+        backgroundColor:['#1A56A055','#1A56A088','#1A56A0'],
+        borderRadius:4,borderSkipped:false,
+        datalabels:{anchor:'end',align:'top',
+          font:{size:11,weight:'700',family:"'Noto Sans KR',sans-serif"},
+          color:'#1A56A0',formatter:v=>v!=null?v+'%':'미집계'}}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{
+      legend:{display:true,position:'bottom',
+        labels:{font:F,color:'#999',boxWidth:10,boxHeight:10}},
+      datalabels:{display:true},
+      tooltip:{mode:'index',intersect:false,
+        callbacks:{label:d=>d.raw!=null?`${d.dataset.label}: ${d.raw}%`:`${d.dataset.label}: 미집계`}}
+    },
+    scales:{
+      x:{grid:{display:false},ticks:{font:F,color:'#555'}},
+      y:{grid:{color:'rgba(0,0,0,.04)',drawBorder:false},
+        ticks:{font:F,color:'#999',callback:v=>v+'%'},max:80,min:0}
+    }
+  }
+});
 </script>
 </body>
 </html>

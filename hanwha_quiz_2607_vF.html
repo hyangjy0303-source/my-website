@@ -514,12 +514,15 @@ function showResult() {
       <button class="btn-secondary" onclick="restart()">다시 해보기</button>
       <button class="btn-orange" id="sol-link-btn" style="flex:2">솔루션 더 알아보기 →</button>
     </div>
-    <button class="btn-secondary" style="width:100%;margin-top:10px;" onclick="window.close()">✕ 뉴스레터로 돌아가기</button>
+    <button class="btn-secondary" style="width:100%;margin-top:10px;" id="back-btn">✕ 뉴스레터로 돌아가기</button>
   `;
   document.getElementById('sol-link-btn').addEventListener('click', function() {
     window.open(r.url, '_blank');
   });
-}
+  document.getElementById('back-btn').addEventListener('click', function() {
+    window.open('https://stibee.com/api/v1.0/emails/share/lsuHeSycVIdP-iv84_OEccPP4G475iM', '_blank');
+    window.close();
+  });
 
 function restart() {
   answers = []; current = 0; selected = null;

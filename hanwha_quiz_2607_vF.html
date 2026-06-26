@@ -6,13 +6,13 @@
 <title>나는 어떤 IT 기획자 유형일까? | 한화시스템 ICT</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
     font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-    background: #F5F5F5;
+    background: linear-gradient(135deg, #FFF4ED 0%, #F0F4FF 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -22,79 +22,65 @@
 
   .card {
     background: #fff;
-    border-radius: 16px;
+    border-radius: 24px;
     max-width: 540px;
     width: 100%;
     overflow: hidden;
-    box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+    box-shadow: 0 8px 48px rgba(255,107,0,0.10), 0 2px 12px rgba(0,0,0,0.06);
   }
 
-  /* 상단 로고 바 */
   .top-bar {
     background: #fff;
     padding: 16px 24px;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #F0F0F0;
-  }
-  .logo-mark {
-    width: 28px;
-    height: 28px;
-    margin-right: 8px;
-  }
-  .logo-text {
-    font-size: 13px;
-    font-weight: 700;
-    color: #1A1A1A;
-    letter-spacing: -0.01em;
+    border-bottom: 1px solid #F5F5F5;
   }
 
-  /* Progress bar */
   .progress-track {
-    height: 4px;
+    height: 3px;
     background: #F0F0F0;
     width: 100%;
   }
   .progress-fill {
     height: 100%;
-    background: #FF6B00;
+    background: linear-gradient(90deg, #FF6B00, #FF9A4D);
     transition: width 0.5s cubic-bezier(.4,0,.2,1);
   }
 
-  .inner { padding: 32px 28px 28px; }
+  .inner { padding: 36px 28px 32px; }
 
-  /* Intro */
-  .intro { text-align: center; padding: 8px 0; }
+  /* ── Intro ── */
+  .intro { text-align: center; }
+  .intro-emoji { font-size: 52px; display: block; margin-bottom: 18px; }
   .intro-badge {
     display: inline-block;
-    background: #FF6B00;
+    background: linear-gradient(90deg, #FF6B00, #FF9A4D);
     color: #fff;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
-    padding: 6px 16px;
-    border-radius: 4px;
-    letter-spacing: 0.02em;
-    margin-bottom: 24px;
+    padding: 5px 16px;
+    border-radius: 99px;
+    letter-spacing: 0.04em;
+    margin-bottom: 18px;
   }
   .intro-title {
     font-size: 26px;
     font-weight: 800;
     color: #1A1A1A;
-    line-height: 1.35;
-    margin-bottom: 6px;
+    line-height: 1.4;
+    margin-bottom: 12px;
   }
   .intro-title .highlight { color: #FF6B00; }
-  .intro-emoji { font-size: 44px; display: block; margin-bottom: 16px; }
   .intro-desc {
     font-size: 14px;
-    color: #888;
-    line-height: 1.85;
+    color: #999;
+    line-height: 1.9;
     margin-bottom: 32px;
-    margin-top: 12px;
   }
   .intro-desc strong { color: #FF6B00; font-weight: 700; }
 
-  /* Quiz header */
+  /* ── Quiz ── */
   .quiz-header {
     display: flex;
     align-items: center;
@@ -104,23 +90,22 @@
   .q-num-badge {
     background: #FF6B00;
     color: #fff;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 800;
-    padding: 5px 14px;
-    border-radius: 4px;
-    letter-spacing: 0.02em;
+    padding: 4px 14px;
+    border-radius: 99px;
+    letter-spacing: 0.04em;
   }
   .step-label {
     font-size: 12px;
-    color: #BBBBBB;
+    color: #CCCCCC;
     font-weight: 500;
   }
-
   .q-text {
     font-size: 20px;
     font-weight: 800;
     color: #1A1A1A;
-    line-height: 1.4;
+    line-height: 1.45;
     margin-bottom: 6px;
   }
   .q-sub {
@@ -130,25 +115,24 @@
     font-weight: 400;
   }
 
-  /* Options */
+  /* ── Options ── */
   .options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
   .opt {
     display: flex;
     align-items: center;
-    gap: 0;
-    border: 1.5px solid #EBEBEB;
-    border-radius: 12px;
+    border: 1.5px solid #EFEFEF;
+    border-radius: 14px;
     cursor: pointer;
-    background: #fff;
-    transition: border-color 0.15s, background 0.15s;
+    background: #FAFAFA;
+    transition: all 0.15s;
     overflow: hidden;
     text-align: left;
   }
-  .opt:hover { border-color: #FF6B00; background: #FFF8F4; }
-  .opt.selected { border-color: #FF6B00; background: #FFF3EB; }
+  .opt:hover { border-color: #FF6B00; background: #FFF8F4; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(255,107,0,0.08); }
+  .opt.selected { border-color: #FF6B00; background: #FFF3EB; box-shadow: 0 4px 16px rgba(255,107,0,0.12); }
   .opt-icon-box {
-    min-width: 52px;
-    height: 52px;
+    min-width: 54px;
+    height: 54px;
     background: #FFE8D6;
     display: flex;
     align-items: center;
@@ -160,100 +144,148 @@
   .opt.selected .opt-icon-box { background: #FF6B00; }
   .opt-text {
     font-size: 13.5px;
-    color: #333;
-    line-height: 1.6;
+    color: #444;
+    line-height: 1.65;
     padding: 13px 16px;
     font-weight: 500;
   }
   .opt.selected .opt-text { color: #BF3F00; font-weight: 600; }
 
-  /* Buttons */
+  /* ── Buttons ── */
   .btn-primary {
     width: 100%;
-    padding: 16px;
+    padding: 17px;
     background: #1A1A1A;
     color: #fff;
     border: none;
-    border-radius: 10px;
+    border-radius: 14px;
     font-size: 15px;
     font-weight: 800;
     cursor: pointer;
-    transition: background 0.15s, transform 0.1s;
+    transition: all 0.15s;
     letter-spacing: 0.01em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+    font-family: inherit;
   }
-  .btn-primary:hover { background: #333; }
-  .btn-primary:active { transform: scale(0.99); }
+  .btn-primary:hover { background: #333; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+
   .btn-orange {
     width: 100%;
-    padding: 16px;
-    background: #FF6B00;
+    padding: 17px;
+    background: linear-gradient(90deg, #FF6B00, #FF8C38);
     color: #fff;
     border: none;
-    border-radius: 10px;
+    border-radius: 14px;
     font-size: 15px;
     font-weight: 800;
     cursor: pointer;
-    transition: background 0.15s, transform 0.1s;
+    transition: all 0.15s;
     letter-spacing: 0.01em;
+    font-family: inherit;
   }
-  .btn-orange:hover { background: #E55A00; }
-  .btn-orange:active { transform: scale(0.99); }
-  .btn-orange.disabled {
-    opacity: 0.3;
-    pointer-events: none;
-  }
+  .btn-orange:hover { background: linear-gradient(90deg, #E55A00, #FF7A1F); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,107,0,0.25); }
+  .btn-orange.disabled { opacity: 0.3; pointer-events: none; }
+
   .btn-secondary {
     flex: 1;
-    padding: 13px;
+    padding: 14px;
     background: #F5F5F2;
-    color: #666;
+    color: #777;
     border: none;
-    border-radius: 10px;
+    border-radius: 14px;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.15s;
+    transition: all 0.15s;
+    font-family: inherit;
   }
   .btn-secondary:hover { background: #EAEAE7; }
 
-  /* Result */
-  .result-top {
-    background: #FF6B00;
-    margin: -32px -28px 24px;
-    padding: 28px;
-    text-align: center;
+  .btn-newsletter {
+    width: 100%;
+    padding: 15px;
+    background: #fff;
+    color: #FF6B00;
+    border: 2px solid #FF6B00;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.01em;
+    font-family: inherit;
+    margin-top: 10px;
   }
-  .result-emoji { font-size: 48px; display: block; margin-bottom: 10px; }
+  .btn-newsletter:hover { background: #FFF3EB; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(255,107,0,0.12); }
+
+  .btn-close {
+    width: 100%;
+    padding: 13px;
+    background: transparent;
+    color: #BBBBBB;
+    border: 1.5px solid #EFEFEF;
+    border-radius: 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+    margin-top: 8px;
+  }
+  .btn-close:hover { background: #F8F8F8; color: #888; }
+
+  /* ── Result ── */
+  .result-top {
+    background: linear-gradient(135deg, #FF6B00, #FF9A4D);
+    margin: -36px -28px 24px;
+    padding: 32px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .result-top::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 120px; height: 120px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+  }
+  .result-top::after {
+    content: '';
+    position: absolute;
+    bottom: -20px; left: -20px;
+    width: 80px; height: 80px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .result-emoji { font-size: 52px; display: block; margin-bottom: 12px; }
   .result-badge-label {
     display: inline-block;
-    background: rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.22);
     color: #fff;
     font-size: 11px;
     font-weight: 700;
-    padding: 4px 12px;
-    border-radius: 4px;
+    padding: 4px 14px;
+    border-radius: 99px;
     letter-spacing: 0.08em;
     margin-bottom: 10px;
+    backdrop-filter: blur(4px);
   }
   .result-type { font-size: 22px; font-weight: 800; color: #fff; line-height: 1.3; }
 
   .result-desc {
     font-size: 14px;
-    color: #555;
-    line-height: 1.9;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1.5px solid #F0F0EE;
+    color: #666;
+    line-height: 1.95;
+    margin-bottom: 22px;
+    padding-bottom: 22px;
+    border-bottom: 1.5px solid #F5F5F5;
   }
   .sol-label {
     font-size: 10px;
     font-weight: 800;
-    color: #BBBBBB;
-    letter-spacing: 0.12em;
+    color: #CCCCCC;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     margin-bottom: 10px;
   }
@@ -261,37 +293,29 @@
   .pill {
     font-size: 12px;
     padding: 5px 13px;
-    border-radius: 4px;
+    border-radius: 99px;
     border: 1.5px solid #FFD4B3;
     color: #BF3F00;
     background: #FFF3EB;
     font-weight: 600;
   }
-  .sol-desc { font-size: 13px; color: #888; line-height: 1.75; margin-bottom: 22px; }
-  .action-row { display: flex; gap: 10px; }
-
-  .share-hint {
-    margin-top: 16px;
-    text-align: center;
-    font-size: 12px;
-    color: #BBBBBB;
-    line-height: 1.7;
+  .sol-desc {
+    font-size: 13px;
+    color: #999;
+    line-height: 1.8;
+    margin-bottom: 24px;
+    padding: 14px 16px;
+    background: #FAFAFA;
+    border-radius: 12px;
+    border-left: 3px solid #FF6B00;
   }
-  .share-hint strong { color: #FF6B00; }
-
-  /* Type summary for result screen quiz section */
-  .result-progress {
-    height: 4px;
-    background: #FF6B00;
-    margin: -32px -28px 24px;
-    width: calc(100% + 56px);
-  }
+  .action-row { display: flex; gap: 10px; margin-bottom: 0; }
 </style>
 </head>
 <body>
 <div class="card">
   <div class="top-bar">
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="121.085" height="34" viewBox="0 0 121.085 34" style="height:28px;width:auto;display:block;">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="121.085" height="34" viewBox="0 0 121.085 34" style="height:26px;width:auto;display:block;">
       <defs><clipPath id="clip-path-q"><rect width="121.085" height="34" fill="none"/></clipPath></defs>
       <g clip-path="url(#clip-path-q)">
         <path d="M21.562,23.283c-.486-4.42,4.148-7.967,10.347-7.918s11.623,3.669,12.109,8.086-4.142,7.964-10.345,7.915S22.048,27.7,21.562,23.283m23.609,1.37c-.561-5.481-6.8-9.969-13.937-10.028s-12.472,4.337-11.912,9.817,6.8,9.972,13.94,10.032,12.472-4.337,11.909-9.821" transform="translate(-7.718 -5.854)" fill="#fbb584"/>
@@ -305,8 +329,6 @@
   <div class="progress-track"><div class="progress-fill" id="progress" style="width:0%"></div></div>
 
   <div class="inner">
-
-    <!-- Intro -->
     <div id="intro-screen">
       <div class="intro">
         <span class="intro-emoji">🧠</span>
@@ -316,13 +338,10 @@
           <strong>4가지 질문</strong>에 답하고<br>
           당신의 업무 성향과 가장 닮은 <strong>ICT 솔루션</strong>을 찾아보세요!
         </div>
-        <button class="btn-primary" onclick="startQuiz()">
-          👉 테스트 시작하기
-        </button>
+        <button class="btn-primary" onclick="startQuiz()">👉 테스트 시작하기</button>
       </div>
     </div>
 
-    <!-- Quiz -->
     <div id="quiz-screen" style="display:none">
       <div class="quiz-header">
         <span class="q-num-badge" id="q-num">Q1.</span>
@@ -334,9 +353,7 @@
       <button class="btn-orange disabled" id="next-btn" onclick="nextQ()">다음으로 →</button>
     </div>
 
-    <!-- Result -->
     <div id="result-screen" style="display:none"></div>
-
   </div>
 </div>
 
@@ -386,54 +403,42 @@ const questions = [
 
 const results = {
   data: {
-    emoji: "🧬",
-    type: "제조 데이터 설계자형",
-    badge: "Data Intelligence",
+    emoji: "🧬", type: "제조 데이터 설계자형", badge: "Data Intelligence",
     desc: "숫자 없이는 결정 못 하는 사람이에요. 데이터를 '비용'이 아닌 '자산'으로 보고, AI가 실질적인 인사이트를 낼 수 있는 기반을 설계하는 역할이 딱 맞아요. 회의에서 \"그 근거가 뭐예요?\"를 가장 먼저 묻는 유형.",
     solutions: ["AI/Data Governance", "AI/Data Assessment", "Advanced Analysis"],
     sol_desc: "제조 Data Intelligence — 데이터 진단부터 AI 기반 의사결정까지, 제조 Value Chain 전 과정을 데이터로 최적화합니다.",
     url: "https://www.hanwhasystems.com/ict/kr/offering/data_intelligence.do"
   },
   factory: {
-    emoji: "🏭",
-    type: "스마트 팩토리 혁신가형",
-    badge: "Smart Factory",
+    emoji: "🏭", type: "스마트 팩토리 혁신가형", badge: "Smart Factory",
     desc: "현장이 답이라고 믿는 사람이에요. MES·IIoT로 공정을 직접 뜯어고치고, 불량률 숫자가 줄어드는 순간 짜릿함을 느껴요. 보고서보다 현장, 회의보다 실행이 먼저인 유형.",
     solutions: ["MES", "IIoT", "Intelligent Factory 컨설팅"],
     sol_desc: "Smart Factory — 데이터 기반 자동화와 공정 최적화로 제조 혁신을 가속화합니다.",
     url: "https://www.hanwhasystems.com/ict/kr/offering/smart_factory.do"
   },
   cloud: {
-    emoji: "☁️",
-    type: "클라우드 퍼포먼스 아키텍트형",
-    badge: "GPU as a Service",
+    emoji: "☁️", type: "클라우드 퍼포먼스 아키텍트형", badge: "GPU as a Service",
     desc: "인프라가 느리면 모든 게 느리다는 걸 본능적으로 아는 사람이에요. AI 워크로드를 위한 GPU 환경 설계, Private Cloud 아키텍처까지 — 성능을 극한까지 끌어내는 게 목표인 유형.",
     solutions: ["GPU as a Service", "Cloud Service", "AI/Data Platform"],
     sol_desc: "프라이빗 GPUaaS — 보안과 성능을 동시에 잡는 온프레미스 GPU 클라우드 구축 전략입니다.",
     url: "https://www.hanwhasystems.com/ict/kr/business/tech/cloud_service.do"
   },
   erp: {
-    emoji: "🔗",
-    type: "엔터프라이즈 통합 설계자형",
-    badge: "Enterprise Modernization",
+    emoji: "🔗", type: "엔터프라이즈 통합 설계자형", badge: "Enterprise Modernization",
     desc: "흩어진 시스템과 사람을 하나의 흐름으로 연결하는 게 특기예요. ERP·HRM·그룹웨어를 유기적으로 묶어 조직 전체의 효율을 올리는 역할이 잘 맞아요. 항상 답을 알고 있는 유형.",
     solutions: ["ERP", "HRM", "Groupware", "ITSM"],
     sol_desc: "Enterprise Modernization — 경영 시스템 현대화로 고객 경험을 혁신하고 미래 성장을 지원합니다.",
     url: "https://www.hanwhasystems.com/ict/kr/offering/enterprise_modernization.do"
   },
   ai: {
-    emoji: "🤖",
-    type: "AX 트랜스포메이션 리더형",
-    badge: "AI Agent",
+    emoji: "🤖", type: "AX 트랜스포메이션 리더형", badge: "AI Agent",
     desc: "AI가 업무 방식 자체를 바꾼다고 확신하는 사람이에요. Use Case 발굴부터 AI Workflow 설계까지, 조직의 AX 여정을 앞에서 끌고 가는 유형. \"이거 AI로 못 하나요?\"를 입에 달고 사는 분.",
     solutions: ["AI Agent", "Vertical AI", "Advanced Analysis"],
     sol_desc: "AI Agent — 오피스 전반의 반복 업무를 AI로 전환해 진짜 중요한 일에 집중하게 합니다.",
     url: "https://www.hanwhasystems.com/ict/kr/business/solution/vertical_ai.do"
   },
   logistics: {
-    emoji: "🚚",
-    type: "스마트 물류 최적화형",
-    badge: "Smart 물류",
+    emoji: "🚚", type: "스마트 물류 최적화형", badge: "Smart 물류",
     desc: "물류를 '비용 센터'가 아닌 '경쟁력'으로 보는 사람이에요. 납기 지연, 재고 오차, 운송 비용 — 이 숫자들이 눈에 밟히고, 데이터로 하나씩 줄여가는 과정이 재미있는 유형.",
     solutions: ["WMS", "Intelligent Logistics 컨설팅", "Advanced Analysis"],
     sol_desc: "Smart 물류 — 제조 물류 혁신의 필수 파트너, 데이터 기반 공급망 최적화입니다.",
@@ -511,19 +516,19 @@ function showResult() {
     <div class="sol-pills">${r.solutions.map(s=>`<span class="pill">${s}</span>`).join('')}</div>
     <div class="sol-desc">${r.sol_desc}</div>
     <div class="action-row">
-      <button class="btn-secondary" onclick="restart()">다시 해보기</button>
+      <button class="btn-secondary" onclick="restart()">🔄 다시 해보기</button>
       <button class="btn-orange" id="sol-link-btn" style="flex:2">솔루션 더 알아보기 →</button>
     </div>
-    <button class="btn-secondary" style="width:100%;margin-top:10px;" id="back-btn">✕ 뉴스레터 구독하기</button>
+    <button class="btn-newsletter" id="newsletter-btn">📩 한화시스템 ICT 뉴스레터 구독하기</button>
   `;
   document.getElementById('sol-link-btn').addEventListener('click', function() {
     window.open(r.url, '_blank');
   });
-  document.getElementById('back-btn').addEventListener('click', function() {
+  document.getElementById('newsletter-btn').addEventListener('click', function() {
     window.open('https://page.stibee.com/subscriptions/494176', '_blank');
-    window.close();
   });
 }
+
 function restart() {
   answers = []; current = 0; selected = null;
   document.getElementById('result-screen').style.display = 'none';

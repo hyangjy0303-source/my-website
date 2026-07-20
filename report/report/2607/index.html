@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>B2B 마케팅 월간 성과 보고</title>
+<title>Digital Marketing 대시보드</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
@@ -116,7 +116,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
   <div class="hd">
     <div>
       <div class="hd-eye">한화시스템 ICT부문 · 전략마케팅팀</div>
-      <div class="hd-ttl">B2B 마케팅 <span>월간 성과 보고</span></div>
+      <div class="hd-ttl">Digital Marketing <span>대시보드</span></div>
       <!-- ⚠️ URL 패턴: https://hyangjy0303-source.github.io/my-website/report/YYMM/index.html (예: 8월호 = /report/2608/index.html)
            이번 파일(2607호)은 발행 시 /report/2607/index.html 에 올려주세요 — 8월호의 '이전달' 링크가 이 주소를 가리키게 됩니다.
            단, 6월호는 새 규칙 이전(구 경로: 루트 index.html)에 발행되어 아래 링크는 예외적으로 구 경로를 유지합니다. -->
@@ -646,7 +646,7 @@ function render(){
   // 헤더
   document.getElementById('hd-period').innerHTML =
     `${DATA.meta.periodLine1}<br>홈페이지 GA · 자료 다운로드 · 뉴스레터 · LinkedIn<br>4채널 통합 분석`;
-  document.title = `B2B 마케팅 월간 성과 보고 — ${DATA.meta.yearMonth}`;
+  document.title = `Digital Marketing 대시보드 — ${DATA.meta.yearMonth}`;
   document.getElementById('ft-date').textContent = DATA.meta.footerDate;
 
   // KPI

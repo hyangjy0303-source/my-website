@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AX Lucky Draw</title>
+<style>
+  :root { --bg:#fffaf4; --ink:#181818; --accent:#f37321; --muted:#777; --card:#ffffff; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: Arial, "Noto Sans KR", sans-serif; background:linear-gradient(135deg,#fffdf9,#fff3e8); color:var(--ink); overflow:hidden; }
+  .wrap { width:100vw; height:100vh; display:flex; flex-direction:column; padding:34px 48px; }
+  header { display:flex; justify-content:space-between; align-items:flex-start; }
+  .brand { font-weight:800; letter-spacing:.02em; font-size:22px; }
+  .brand span { color:var(--accent); }
+  .title { margin-top:2vh; text-align:center; }
+  .title h1 { font-size:clamp(42px,6vw,88px); margin:0; line-height:1; }
+  .title p { color:var(--muted); font-size:clamp(16px,1.6vw,24px); margin:14px 0 0; }
+  main { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:0; }
+  #stage { width:min(1200px,92vw); text-align:center; }
+  .number-grid { display:grid; grid-template-columns:repeat(20,1fr); gap:7px; max-height:52vh; overflow:hidden; }
+  .num { background:rgba(255,255,255,.8); border:1px solid #eadfd5; border-radius:9px; padding:7px 2px; font-size:clamp(11px,1vw,17px); transition:.25s; }
+  .num.dim { opacity:.07; transform:scale(.85); }
+  .num.alive { border:2px solid var(--accent); background:#fff; transform:scale(1.08); font-weight:800; box-shadow:0 6px 20px rgba(243,115,33,.15); }
+  .big { font-size:clamp(120px,24vw,320px); font-weight:900; letter-spacing:-.05em; line-height:.95; }
+  .subbig { font-size:clamp(38px,5vw,72px); font-weight:800; margin-bottom:18px; }
+  .winner { color:var(--accent); text-shadow:0 8px 30px rgba(243,115,33,.22); }
+  .chips { display:flex; gap:18px; justify-content:center; flex-wrap:wrap; }
+  .chip { min-width:160px; padding:24px 32px; border-radius:24px; background:#fff; border:2px solid #f0ded0; font-size:clamp(36px,5vw,72px); font-weight:900; box-shadow:0 12px 34px rgba(0,0,0,.06); }
+  .vs { display:flex; align-items:center; justify-content:center; gap:32px; }
+  .vs .chip { min-width:260px; }
+  .vsword { font-size:clamp(28px,4vw,52px); font-weight:900; color:var(--accent); }
+  .controls { display:flex; align-items:center; justify-content:center; gap:12px; padding-top:10px; flex-wrap:wrap; }
+  button { border:0; border-radius:999px; padding:14px 22px; font-size:17px; font-weight:800; cursor:pointer; }
+  .primary { background:var(--accent); color:white; }
+  .secondary { background:#fff; border:1px solid #e5d6cb; color:#333; }
+  .danger { background:#222; color:#fff; }
+  .status { position:absolute; left:48px; bottom:24px; color:#777; font-size:14px; }
+  .hint { position:absolute; right:48px; bottom:24px; color:#777; font-size:14px; }
+  .flash { animation:flash .55s ease; }
+  .confirm-row { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:22px; }
+  .winner-card { display:flex; flex-direction:column; gap:10px; align-items:center; }
+  .tiny { border-radius:999px; padding:9px 14px; font-size:14px; font-weight:800; }
+  .present { background:#fff; border:1px solid #d8cec5; color:#333; }
+  .absent { background:#222; color:#fff; }
+  .notice { margin-top:16px; color:#777; font-size:15px; }
+  .replacement { font-size:clamp(26px,3vw,44px); font-weight:800; margin-bottom:14px; }
+  .setup-card { width:min(760px,90vw); background:#fff; border:1px solid #eadfd5; border-radius:32px; padding:42px 48px; box-shadow:0 22px 60px rgba(0,0,0,.08); }
+  .setup-card h2 { font-size:clamp(30px,4vw,52px); margin:0 0 12px; }
+  .setup-card p { color:var(--muted); font-size:18px; line-height:1.6; margin:0 0 28px; }
+  .setup-input { display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; }
+  .setup-input label { font-weight:800; font-size:20px; }
+  .setup-input input { width:180px; border:2px solid #eadfd5; border-radius:18px; padding:16px 18px; font-size:28px; font-weight:900; text-align:center; outline:none; }
+  .setup-input input:focus { border-color:var(--accent); box-shadow:0 0 0 4px rgba(243,115,33,.10); }
+  .setup-note { margin-top:18px !important; font-size:14px !important; }
+  .hidden-control { display:none !important; }
+  @keyframes flash { 0%{transform:scale(.86);opacity:.2} 55%{transform:scale(1.08)} 100%{transform:scale(1);opacity:1} }
+  @media (max-width:900px){ .number-grid{grid-template-columns:repeat(10,1fr)} .wrap{padding:22px} .status{left:22px}.hint{right:22px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><span>AX</span> NEXT STEP SEMINAR</div>
+    <div class="brand">LUCKY DRAW</div>
+  </header>
+  <div class="title"><h1 id="headline">LUCKY DRAW</h1><p id="desc">참석자 끝번호를 입력해주세요</p></div>
+  <main><div id="stage"></div></main>
+  <div class="controls">
+    <button class="secondary" onclick="showAll()">전체 번호</button>
+    <button class="primary" id="drawBtn" onclick="drawNext()">추첨 시작</button>
+    <button class="secondary" onclick="toggleFullscreen()">전체화면</button>
+    <button class="danger" onclick="resetAll()">처음부터</button>
+  </div>
+  <div class="status" id="status"></div>
+  <div class="hint">Space: 추첨 · F: 전체화면</div>
+</div>
+<script>
+let endNumber = null;
+let ALL = [];
+let remaining = [];
+let winners = { third:[], second:[], first:[] }; // 확정 당첨자
+let held = []; // 화면에 뽑혔지만 참석 확인 전인 번호
+let phase = 'setup';
+let firstRoundCandidates = null;
+let firstStep = 0;
+let busy = false;
+let thirdReplacementCount = 0;
+let secondReplacementCount = 0;
+let firstReplacementCount = 0;
+
+const pad = n => String(n).padStart(3,'0');
+const pickOne = arr => arr[Math.floor(Math.random()*arr.length)];
+function takeRandom(count, pool=remaining){
+  const copy=[...pool], out=[];
+  for(let i=0;i<count && copy.length;i++) out.push(copy.splice(Math.floor(Math.random()*copy.length),1)[0]);
+  return out;
+}
+function removeFromRemaining(nums){ remaining = remaining.filter(n=>!nums.includes(n)); }
+function releaseToRemaining(nums){
+  nums.forEach(n=>{ if(!remaining.includes(n) && !allConfirmed().includes(n)) remaining.push(n); });
+  remaining.sort((a,b)=>a-b);
+}
+function allConfirmed(){ return [...winners.third,...winners.second,...winners.first]; }
+function setText(h,d){ document.getElementById('headline').textContent=h; document.getElementById('desc').textContent=d; }
+function render(html){ const s=document.getElementById('stage'); s.innerHTML=html; s.classList.remove('flash'); void s.offsetWidth; s.classList.add('flash'); updateStatus(); }
+function updateStatus(){
+  const confirmed=allConfirmed().length;
+  const btn=document.getElementById('drawBtn');
+  const allBtn=document.querySelector('.controls button[onclick="showAll()"]');
+  if(phase==='setup'){
+    document.getElementById('status').textContent = '참석자 수 설정 전';
+    btn.textContent='추첨 시작'; btn.disabled=true; btn.style.opacity='.45';
+    if(allBtn) allBtn.disabled=true;
+    return;
+  }
+  if(allBtn) allBtn.disabled=false;
+  document.getElementById('status').textContent = `참석 번호 1–${endNumber} · 당첨 확정 ${confirmed}/9 · 추첨 가능 번호 ${remaining.length}`;
+  if(phase==='done') btn.textContent='추첨 완료';
+  else if(held.length) btn.textContent='참석 여부를 먼저 확인해주세요';
+  else if(phase==='third') btn.textContent='3등 4명 추첨';
+  else if(phase==='second') btn.textContent=`2등 ${winners.second.length+1}/3 추첨`;
+  else btn.textContent='1등 추첨 진행';
+  btn.disabled = held.length>0 || phase==='done';
+  btn.style.opacity = btn.disabled ? '.45' : '1';
+}
+function showSetup(){
+  phase='setup';
+  setText('LUCKY DRAW','오늘 참석자의 마지막 번호를 입력해주세요');
+  render(`<div class="setup-card">
+    <h2>참석자 끝번호 설정</h2>
+    <p>현장에서 실제로 부여된 <b>마지막 참가번호</b>를 입력하면<br>1번부터 해당 번호까지만 추첨 대상이 됩니다.</p>
+    <div class="setup-input"><label for="endNumberInput">1 ~</label><input id="endNumberInput" type="number" min="9" max="9999" placeholder="예: 137" onkeydown="if(event.key==='Enter') applyEndNumber()"><button class="primary" onclick="applyEndNumber()">확정하고 시작</button></div>
+    <p class="setup-note">※ 9명의 경품 당첨자를 선정하므로 끝번호는 9 이상 입력해주세요.</p>
+  </div>`);
+  setTimeout(()=>document.getElementById('endNumberInput')?.focus(),50);
+}
+function applyEndNumber(){
+  const input=document.getElementById('endNumberInput');
+  const n=Number(input?.value);
+  if(!Number.isInteger(n) || n<9 || n>9999){ alert('9 이상 9999 이하의 끝번호를 입력해주세요.'); input?.focus(); return; }
+  endNumber=n;
+  ALL=Array.from({length:n},(_,i)=>i+1);
+  remaining=[...ALL]; winners={third:[],second:[],first:[]}; held=[]; phase='third'; firstRoundCandidates=null; firstStep=0; busy=false;
+  thirdReplacementCount=secondReplacementCount=firstReplacementCount=0;
+  showAll();
+}
+function showAll(highlight=[]){
+  if(phase==='setup' || !endNumber){ showSetup(); return; }
+  setText('LUCKY DRAW',`1–${endNumber} 참가번호`);
+  render(`<div class="number-grid">${ALL.map(n=>`<div class="num ${highlight.includes(n)?'alive':''}">${pad(n)}</div>`).join('')}</div>`);
+}
+function animateSlot(finalNum, label, cb){
+  setText(label,'행운의 번호는?');
+  let ticks=0; busy=true;
+  const iv=setInterval(()=>{
+    const pool=remaining.length?remaining:ALL;
+    const n=pickOne(pool);
+    render(`<div class="big">${pad(n)}</div>`);
+    ticks++;
+    if(ticks>20){ clearInterval(iv); render(`<div class="big winner">${pad(finalNum)}</div>`); busy=false; setTimeout(cb,450); }
+  },70);
+}
+function drawNext(){
+  if(busy || phase==='done' || held.length) return;
+  if(phase==='third') drawThird();
+  else if(phase==='second') drawSecond();
+  else if(phase==='first') drawFirst();
+}
+
+// ---------- 3등 ----------
+function drawThird(){
+  if(remaining.length<4){ alert('추첨 가능한 번호가 4개 미만입니다. 참석자 번호 설정을 확인해주세요.'); return; }
+  const nums=takeRandom(4); held=[...nums]; removeFromRemaining(nums);
+  showThirdConfirm();
+}
+function showThirdConfirm(){
+  setText('3등 당첨','현장에 계신지 확인해주세요');
+  render(`<div class="chips">${held.map(n=>`<div class="winner-card"><div class="chip winner">${pad(n)}</div><div class="confirm-row"><button class="tiny present" onclick="confirmThird(${n})">참석 확인</button><button class="tiny absent" onclick="absentThird(${n})">부재 · 추가추첨</button></div></div>`).join('')}</div><div class="notice">부재 번호는 1명씩 추가추첨 · 추가추첨 ${thirdReplacementCount}회</div>`);
+}
+function confirmThird(n){
+  if(!held.includes(n)) return;
+  winners.third.push(n); held=held.filter(x=>x!==n);
+  if(winners.third.length===4){ held=[]; phase='second'; showGradeComplete('3등 추첨 완료','2등 추첨을 시작합니다'); }
+  else showThirdConfirm();
+}
+function absentThird(n){
+  if(!held.includes(n)) return;
+  held=held.filter(x=>x!==n);
+  // 부재 번호는 다시 당첨되지 않도록 추첨 풀에서 제외 유지
+  if(!remaining.length){ alert('추첨 가능한 번호가 더 이상 없습니다.'); return; }
+  thirdReplacementCount++;
+  const repl=pickOne(remaining); removeFromRemaining([repl]); held.push(repl);
+  animateSlot(repl, `3등 추가추첨 ${thirdReplacementCount}회`, showThirdConfirm);
+}
+
+// ---------- 2등 ----------
+function drawSecond(){
+  if(!remaining.length){ alert('추첨 가능한 번호가 더 이상 없습니다.'); return; }
+  const final=pickOne(remaining); removeFromRemaining([final]);
+  animateSlot(final, `2등 ${winners.second.length+1}/3`, ()=>{ held=[final]; showSingleConfirm('second'); });
+}
+function showSingleConfirm(grade){
+  const n=held[0];
+  const isSecond=grade==='second';
+  const label=isSecond?'2등':'1등';
+  const count=isSecond?winners.second.length+1:winners.first.length+1;
+  const rep=isSecond?secondReplacementCount:firstReplacementCount;
+  setText(`${label} ${count}/${isSecond?3:2} 당첨`,`현장에 계신지 확인해주세요`);
+  render(`<div class="big winner">${pad(n)}</div><div class="confirm-row"><button class="secondary" onclick="confirmSingle('${grade}')">✓ 참석 확인</button><button class="danger" onclick="absentSingle('${grade}')">부재 · 추가추첨</button></div><div class="notice">추가추첨 ${rep}회 · 참석 확인 시 다음 단계로 진행됩니다</div>`);
+}
+function confirmSingle(grade){
+  if(!held.length) return;
+  const n=held[0]; held=[];
+  if(grade==='second'){
+    winners.second.push(n);
+    if(winners.second.length===3){ phase='first'; showGradeComplete('2등 추첨 완료','이제 1등 LUCKY DRAW를 시작합니다'); }
+    else { setText('2등 당첨 확정',`${pad(n)} · 다음 2등을 추첨해주세요`); render(`<div class="big winner">${pad(n)}</div>`); }
+  } else {
+    winners.first.push(n);
+    firstRoundCandidates=null; firstStep=0;
+    if(winners.first.length===2){ phase='done'; showFinalSummary(); }
+    else { setText('1등 당첨 확정',`${pad(n)} · 마지막 1등을 추첨합니다`); render(`<div class="big winner">${pad(n)}</div>`); }
+  }
+  updateStatus();
+}
+function absentSingle(grade){
+  if(!held.length) return;
+  if(!remaining.length){ alert('추첨 가능한 번호가 더 이상 없습니다.'); return; }
+  const isSecond=grade==='second';
+  let rep=isSecond?secondReplacementCount:firstReplacementCount;
+  held=[];
+  if(isSecond) secondReplacementCount++; else firstReplacementCount++;
+  const repl=pickOne(remaining); removeFromRemaining([repl]);
+  animateSlot(repl, `${isSecond?'2등':'1등'} 추가추첨 ${rep+1}회`, ()=>{ held=[repl]; showSingleConfirm(grade); });
+}
+
+// ---------- 1등 서바이벌 ----------
+function drawFirst(){
+  if(!remaining.length){ alert('추첨 가능한 번호가 더 이상 없습니다.'); return; }
+  if(firstRoundCandidates===null){
+    const startCount=Math.min(50, remaining.length);
+    firstRoundCandidates = takeRandom(startCount);
+    firstStep=0;
+    setText(`1등 ${winners.first.length+1}/2 · SURVIVAL`,`${remaining.length} → ${startCount}`);
+    renderGridCandidates(firstRoundCandidates);
+    firstStep=1; return;
+  }
+  const desired=[10,5,3,2,1];
+  const validTargets=desired.filter(t=>t < firstRoundCandidates.length);
+  const target=validTargets[0];
+  if(target===undefined){
+    const winner=pickOne(firstRoundCandidates);
+    removeFromRemaining([winner]); firstRoundCandidates=null; firstStep=0;
+    animateSlot(winner, '1등 FINAL', ()=>{ held=[winner]; showSingleConfirm('first'); });
+    return;
+  }
+  if(target===1){
+    const winner=pickOne(firstRoundCandidates);
+    removeFromRemaining([winner]); firstRoundCandidates=null; firstStep=0;
+    animateSlot(winner, '1등 FINAL', ()=>{ held=[winner]; showSingleConfirm('first'); });
+    return;
+  }
+  const before=firstRoundCandidates.length;
+  firstRoundCandidates = takeRandom(target, firstRoundCandidates);
+  setText(`1등 ${winners.first.length+1}/2 · SURVIVAL`,`${before} → ${target}`);
+  if(target===2){ render(`<div class="vs"><div class="chip">${pad(firstRoundCandidates[0])}</div><div class="vsword">VS</div><div class="chip">${pad(firstRoundCandidates[1])}</div></div>`); }
+  else renderGridCandidates(firstRoundCandidates);
+}
+function renderGridCandidates(cands){
+  const classFor=n=>cands.includes(n)?'alive':'dim';
+  render(`<div class="number-grid">${remaining.map(n=>`<div class="num ${classFor(n)}">${pad(n)}</div>`).join('')}</div>`);
+}
+function showGradeComplete(h,d){ setText(h,d); render(`<div class="subbig">✓ 당첨자 참석 확인 완료</div>`); }
+function showFinalSummary(){
+  setText('LUCKY DRAW 완료','축하합니다!');
+  render(`<div class="subbig">1등</div><div class="chips">${winners.first.map(n=>`<div class="chip winner">${pad(n)}</div>`).join('')}</div>`);
+}
+function resetAll(){
+  if(!confirm('모든 당첨 결과와 참석자 끝번호를 초기화할까요?')) return;
+  endNumber=null; ALL=[]; remaining=[]; winners={third:[],second:[],first:[]}; held=[]; phase='setup'; firstRoundCandidates=null; firstStep=0; busy=false;
+  thirdReplacementCount=secondReplacementCount=firstReplacementCount=0; showSetup();
+}
+function toggleFullscreen(){ if(!document.fullscreenElement) document.documentElement.requestFullscreen?.(); else document.exitFullscreen?.(); }
+document.addEventListener('keydown',e=>{ if(e.code==='Space'){e.preventDefault();drawNext();} if(e.key.toLowerCase()==='f') toggleFullscreen(); });
+showSetup();
+</script>
+</body>
+</html>

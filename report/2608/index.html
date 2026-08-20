@@ -239,8 +239,8 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
               <span class="legend-sw" style="width:8px;height:8px;background:#C8DAF0;border-radius:2px;margin-left:3px"></span>대내 (Insight)
             </div>
             <div style="display:flex;align-items:center;gap:4px;color:var(--o);font-weight:500">
-              <span class="legend-sw" style="width:8px;height:8px;background:var(--o);border-radius:2px"></span>대외 (Sales)
-              <span class="legend-sw" style="width:8px;height:8px;background:var(--omid);border-radius:2px;margin-left:3px"></span>대내 (Sales)
+              <span class="legend-sw" style="width:8px;height:8px;background:var(--o);border-radius:2px"></span>대외 (Sales Pack)
+              <span class="legend-sw" style="width:8px;height:8px;background:var(--omid);border-radius:2px;margin-left:3px"></span>대내 (Sales Pack)
             </div>
           </div>
         </div>
@@ -359,11 +359,22 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
     <div class="chb" style="display:block;border-left-color:#1D7A4F;background:#F7FBF8">
       <div style="font-size:11px;color:var(--ink3);margin-bottom:14px">자료 다운로드(대내+대외)·뉴스레터 로그를 종합해, <strong>복수 접점이 확인되거나 여러 자료를 받아간 경우</strong>(제품 전반을 검토 중인 신호)를 우선 선별했습니다.</div>
 
+      <div style="font-size:11px;font-weight:600;color:#1A56A0;margin-bottom:8px;letter-spacing:.02em">📊 이달의 파이프라인 인사이트</div>
+      <div id="bd-insights" style="margin-bottom:16px"></div>
+
+      <div class="dv" style="margin:14px 0"></div>
+
       <div style="font-size:11px;font-weight:600;color:#1D7A4F;margin-bottom:8px;letter-spacing:.02em">🎯 리드 후보 — 대내(계열사)</div>
       <div id="bd-leads-internal" style="margin-bottom:14px"></div>
 
-      <div style="font-size:11px;font-weight:600;color:#1D7A4F;margin-bottom:8px;letter-spacing:.02em">🎯 리드 후보 — 대외</div>
+      <div style="font-size:11px;font-weight:600;color:#1D7A4F;margin-bottom:4px;letter-spacing:.02em">🎯 리드 후보 — 대외</div>
+      <div style="font-size:10px;color:var(--ink4);margin-bottom:8px">대외 고객은 뉴스레터·세미나 대상에 포함되지 않아 다운로드 채널로만 관찰됨 — '신규 접점' 등급은 관심도가 낮다는 뜻이 아니라 관찰 채널이 하나뿐이라는 구조적 특성</div>
       <div id="bd-leads-external" style="margin-bottom:16px"></div>
+
+      <div class="dv" style="margin:14px 0"></div>
+
+      <div style="font-size:11px;font-weight:600;color:#1D7A4F;margin-bottom:8px;letter-spacing:.02em">🎯 9/3 AX혁신세미나 신청 현황 (계열사별)</div>
+      <div id="bd-seminar" style="margin-bottom:16px"></div>
 
       <div class="dv" style="margin:14px 0"></div>
 
@@ -398,7 +409,7 @@ const DATA = {
 
   kpi: {
     activeUsers: { value: 4931, prevValue: 4644 },   // GA4, 전월 대비 증감은 자동 계산 — ✅ 7/16~8/15 확정
-    downloadMeaningful: { value: 154, monthly: 23, prevMonthly: 16 },  // 자료DL 유의미(대내+대외) 누적 건수 · 당월(23=대내16+대외7) · 전월(16=대내6+대외10)
+    downloadMeaningful: { value: 151, monthly: 20, prevMonthly: 16 },  // 자료DL 유의미(대내+대외) 누적 건수 · 당월(20=대내16+대외4, seg 재분류 반영) · 전월(16=대내6+대외10)
     newsletter: {
       issueNo: 4, sentDate: "7/28", recipients: 297,
       openRate: 50.2, clickRate: 12.1
@@ -427,7 +438,7 @@ const DATA = {
       { name: "Insight Report 뷰", sessions: 286, avgTime: "37초", prevRank: 3 },
       { name: "ERP", sessions: 278, avgTime: "24초", prevRank: null },
       { name: "Intelligent Factory", sessions: 277, avgTime: "21초", prevRank: 7 },
-      { name: "Groupware", sessions: 242, avgTime: "11초", prevRank: 5 }
+      { name: "그룹웨어", sessions: 242, avgTime: "11초", prevRank: 5 }
     ],
     topPagesNoteDef: "<ul><li>세션: 사용자가 홈페이지에 접속한 횟수</li><li>index·search·sales_pack·contact 페이지 제외</li></ul>",
 
@@ -447,8 +458,10 @@ const DATA = {
     },
     // 월별 소스 구성 추이 바 (최근 2~3개월 정도만 유지 권장)
     sourceMonthlyTrend: [
-      { label: "6월 (6/16~7/15, 확정)", sessions: 5636, breakdown: { "검색엔진":23.5,"Direct":66.0,"광고":4.0,"뉴스레터":0.5,"AI 검색":0.7,"기타":5.3 } },
-      { label: "7월 (7/16~8/15, 확정)", sessions: 5996, breakdown: { "검색엔진":30.4,"Direct":61.0,"광고":4.3,"뉴스레터":0.5,"AI 검색":1.1,"기타":2.7 } }
+      { label: "5월 (4/16~5/15)", sessions: 4567, breakdown: { "검색엔진":43.8,"Direct":46.4,"광고":5.2,"뉴스레터":0.2,"AI 검색":3.6,"기타":0.8 } },
+      { label: "6월 (5/16~6/15)", sessions: 5001, breakdown: { "검색엔진":37.7,"Direct":51.4,"광고":5.3,"뉴스레터":0.9,"AI 검색":3.8,"기타":0.9 } },
+      { label: "7월 (6/16~7/15)", sessions: 5636, breakdown: { "검색엔진":23.5,"Direct":66.0,"광고":4.0,"뉴스레터":0.5,"AI 검색":0.7,"기타":5.3 } },
+      { label: "8월 (7/16~8/15)", sessions: 5996, breakdown: { "검색엔진":30.4,"Direct":61.0,"광고":4.3,"뉴스레터":0.5,"AI 검색":1.1,"기타":2.7 } }
     ],
     sourceNoteDef: "<ul><li>AI 검색: ChatGPT·Claude 등 유입</li><li>뉴스레터: Stibee 클릭 유입</li></ul>"
   },
@@ -463,14 +476,14 @@ const DATA = {
       { label: "5월", internal: 2,  external: 12, nonTarget: 71 },
       { label: "6월", internal: 21, external: 4,  nonTarget: 57 },
       { label: "7월", internal: 6,  external: 10, nonTarget: 39 },
-      { label: "8월", internal: 16, external: 7,  nonTarget: 19 }   // ✅ 7/16~8/15 확정, 자사(내부직원) 9건 제외
+      { label: "8월", internal: 16, external: 4,  nonTarget: 18 }   // ✅ 7/16~8/15 재확정 (seg 재분류 반영), 자사(내부직원) 9건 제외
     ],
     trendNoteDef: "<ul><li>월 기준: 전월 16일~당월 15일 (1월은 1/1~1/15)</li><li>고객 外: 학생·경쟁SI·IT기업 등 비타겟</li></ul>",
 
     // 누적 인기 자료 (대내+대외 합산). group: "insight" | "sales"
     popularMaterials: [
       { name: "Physical AI",    group: "insight", internal: 32, external: 3 },
-      { name: "MMDM",           group: "insight", internal: 12, external: 4 },
+      { name: "MMDM",           group: "insight", internal: 12, external: 5 },
       { name: "멀티AI Agent",    group: "insight", internal: 5,  external: 0 },
       { name: "프라이빗 GPUaaS",  group: "insight", internal: 4,  external: 0 },
       { name: "구매AX혁신",      group: "insight", internal: 4,  external: 0 },
@@ -478,9 +491,9 @@ const DATA = {
       { name: "제조 DI",         group: "sales",   internal: 5,  external: 7 },
       { name: "Smart 물류",      group: "sales",   internal: 2,  external: 9 },
       { name: "HARU",           group: "sales",   internal: 6,  external: 2 },
-      { name: "AI Agent",       group: "sales",   internal: 9,  external: 6 },
+      { name: "AI Agent",       group: "sales",   internal: 9,  external: 4 },
       { name: "MRO",            group: "sales",   internal: 2,  external: 6 },
-      { name: "AGP",            group: "sales",   internal: 3,  external: 5 },
+      { name: "AGP",            group: "sales",   internal: 3,  external: 3 },
       { name: "Ent.Mod",        group: "sales",   internal: 1,  external: 2 },
       { name: "그룹웨어",         group: "sales",   internal: 4,  external: 2 },
       { name: "ESG ON",         group: "sales",   internal: 1,  external: 1 },
@@ -498,7 +511,10 @@ const DATA = {
       { company: "한화에어로스페이스", detail: "AI Agent (1건)" }
     ],
     highlightExternal: [
-      { company: "mav corp.", detail: "MRO(TOMMS) (1건) · 실제 도입 검토 가능 고객으로 판단" }
+      { company: "(주)나다", detail: "MRO(TOMMS) · 기술영업팀 팀장" },
+      { company: "mav corp.", detail: "MRO(TOMMS) · sales manager · 업종·규모 확인 필요" },
+      { company: "MOTIR(산업통상부)", detail: "Physical AI · 조선해양플랜트과 사무관 · 정부기관" },
+      { company: "세메스", detail: "AX시대 제조데이터표준(MMDM) · 시스템혁신팀 부장 · 삼성 계열 반도체 장비사" }
     ],
     highlightNoteDef: "<ul><li>유의미 = 실제 도입·구매 검토 가능성 있는 대내·대외 고객 기준</li></ul>",
 
@@ -525,14 +541,19 @@ const DATA = {
   newsletter: {
     // 발행된 모든 호를 넣어두면 최근 3개만 자동으로 화면에 표시됩니다 (0호처럼 오래된 호는 자동으로 빠짐)
     issues: [
-      { no: "2호", date: "6/11", recipients: 179, title: "GPUaaS 소개", target: "IT팀·유관부서 + GPUaaS 문의자", openRate: 33.5, clickRate: 6.1,
+      { no: "2호", date: "6/11", recipients: 179, title: "(광고) GPUaaS 소개", target: "IT팀·유관부서 + GPUaaS 문의자", openRate: 33.5, clickRate: 6.1,
         whitepaper: { title: "프라이빗 GPUaaS 구축 전략", events: 16, internalTest: 5, realEvents: 11, realUnique: 11, realCompanies: 8 } },
-      { no: "3호", date: "7/2",  recipients: 370, title: "AX시대, 구매가 바뀐다 (구매 프로세스 혁신)", target: "핵심코어군 109명 + 구매팀(신규) 261명", openRate: 28.6, clickRate: 4.3,
+      { no: "3호", date: "7/2",  recipients: 416, title: "AX시대, 구매가 바뀐다 (구매 프로세스 혁신)", target: "핵심코어군 109명 + 구매팀(신규) 307명", openRate: 31.7, clickRate: 6.2,
+        adTest: [
+          { label: "'(광고)' 표기", subject: "(광고) AX시대, 구매가 바뀐다", target: "핵심코어군 106명 + 구매팀(신규) 266명", recipients: 372, opens: 108, clicks: 18, openRate: 29.0, clickRate: 4.8, sentDate: "7/2" },
+          { label: "'(광고)' 미표기 (추가 발송)", subject: "AX시대, 구매가 바뀐다", target: "핵심코어군 44명 (추가 발송)", recipients: 44, opens: 24, clicks: 8, openRate: 54.5, clickRate: 18.2, sentDate: "7/23" }
+        ],
         whitepaper: { title: "제조기업 구매, 비용에서 수익 레버로", events: 17, unique: 12, internalTest: 2, realEvents: 15, realUnique: 10, purchaseTeamUnique: 6 } },
       { no: "4호", date: "7/28", recipients: 297, title: "AI 전환의 현실, 도입은 시작되었지만 현실은? (데이터플랫폼 필요성 · AI/Data Platform · AX혁신세미나 신청)", target: "핵심코어군 (컨퍼런스 참석·자료 다운로드·IT담당자 조건 충족자)", openRate: 50.2, clickRate: 12.1,
+        decisionNote: "3호 A/B 결과(무표기 열람률 54.5% vs 광고 표기 29.0%)를 반영해 '(광고)' 표기 제외하고 발송",
         whitepaper: { title: "AI 전환의 현실 (메일 내 첨부)", realEvents: 22, realUnique: 20 } }
     ],
-    noteDef: "<ul><li>호별 발송 대상이 달라 수치 직접 비교 불가</li><li>핵심코어군 = 컨퍼런스 참석자 + 홈페이지 DL자 + IT관련담당자</li><li>한화시스템/ICT 자체 활동은 고관심 계열사 집계에서 제외</li></ul>",
+    noteDef: "<ul><li>호별 발송 대상이 달라 수치 직접 비교 불가</li><li>핵심코어군 = 컨퍼런스 참석자 + 홈페이지 DL자 + IT관련담당자</li><li>'ICT마케팅담당자' 플래그 대상자는 발송·오픈·클릭 수치엔 포함하되 고관심 계열사 집계에서는 제외</li></ul>",
     noteDef2: "<ul><li>누적 기준: 같은 계열사가 2개 호 이상 연속 고관심(최고관심·고관심) 등장 시 표시</li></ul>",
 
     // 고관심 계열사 — issueNo는 issues 배열의 no 값과 동일하게. tier: "top"(최고관심) | "high"(고관심)
@@ -571,26 +592,77 @@ const DATA = {
 
   insights: {
     marketing: [
-      { level: "green", title: "뉴스레터 4호, 핵심코어군 단독 대상 발송으로 열람률·클릭률 급등", desc: "3호(구매팀 포함 혼합 대상, 열람률 28.6%)와 달리 4호는 관심도가 이미 검증된 핵심코어군 297명 단독 대상<br>— 열람률 50.2%·클릭률 12.1%로 대상군 차이에 따른 자연스러운 상승. 세그먼트별 발송의 효과를 재확인" },
+      { level: "green", title: "뉴스레터 제목의 '(광고)' 표기 유무가 열람률·클릭률을 크게 좌우", desc: "3호 안에서 같은 캠페인을 두 그룹으로 나눠 보낸 A/B 비교: (광고) 표기 372명(7/2) 열람률 29.0%·클릭률 4.8% vs 무표기 44명(7/23, 추가 발송) 열람률 54.5%·클릭률 18.2%<br>— 무표기 그룹이 열람률 +25.5%p·클릭률 +13.4%p 더 높음. 이 결과를 반영해 4호(297명)는 처음부터 '(광고)' 표기 없이 발송했고, 열람률 50.2%·클릭률 12.1%로 같은 패턴이 재확인됨<br>— 5호부터도 '(광고)' 미표기를 유지하며 추이 확인 필요" },
       { level: "green", title: "한화오션, 다운로드·뉴스레터 전 채널 최다 관심 계열사 지위 유지", desc: "8월 자료 다운로드 5건(그룹웨어·멀티AI Agent·Physical AI·MMDM·프라이빗 GPUaaS 전방위)·뉴스레터 4호 오픈 224회·클릭 12회<br>→ 전 채널 최상위 관심 지속, 확장 논의 적기" },
-      { level: "green", title: "SNS 'XPERION MES' 게시물, 참여율 21.1%로 8월 최고 반응", desc: "7/28 게시된 제조 데이터 통합 콘텐츠가 클릭률 19.3%까지 기록 — 실무형 솔루션 콘텐츠에 대한 높은 반응 재확인" },
-      { level: "green", title: "App.Gen.Platform 세션 급증, 광고 유입 효과로 확인", desc: "6월 570세션 → 8월 1,620세션 증가분은 유기적 관심 증가가 아니라 광고(cpc) 유입 효과로 확인됨 — 광고 집행 종료·축소 시 세션 재조정 가능성을 염두에 두고 9월 데이터 확인 필요" },
-      { level: "yellow", title: "한화에어로스페이스, 4호(AI/데이터플랫폼)엔 최고 반응 — 3호(구매혁신)는 여전히 무반응", desc: "3호(구매 프로세스 혁신) 발송 77명 전원 오픈 0건이었으나 4호(AI 전환·데이터플랫폼)에서는 오픈 60회·클릭 21회로 클릭 기준 1위 — 발송 경로 문제가 아니라 주제별 관심도 차이로 추정됨. '구매혁신' 주제 자체에는 관심이 낮고 AI·데이터 인프라 주제에 반응하는 것으로 보이나, 표본이 1개 호씩뿐이라 단정하기는 이름 — 다음 구매 관련 발송에서 재확인 필요" }
+      { level: "green", title: "SNS 'XPERION MES' 게시물, 참여율 21.1%로 8월 최고 반응", desc: "7/28 게시된 제조 데이터 통합 콘텐츠가 클릭률 19.3%까지 기록<br>— 실무형 솔루션 콘텐츠에 대한 높은 반응 재확인" },
+      { level: "green", title: "유의미(대내+대외) 다운로드 비중, 7월 29.1% → 8월 52.6%로 상승", desc: "8월 유의미 20건(대내16+대외4) 대 고객外(비타겟) 18건<br>— 고객外 건수가 7월 39건에서 절반 이하로 줄면서 유의미 비중이 크게 늘어남. 4월(53.6%)에도 유사한 스파이크가 있었던 만큼 단정하긴 이르지만, 실제 구매·도입 가능성 있는 다운로드 비중이 커지고 있다는 호신호로 볼 수 있음" },
+      { level: "green", title: "App.Gen.Platform 세션 급증, 광고 유입 효과로 확인", desc: "6월 570세션 → 8월 1,620세션 증가분은 유기적 관심 증가가 아니라 광고(cpc) 유입 효과로 확인됨<br>— 광고 집행 종료·축소 시 세션 재조정 가능성을 염두에 두고 9월 데이터 확인 필요" },
+      { level: "green", title: "9/3 대내 세미나 초청장, 신청 200명+ 확보 — 톤앤매너 일관된 제작물의 시너지 확인", desc: "AX혁신세미나(9/3) 초청장 발송 결과 신청 219명(8/19 14시 기준) 확보<br>— 뉴스레터·SNS와 동일한 톤앤매너로 제작된 디지털 마케팅 결과물이 오프라인 행사 흥행에도 직접 기여함을 확인. 앞으로도 채널 간 톤앤매너를 통일해 온라인 콘텐츠와 오프라인 행사가 서로 시너지를 내는 방향으로 지속 추진" },
+      { level: "green", title: "세미나 신청, 한화솔루션 인사이트 부문·한화에어로스페이스·한화오션에 집중", desc: "26개 계열사 중 상위 4곳(한화솔루션 인사이트 부문 47명·한화에어로스페이스 23명·한화솔루션 22명·한화오션 18명)이 전체 신청의 절반 이상 차지<br>— 다운로드·뉴스레터에서 이미 고관심으로 확인된 한화오션·한화에어로스페이스가 오프라인 행사 신청에서도 상위권에 들며 관심도 일관성 재확인. 한화솔루션 인사이트 부문은 다운로드·뉴스레터 접점은 상대적으로 적었으나 세미나 신청에서는 1위로 나타남" },
+      { level: "green", title: "고객사례 뷰, 순위는 밀렸지만 세션수는 오히려 증가", desc: "1위→2위로 순위는 하락했지만 실제 세션은 636→755로 전월 대비 119건 증가(+18.7%)<br>— App.Gen.Platform이 더 크게 늘며 순위만 역전된 것으로, 고객사례 자체의 관심은 줄지 않음. 분석 기간(7/16~8/15) 내 고객사례 페이지가 3건 신규 업데이트된 영향으로 추정<br>다만 신규 사례 업로드가 수작업 확인으로만 파악되는 구조라, 업로드 시점에 맞춰 뉴스레터·LinkedIn으로 바로 확산하는 프로세스가 필요<br>— 신규 ERP 도입 시 업데이트 자동 알림도 함께 검토" },
+      { level: "yellow", title: "고객外 세그먼트 내 AX 교육·컨설팅 기업 다운로드 관찰됨 — 파트너십 후보 발굴 관점 검토 필요", desc: "8월 고객外 18건 중 모두의연구소(AI 교육)·에스코어(데이터컨설팅)·휴마인(교육 R&D)·한국오픈솔루션 등 교육·컨설팅 성격 기업이 다수 포함<br>— 지금까지 고객外는 비타겟으로 분류돼 분석에서 제외돼 왔으나, 이 중 일부는 경쟁이 아닌 제안 파트너사 후보일 수 있어 다음 달부터 고객外 세그먼트도 업종 기준으로 별도 트렌드 관찰 시작 예정" },
+      { level: "yellow", title: "검색엔진 유입 비중 반등, Direct 비중은 축소", desc: "7월(6/16~7/15) 23.5% → 8월(7/16~8/15) 30.4%로 검색엔진 비중 +6.9%p 상승, 같은 기간 Direct는 66.0%→61.0%로 -5.0%p 하락<br>— 다만 5월(37.7%)에서 7월로 한 차례 하락했던 흐름이 있어 3개월 연속 추세라기보다 최근 1개월간의 반등으로 해석" },
+      { level: "yellow", title: "한화에어로스페이스, 4호(AI/데이터플랫폼)에서 높은 반응 — 3호(구매혁신)와는 대비", desc: "3호(구매 프로세스 혁신) 발송 77명은 오픈 0건이었으나 4호(AI 전환·데이터플랫폼)에서는 오픈 60회·클릭 21회로 클릭 기준 1위<br>— 발송 경로 문제라기보다 주제별 관심도 차이일 가능성이 있음. '구매혁신' 주제 대비 AI·데이터 인프라 주제에 더 반응한 것으로 보이나, 표본이 1개 호씩뿐이고 3호 이후 재발송 등 최신 동향은 확인하지 않아 단정하기는 이름<br>— 다음 구매 관련 발송 시 재확인" }
     ]
   },
 
   // BD 전달용 — 다운로드(대내+대외)·뉴스레터 신호를 종합해 복수 접점이 확인된 계열사/기업 선별
   bdLeads: [
-    { company: "한화오션", segTag: "대내(계열사)", materials: 5, lastDate: "8/10", dept: "운영기획팀·IT시스템담당 등", title: "-", note: "8월 5개 자료(그룹웨어·멀티AI Agent·Physical AI·MMDM·프라이빗 GPUaaS) 전방위 다운로드 + 뉴스레터 4호 오픈 224회·클릭 12회 — 전 채널 최상위 관심, 확장 논의 적기" },
-    { company: "한화시스템 방산", segTag: "대내(계열사)", materials: 4, lastDate: "7/23", dept: "구매기획팀", title: "과장", note: "멀티AI Agent·프라이빗 GPUaaS·Physical AI·구매AX혁신 4종 연속 다운로드(동일 담당자) — 구매기획팀 관심사와 맞닿은 자료 위주, 후속 컨택 대상" },
-    { company: "한화솔루션", segTag: "대내(계열사)", materials: 2, lastDate: "7/23", dept: "경영혁신팀·원부물류팀", title: "팀장", note: "구매AX혁신 리포트를 서로 다른 부서에서 각각 다운로드 — 부서 간 관심 확산 신호" },
-    { company: "mav corp.", segTag: "대외 고객", materials: 1, lastDate: "8/5", dept: "sales", title: "manager", note: "MRO(TOMMS) 소개서 다운로드 — 실제 도입 검토 가능 고객으로 판단, 이번 달 하이라이트 선정" }
+    { company: "한화오션", tier: "hot", channels: ["다운로드","뉴스레터","세미나"], segTag: "대내(계열사)", materials: 5, lastDate: "8/10", dept: "운영기획팀·IT시스템담당 등", title: "-", note: "IT시스템담당(담당) 1명이 7/21 하루 동안 GPUaaS·AX시대(MMDM)·Physical AI·멀티AI Agent 4종을 연달아 다운로드<br>— 특정 솔루션이 아닌 AI/데이터 인프라 전반을 한 번에 검토한 정황<br>이후 8/10 운영기획팀(책임)이 그룹웨어(Cleverse)를 별도로 다운로드해 부서를 넘나든 관심 확인<br>뉴스레터 4호 오픈 224회·클릭 12회, 세미나 신청 18명까지 3개 채널 모두 상위" },
+    { company: "한화에어로스페이스", tier: "hot", channels: ["다운로드","뉴스레터","세미나"], segTag: "대내(계열사)", materials: 1, lastDate: "7/20", dept: "재무회계", title: "과장", note: "재무회계(과장)가 7/20 AI Agent(AgentOne) 소개서 단건 다운로드<br>— 이후 뉴스레터 4호(7/28)에서 같은 계열사가 오픈 60회·클릭 21회로 클릭 기준 1위 기록, 세미나 신청 23명으로 2위<br>다운로드는 재무회계 단일 접점이지만 뉴스레터·세미나 반응은 조직 전반에서 나온 것으로 보임" },
+    { company: "한화솔루션", tier: "warm", channels: ["다운로드","세미나"], segTag: "대내(계열사)", materials: 2, lastDate: "7/23", dept: "경영혁신팀·원부물류팀", title: "팀장", note: "구매AX혁신 리포트를 원부물류팀(팀장, 7/23)과 경영혁신팀(팀장, 7/27) 두 부서가 나흘 간격으로 각각 다운로드<br>— 같은 자료가 서로 다른 부서로 자연 확산되는 정황, 세미나 신청 22명으로 3위" },
+    { company: "한화토탈에너지스", tier: "warm", channels: ["다운로드","뉴스레터"], segTag: "대내(계열사)", materials: 1, lastDate: "7/23", dept: "IT기획", title: "프로", note: "IT기획(프로)이 7/23 구매AX혁신 리포트 단건 다운로드<br>— 3월에도 Physical AI를 다운로드한 이력이 있는 재방문 계열사(누적 3건), 뉴스레터 4호 오픈 53회·클릭 4회" },
+    { company: "한화시스템 방산", tier: "watch", channels: ["다운로드"], segTag: "대내(계열사)", materials: 4, lastDate: "7/23", dept: "구매기획팀", title: "과장", note: "구매기획팀(과장) 1명이 7/23 하루 동안 구매AX혁신·Physical AI·GPUaaS·멀티AI Agent 4종을 몰아서 다운로드<br>— 구매 프로세스 혁신 검토 목적으로 관련 기술 자료까지 함께 확인한 것으로 추정" },
+    { company: "(주)나다", tier: "watch", channels: ["다운로드"], segTag: "대외 고객", materials: 1, lastDate: "8/6", dept: "기술영업팀", title: "팀장", note: "기술영업팀 팀장이 8/6 MRO(TOMMS) 소개서 다운로드<br>— 동일 상호의 '설비 진동감시·진단 전문기업(1997년 설립)'이 검색됨" },
+    { company: "세메스", tier: "watch", channels: ["다운로드"], segTag: "대외 고객", materials: 1, lastDate: "7/16", dept: "시스템혁신팀", title: "부장", note: "반도체·디스플레이 제조장비 전문기업(충남 천안 제조사업장 보유)인 세메스, 시스템혁신팀 부장이 AX시대 제조데이터표준(MMDM) 리포트 다운로드" },
+    { company: "mav corp.", tier: "watch", channels: ["다운로드"], segTag: "대외 고객", materials: 1, lastDate: "8/5", dept: "sales", title: "manager", note: "sales 직군 manager가 8/5 MRO(TOMMS) 소개서 다운로드<br>— 회사명·직무 모두 실제 기업 정보로 기재되어 있고 학생·테스트성 응답과 구분됨. 업종·규모는 추가 확인 필요" },
+    { company: "MOTIR(산업통상부)", tier: "watch", channels: ["다운로드"], segTag: "대외 고객", materials: 1, lastDate: "7/29", dept: "조선해양플랜트과", title: "사무관", note: "산업통상부 조선해양플랜트과 사무관이 7/29 Physical AI 리포트 다운로드<br>— 정부 정책 담당 공공 접점, 조선·해양 플랜트 관련 정책 동향 파악에 참고" }
   ],
+  bdInsights: [
+    { title: "3개 채널(다운로드·뉴스레터·세미나) 모두에서 상위권인 계열사는 한화오션·한화에어로스페이스", desc: "나머지 계열사는 1~2개 채널에서 상위권으로 나타나, 이 2곳은 조직 차원에서 관심이 형성된 것으로 보임" },
+    { title: "대외 리드 4곳 중 3곳이 MRO 또는 Physical AI(제조 현장 AI) 자료를 다운로드", desc: "나다·mav·MOTIR 모두 설비·제조 인프라 관련 자료를 받아, 이번 달 대외 관심이 해당 도메인에 쏠려 있는 것으로 나타남" }
+  ],
+  bdSeminar: {
+    period: "9/3 AX혁신세미나",
+    asOf: "8/19 14시 기준",
+    total: 219,
+    summary: "26개 계열사에서 신청<br>— 상위 4곳(한화솔루션 인사이트 부문·한화에어로스페이스·한화솔루션·한화오션)이 전체의 50.2%(110명) 차지",
+    insight: "한화오션·한화에어로스페이스는 다운로드·뉴스레터에서도 이미 고관심 계열사로 확인된 곳이라 관심도 일관성이 재확인됐고, 한화솔루션 인사이트 부문은 다운로드·뉴스레터 접점은 적었지만 세미나 신청 47명으로 전체 1위<br>— 이번 세미나에서 새롭게 상위권으로 나타난 계열사",
+    followUpNote: "세미나 이후(9/3 이후) 실제 참석·관심 계열사를 다시 정리해 별도로 전달 예정",
+    companies: [
+      { company: "한화솔루션 인사이트 부문", count: 47 },
+      { company: "한화에어로스페이스", count: 23 },
+      { company: "한화솔루션", count: 22 },
+      { company: "한화오션", count: 18 },
+      { company: "(주)한화 건설부문", count: 14 },
+      { company: "아워홈", count: 12 },
+      { company: "한화시스템", count: 11 },
+      { company: "한화컨버전스", count: 10 },
+      { company: "(주)한화", count: 9 },
+      { company: "한화비전", count: 8 },
+      { company: "한화모멘텀(주)", count: 6 },
+      { company: "한화세미텍", count: 5 },
+      { company: "한화NxMD", count: 3 },
+      { company: "한화토탈에너지스", count: 3 },
+      { company: "한화갤러리아", count: 3 },
+      { company: "한화첨단소재", count: 3 },
+      { company: "한화에너지", count: 3 },
+      { company: "한화파워", count: 3 },
+      { company: "한화솔루션 큐셀 부문", count: 3 },
+      { company: "한화엔진", count: 3 },
+      { company: "한화컴파운드", count: 2 },
+      { company: "한화63시티", count: 2 },
+      { company: "여천NCC", count: 2 },
+      { company: "한화임팩트", count: 2 },
+      { company: "에이치앤지케미칼", count: 1 },
+      { company: "한화호텔&리조트", count: 1 }
+    ]
+  },
   bdCompetitors: [
-    { company: "삼성sds", materials: 4, lastDate: "8/6", note: "그룹 계열 SI, 동일 담당자가 짧은 간격으로 App.Gen.Platform 4회 다운로드 — 경쟁 동향 참고용" },
-    { company: "에스코어", materials: 1, lastDate: "8/8", note: "삼성SDS 계열 데이터컨설팅 조직, MMDM 리포트 다운로드 — 경쟁 동향 참고용" }
+    { company: "삼성sds", materials: 4, lastDate: "8/6", note: "그룹 계열 SI, 동일 담당자가 짧은 간격으로 App.Gen.Platform 4회 다운로드<br>— 경쟁 동향 참고용" },
+    { company: "에스코어", materials: 1, lastDate: "8/8", note: "삼성SDS 계열 데이터컨설팅 조직, MMDM 리포트 다운로드<br>— 경쟁 동향 참고용" }
   ],
-  bdNote: "* 선별 기준: 학생·개인·익명 제외, 2종 이상 자료 다운로드 또는 뉴스레터 고관심 기준<br>* '경쟁 SI 벤치마킹 추정'은 소속 직군·자료 다운로드 패턴 기준 추정치로, 확정 판단 아님<br>* latestByCompany(계열사별 누적 랭킹)는 8월 신규 접점 기준 미반영 — 전체 이력 재집계 필요"
+  bdNote: "* 선별 기준: 학생·개인·익명 제외, 2종 이상 자료 다운로드 또는 뉴스레터 고관심 기준<br>* '경쟁 SI 벤치마킹 추정'은 소속 직군·자료 다운로드 패턴 기준 추정치로, 확정 판단 아님"
 };
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -795,8 +867,19 @@ function render(){
   document.getElementById('nl-issue-cards').innerHTML = issues.map((iss,i)=>`
     <div class="issue-card" style="border-top:3px solid ${borderColors[i]}">
       <div style="font-size:10px;color:var(--ink3);margin-bottom:3px">${iss.no} · ${fmtNum(iss.recipients)}명${i===issues.length-1?` · ${iss.date}`:''}</div>
-      <div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:2px">${iss.title}</div>
-      <div style="font-size:10px;color:var(--ink3)">${iss.target}</div>
+      ${iss.adTest ? `
+        <div style="font-size:10px;color:var(--ink4);margin-bottom:4px">전체: ${iss.title}</div>
+        ${iss.adTest.map(g=>`
+          <div style="margin-top:5px;padding-top:5px;border-top:1px dashed var(--bd)">
+            <div style="font-size:10px;font-weight:600;color:${g.label.includes('미표기')?'#1D7A4F':'var(--o)'}">${g.label} · ${fmtNum(g.recipients)}명</div>
+            <div style="font-size:11px;font-weight:500;color:var(--ink);margin:1px 0">${g.subject}</div>
+            <div style="font-size:9px;color:var(--ink3)">${g.target}</div>
+          </div>`).join('')}
+      ` : `
+        <div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:2px">${iss.title}</div>
+        <div style="font-size:10px;color:var(--ink3)">${iss.target}</div>
+        ${iss.decisionNote ? `<div style="font-size:9px;color:#1D7A4F;margin-top:4px;padding-top:4px;border-top:1px dashed var(--bd)">💡 ${iss.decisionNote}</div>` : ''}
+      `}
     </div>`).join('');
 
   const wpIssues = issues.filter(iss=>iss.whitepaper).reverse();
@@ -912,19 +995,57 @@ function render(){
     </div>`).join('');
 
   // BD 전달용 리드 — 대내/대외 분리
+  const tierBadge = { hot:'🔥 최우선', warm:'🟡 관찰 중', watch:'🔵 신규 접점' };
+  const tierBorder = { hot:'#C03C10', warm:'#BA7517', watch:'#1D7A4F' };
+  const tierOrder = { hot:0, warm:1, watch:2 };
   const renderLead = l => `
-    <div style="background:var(--white);border-radius:8px;padding:10px 14px;margin-bottom:6px;border-left:3px solid #1D7A4F">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+    <div style="background:var(--white);border-radius:8px;padding:10px 14px;margin-bottom:6px;border-left:3px solid ${tierBorder[l.tier]||'#1D7A4F'}">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px;flex-wrap:wrap">
         <span style="font-size:13px;font-weight:600;color:var(--ink)">${l.company}</span>
+        <span style="font-size:10px;font-weight:700;color:${tierBorder[l.tier]||'#1D7A4F'}">${tierBadge[l.tier]||''}</span>
         <span style="font-size:10px;color:var(--ink4);background:#EDEBE6;border-radius:8px;padding:1px 7px">${l.segTag}</span>
         <span style="font-size:10px;font-weight:700;color:#1D7A4F;background:#E6F3EA;border-radius:8px;padding:1px 7px">${typeof l.materials==='number' ? '자료 '+l.materials+'건' : l.materials}</span>
         <span style="font-size:10px;color:var(--ink3);margin-left:auto">최근 ${l.lastDate}</span>
       </div>
+      ${l.channels ? `<div style="font-size:9px;color:var(--ink4);margin-bottom:3px">접점 채널: ${l.channels.join(' · ')}</div>` : ''}
       <div style="font-size:11px;color:var(--ink3);margin-bottom:4px">${l.dept} · ${l.title}</div>
       <div style="font-size:11px;color:var(--ink2);line-height:1.5">${l.note}</div>
     </div>`;
-  document.getElementById('bd-leads-internal').innerHTML = DATA.bdLeads.filter(l=>l.segTag.startsWith('대내')).map(renderLead).join('');
-  document.getElementById('bd-leads-external').innerHTML = DATA.bdLeads.filter(l=>!l.segTag.startsWith('대내')).map(renderLead).join('');
+  const sortByTier = (a,b) => (tierOrder[a.tier]??9) - (tierOrder[b.tier]??9);
+  document.getElementById('bd-leads-internal').innerHTML = DATA.bdLeads.filter(l=>l.segTag.startsWith('대내')).sort(sortByTier).map(renderLead).join('');
+  document.getElementById('bd-leads-external').innerHTML = DATA.bdLeads.filter(l=>!l.segTag.startsWith('대내')).sort(sortByTier).map(renderLead).join('');
+
+  const biEl = document.getElementById('bd-insights');
+  if(biEl && DATA.bdInsights){
+    biEl.innerHTML = DATA.bdInsights.map(x=>`
+      <div style="background:var(--white);border-radius:8px;padding:10px 12px;margin-bottom:6px;border-left:3px solid #1A56A0">
+        <div style="font-size:11px;font-weight:600;color:var(--ink);margin-bottom:3px">${x.title}</div>
+        <div style="font-size:11px;color:var(--ink2);line-height:1.5">${x.desc}</div>
+      </div>`).join('');
+  }
+
+
+  const sem = DATA.bdSeminar;
+  document.getElementById('bd-seminar').innerHTML = `
+    <div style="font-size:11px;color:var(--ink3);margin-bottom:8px">${sem.period} 신청 총 <strong style="color:#1D7A4F">${sem.total}명</strong> (${sem.companies.length}개 계열사) · ${sem.asOf}</div>
+    <div style="font-size:11px;color:var(--ink2);line-height:1.6;margin-bottom:6px">${sem.summary}</div>
+    <div style="font-size:11px;color:var(--ink2);line-height:1.6;margin-bottom:10px;padding:8px 10px;background:#F7FBF8;border-radius:6px">💡 ${sem.insight}</div>
+    <div style="font-size:11px;color:var(--ink4);margin-bottom:10px">📌 ${sem.followUpNote}</div>
+    <details style="font-size:11px">
+      <summary style="cursor:pointer;color:#1D7A4F;font-weight:600;list-style:none;display:flex;align-items:center;gap:4px">
+        <span style="display:inline-block;transition:transform .15s">▶</span> 계열사별 전체 신청 현황 보기 (${sem.companies.length}개)
+      </summary>
+      <div style="display:grid;grid-template-columns:1fr auto;gap:4px 10px;margin-top:10px;padding-top:10px;border-top:1px solid var(--bd)">
+        ${sem.companies.map(c=>`<div style="color:var(--ink2)">${c.company}</div><div style="text-align:right;font-weight:600;color:var(--ink)">${c.count}명</div>`).join('')}
+      </div>
+    </details>`;
+  // 화살표 회전 토글
+  document.querySelectorAll('#bd-seminar details').forEach(d=>{
+    d.addEventListener('toggle', ()=>{
+      const arrow = d.querySelector('summary span');
+      if (arrow) arrow.style.transform = d.open ? 'rotate(90deg)' : 'rotate(0deg)';
+    });
+  });
 
   // 경쟁 SI 벤치마킹 추정
   document.getElementById('bd-competitors').innerHTML = DATA.bdCompetitors.map(c=>`
@@ -1050,25 +1171,43 @@ function renderCharts(){
 
   // 03 뉴스레터 (최근 3개 호)
   const issues = DATA.newsletter.issues.slice(-3);
+  // 호별로 뚜렷이 구분되도록 그룹 사이에 빈 막대(스페이서)를 넣고,
+  // adTest((광고) 표기 A/B)가 있는 호는 '전체'(진한색·굵은 라벨) + '표기'/'미표기'(옅은색·세부) 막대를 함께 보여줌
+  const chartBars = [];
+  issues.forEach((iss,idx)=>{
+    if(idx>0) chartBars.push({ label:'', openRate:null, clickRate:null, kind:'spacer' });
+    if(iss.adTest){
+      chartBars.push({ label:`${iss.no} 전체`, openRate:iss.openRate, clickRate:iss.clickRate, kind:'total' });
+      iss.adTest.forEach(g=>chartBars.push({
+        label: `└ ${g.label.includes('미표기')?"'(광고)'미표기":"'(광고)'표기"}`,
+        openRate: g.openRate, clickRate: g.clickRate, kind:'sub'
+      }));
+    } else {
+      chartBars.push({ label: `${iss.no} (${iss.date})`, openRate: iss.openRate, clickRate: iss.clickRate, kind:'total' });
+    }
+  });
+  const shade = (hex, kind) => kind==='sub' ? hex+'70' : hex; // 세부 막대는 옅게, 전체는 진하게
+
   new Chart(document.getElementById('c_nl'),{
     type:'bar',
     data:{
-      labels: issues.map(i=>`${i.no} (${i.date})`),
+      labels: chartBars.map(b=>b.label),
       datasets:[
-        {label:'열람률', data:issues.map(i=>i.openRate),
-          backgroundColor:issues.map((_,i,arr)=> i===arr.length-1?O:O+(55+i*35).toString(16)),
+        {label:'열람률', data:chartBars.map(b=>b.openRate),
+          backgroundColor:chartBars.map(b=>shade(O,b.kind)),
           borderRadius:4,borderSkipped:false,
-          datalabels:{anchor:'end',align:'top',font:{size:11,weight:'700',family:"'Noto Sans KR',sans-serif"},color:O,formatter:v=>v!=null?v+'%':'미집계'}},
-        {label:'클릭률', data:issues.map(i=>i.clickRate),
-          backgroundColor:issues.map((_,i,arr)=> i===arr.length-1?'#1A56A0':'#1A56A0'+(55+i*35).toString(16)),
+          datalabels:{anchor:'end',align:'top',font:{size:11,weight:'700',family:"'Noto Sans KR',sans-serif"},color:O,formatter:v=>v!=null?v+'%':''}},
+        {label:'클릭률', data:chartBars.map(b=>b.clickRate),
+          backgroundColor:chartBars.map(b=>shade('#1A56A0',b.kind)),
           borderRadius:4,borderSkipped:false,
-          datalabels:{anchor:'end',align:'top',font:{size:11,weight:'700',family:"'Noto Sans KR',sans-serif"},color:'#1A56A0',formatter:v=>v!=null?v+'%':'미집계'}}
+          datalabels:{anchor:'end',align:'top',font:{size:11,weight:'700',family:"'Noto Sans KR',sans-serif"},color:'#1A56A0',formatter:v=>v!=null?v+'%':''}}
       ]
     },
     options:{ responsive:true,maintainAspectRatio:false,
       plugins:{ legend:{display:true,position:'bottom',labels:{font:F,color:'#999',boxWidth:10,boxHeight:10}}, datalabels:{display:true},
-        tooltip:{mode:'index',intersect:false,callbacks:{label:d=>d.raw!=null?`${d.dataset.label}: ${d.raw}%`:`${d.dataset.label}: 미집계`}} },
-      scales:{ x:{grid:{display:false},ticks:{font:F,color:'#555'}}, y:{grid:{color:'rgba(0,0,0,.04)',drawBorder:false},ticks:{font:F,color:'#999',callback:v=>v+'%'},max:80,min:0} }
+        tooltip:{mode:'index',intersect:false,filter:d=>d.raw!=null,callbacks:{label:d=>`${d.dataset.label}: ${d.raw}%`}} },
+      scales:{ x:{grid:{display:false},ticks:{font:ctx=>({size:10,family:"'Noto Sans KR',sans-serif",weight:chartBars[ctx.index]?.kind==='total'?'700':'400'}),color:ctx=>chartBars[ctx.index]?.kind==='total'?'#333':'#999'}},
+        y:{grid:{color:'rgba(0,0,0,.04)',drawBorder:false},ticks:{font:F,color:'#999',callback:v=>v+'%'},max:80,min:0} }
     }
   });
 

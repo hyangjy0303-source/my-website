@@ -134,7 +134,9 @@ summary::-webkit-details-marker{display:none}
 .voc-card summary{cursor:pointer;font-size:12.5px;color:var(--ink3);margin-top:8px;list-style:none}
 .voc-card ol{margin:6px 0 0;padding-left:18px;font-size:12.5px;color:var(--ink2);line-height:1.7}
 /* 참고: 선진/경쟁사 비교 (기본 접힘) */
-.bm-details{background:var(--white)}
+.bm-details{background:#F5F8FC;border-color:#C9D8EC}
+.bm-details .bm-sum{color:#0D3B75}
+.bm-no{font-size:12px;font-weight:700;color:#1A56A0;background:#E3ECF8;border-radius:6px;padding:1px 8px}
 .bm-sum{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;padding:14px 24px;font-size:14px;font-weight:600;color:var(--ink)}
 .bm-sum:hover{background:#FAF9F7}
 .bm-sum:focus-visible{outline:2px solid var(--o);outline-offset:-2px}
@@ -156,6 +158,9 @@ summary::-webkit-details-marker{display:none}
 .bm-rank{font-size:11.5px;color:var(--ink4);margin-left:4px}
 .bm-mix-row{display:grid;grid-template-columns:130px 1fr;gap:12px;align-items:center;padding:5px 0;border-bottom:1px solid var(--bd)}
 .bm-mix-row:last-child{border-bottom:none}
+.bm-charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.bm-chart-card{background:var(--white);border:1px solid var(--bd);border-radius:8px;padding:10px 12px}
+.bm-chart-title{font-size:12.5px;font-weight:600;color:var(--ink2);margin-bottom:6px}
 .bm-kw{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .bm-kw-card{background:var(--bg);border-radius:8px;padding:10px 12px}
 .bm-kw-card.self{background:var(--olt)}
@@ -250,6 +255,25 @@ summary::-webkit-details-marker{display:none}
         <div class="ib gray" id="hp-src-def" style="flex-shrink:0"></div>
       </div>
     </div>
+  </div>
+
+  <!-- 1-1 선진/경쟁사 홈페이지 유입 비교 (01 홈페이지 하위 아코디언, 기본 접힘) — DATA.benchmark 가 null 이거나 hidden 이면 숨김 -->
+  <div id="bm-section" style="margin:-4px 0 8px">
+    <details class="ch bm-details">
+      <summary class="bm-sum"><span class="bm-arrow">▶</span><span class="bm-no">1-1</span><span id="bm-title"></span><span class="bm-meta" id="bm-meta"></span></summary>
+      <div class="bm-body">
+        <div class="bm-sub" style="margin-top:14px">활성 사용자 추이</div>
+        <div style="overflow-x:auto"><table class="bm-table" id="bm-table"></table></div>
+        <div class="bm-sub">항목별 비교 그래프</div>
+        <div id="bm-charts" class="bm-charts"></div>
+        <div class="bm-sub">유입 채널 구성</div>
+        <div id="bm-mix"></div>
+        <div class="bm-sub">검색 키워드 비교 <span id="bm-kw-scope" style="font-weight:400;color:var(--ink3)"></span></div>
+        <div id="bm-kw" class="bm-kw"></div>
+        <div id="bm-findings"></div>
+        <div id="bm-note" style="font-size:11.5px;color:var(--ink4);margin-top:12px;line-height:1.7"></div>
+      </div>
+    </details>
   </div>
 
   <!-- 02 자료 다운로드 -->
@@ -488,24 +512,6 @@ summary::-webkit-details-marker{display:none}
     </div>
   </div>
 
-  <!-- ── 참고: 선진/경쟁사 홈페이지 유입 비교 (기본 접힘, ▶ 클릭 시 펼침) — DATA.benchmark 가 null 이면 숨김 ── -->
-  <div id="bm-section">
-    <div class="sl sl-gap">참고 자료</div>
-    <details class="ch bm-details">
-      <summary class="bm-sum"><span class="bm-arrow">▶</span><span id="bm-title"></span><span class="bm-meta" id="bm-meta"></span></summary>
-      <div class="bm-body">
-        <div class="bm-sub" style="margin-top:14px">방문 지표 <span style="font-weight:400;color:var(--ink4)">월간 방문자 수 · 평균 체류시간 · 이탈률</span></div>
-        <div style="overflow-x:auto"><table class="bm-table" id="bm-table"></table></div>
-        <div class="bm-sub">유입 채널 구성</div>
-        <div id="bm-mix"></div>
-        <div class="bm-sub">검색 키워드 <span style="font-weight:400;color:var(--ink4)">회사별 상위 5개</span></div>
-        <div id="bm-kw" class="bm-kw"></div>
-        <div id="bm-findings"></div>
-        <div id="bm-note" style="font-size:11.5px;color:var(--ink4);margin-top:12px;line-height:1.7"></div>
-      </div>
-    </details>
-  </div>
-
   <div class="ft">
     <span>한화시스템 ICT부문 전략마케팅팀</span>
     <span id="ft-date"></span>
@@ -737,7 +743,7 @@ const DATA = {
       { no: "대외 0호 2차", date: "10/15", recipients: 107, title: "데이터를 '지식'으로 연결, 현장을 이해하는 온톨로지 (대내 7호 콘텐츠)", target: "홈페이지 마케팅 활용 수신동의자 + 파트너사 일부·컨설팅펌 (발송 성공 기준)", openRate: 46.7, clickRate: 22.4, opened: 50, clicked: 24,
         whitepaper: { title: "온톨로지 (메일 내 다운로드 링크)", realEvents: 22, realUnique: 19 } }   // ✅ Stibee 원 수치(다운로드 링크 22건·19명, 잘린 URL 변형 1건 별도)(참고: 기업 보안 스캐너 추정 자동 클릭 14명 포함, 제외 시 9.3%) / 11월 대시보드 업데이트 때 재집계값으로 교체
     ],
-    noteDef: "<ul><li>대외 고객 대상 시범 발송 (2026년 10월~)</li><li>0호: 대내 7호(온톨로지) 콘텐츠를 대상 그룹별 2차례 발송(1차 9/30 · 2차 10/15, 발송 성공 기준)</li></ul>",   // 🟡 발송 대상 기준 확정 후 추가
+    noteDef: "<ul><li>대외 고객 대상 시범 발송 (2026년 9월~)</li><li>0호: 대내 7호(온톨로지) 콘텐츠를 대상 그룹별 2차례 발송(1차 9/30 · 2차 10/15, 발송 성공 기준)</li></ul>",   // 🟡 발송 대상 기준 확정 후 추가
     noteDef2: "<ul><li>고관심 기준: 대내 뉴스레터와 동일(오픈·클릭 상위)</li><li>기업 단위 집계 · 누적: 2개 호 이상 연속 등장 시 표시</li></ul>",
     highInterest: [
       { issueNo: "대외 0호 2차", issueLabel: "대외 0호 2차 · 온톨로지", company: "미라콤아이앤씨", detail: "오픈 16회(3명) · 클릭 8회(2명) · 그룹장 포함, 다음 날 재방문", tier: "top" },
@@ -779,13 +785,14 @@ const DATA = {
   insights: {
     // 🟡 10월 데이터 확정 후 작성. 순서: green → yellow → red / em-dash 앞에는 <br>
     marketing: [
-      { level: "green", title: "AI 검색 유입 3개월 연속 증가, 유입 비중 두 달 만에 약 4배", desc: "AI 검색 세션이 8월 66 → 9월 181 → 10월 243으로 늘었고, 전체 유입 중 비중은 1.1% → 2.4% → 4.1%로 매달 확대<br>— AI 검색 유입 확대를 목표로 진행한 홈페이지 최적화(SEO·GEO) 작업의 효과가 3개월 연속 나타났으며, 매월 비중이 확대되는 추세로 보아 AI 검색은 일시적 유입이 아닌 구조적 유입 채널로 판단 가능" },
-      { level: "green", title: "온톨로지 주제, 대내·대외 뉴스레터와 LinkedIn 전 채널에서 높은 반응", desc: "대내 7호의 최다 클릭 링크가 온톨로지 리포트 다운로드(17명)였고, 같은 콘텐츠를 보낸 대외 0호에서도 21명이 다운로드 링크를 클릭 · LinkedIn 온톨로지 게시물은 참여율 23.8%로 당월 최고<br>— 채널별 콘텐츠를 동일 주제로 일원화해 운영하는 가운데 온톨로지 주제가 대내 계열사·대외 고객·SNS 모든 채널에서 높은 반응을 얻어, 고객 관심도가 높은 핵심 주제임을 확인 · 후속 콘텐츠(사례·설명회 등) 확장 시 우선 검토 대상" },
-      { level: "green", title: "LinkedIn 카드형 전환 첫 달, 참여율 페이지 평균의 1.2배", desc: "클릭·참여율 개선을 위해 당월 게시물 4건을 모두 카드형으로 전환했고, 당월 평균 참여율 18.41%로 페이지 전체 평균(15.3%)을 웃돎 · 4건 중 3건이 참여율 20% 이상<br>— 클릭·참여율 개선을 목표로 진행한 카드형 전환의 효과가 첫 달부터 나타나, 4건 중 3건이 페이지 평균을 웃돈 만큼 카드형을 기본 형식으로 유지할 근거를 확보함 · 다만 게시물별 편차(7.3%~23.8%)가 커 주제 선정 고도화가 다음 과제" },
-      { level: "green", title: "한화오션, 뉴스레터 클릭과 자료 다운로드 모두 1위", desc: "대내 7호 클릭 1위(10회), 10월 대내 자료 다운로드 3건 중 2건(AI Agent)이 한화오션<br>— 뉴스레터를 통한 콘텐츠 접점이 같은 달 특정 솔루션(AI Agent) 자료 요청으로 이어져, 한화오션의 관심이 인지 단계를 넘어 솔루션 검토 단계로 진입한 것으로 해석됨" },
-      { level: "yellow", title: "홈페이지 방문 9월 대비 24.1% 감소, 7~8월 수준으로 회귀", desc: "활성 사용자 4,756명으로 9월(6,263명)보다 줄었으나 7~8월 평균(약 4,790명)과 비슷한 수준 · 보고 기간 중 평일 공휴일 4일로 영업일은 18일(9월 21일)<br>— 9월이 최근 4개월 중 이례적으로 높았던 달로 이번 감소는 평월 수준으로의 회귀에 가까우며, 영업일 감소까지 감안하면 방문 기반 자체가 줄었다고 보기는 어려움" },
-      { level: "yellow", title: "인사이트 리포트 다운로드, 홈페이지에서 뉴스레터로 이동", desc: "홈페이지에서 리포트를 받은 고객은 뉴스레터 대상에 편입하고, 이후 리포트는 뉴스레터에서 바로 받도록 운영 · 온톨로지는 뉴스레터에서 38명(대내 17 · 대외 21), Agentic AI는 8명이 다운로드한 반면 홈페이지 다운로드는 두 리포트 모두 0건<br>— 홈페이지 다운로드 감소는 고객이 뉴스레터로 옮겨가는 의도된 흐름이므로, 리포트 성과는 홈페이지와 뉴스레터 다운로드를 합산해 관리할 필요가 있음" },
-      { level: "yellow", title: "뉴스레터 대외 시범 송부 2회 진행", desc: "1차(9/30, 직접 구독자 12명) 열람률 66.7% · 클릭률 16.7% / 2차(10/15, 수신동의자·파트너사 등 107명) 열람률 46.7% · 클릭률 22.4%(발송 다음 날 기준)<br>— 발송 대상과 집계 시점이 달라 현재 수치로 대상별 반응을 비교하기는 이르며, 11월 재집계 결과를 정식 운영 시 발송 대상 선정 기준으로 활용할 필요가 있음" },
+      { level: "green", title: "AI 검색 유입 2개월 연속 증가, 검색엔진 유입 비중도 상승", desc: "AI 검색 세션 8월 66 → 9월 181 → 10월 243으로 2개월 연속 증가, 유입 비중은 1.1% → 2.4% → 4.1%로 두 달 만에 약 4배<br>· 검색엔진 유입 비중도 9월 27.0%에서 10월 31.3%로 상승<br>— AI 검색 유입 확대를 목표로 진행한 홈페이지 최적화(SEO·GEO) 작업의 효과가 AI 검색(GEO)과 검색엔진(SEO) 양쪽에서 나타났으며, 매월 비중이 확대되는 추세로 보아 AI 검색은 일시적 유입이 아닌 구조적 유입 채널로 판단 가능" },
+      { level: "green", title: "인기 페이지 '고객사례 목록' 9월 8위에서 4위로 상승", desc: "고객사례 목록 360세션으로 9월 8위에서 4위로 상승 · 개별 사례 페이지(고객사례 뷰)도 1,237세션으로 1위 유지<br>— 한 가지 사례 확인에 그치지 않고 여러 사례를 비교하거나 솔루션 설명을 본 뒤 관련 사례를 찾아보는 방문객이 많았던 것으로 보이며, 실제 사례에 대한 방문객 니즈가 지속적으로 큰 만큼 10월 뉴스레터 주제인 '고객사례집'을 지속 업데이트해 뉴스레터·LinkedIn 등 홈페이지 외 채널에서도 확대 활용할 필요가 있음" },
+      { level: "green", title: "온톨로지 주제, 대내·대외 뉴스레터와 LinkedIn 전 채널에서 높은 반응", desc: "대내 뉴스레터 7호: 최다 클릭 링크가 온톨로지 리포트 다운로드(17명)<br>· 대외 뉴스레터 0호: 같은 콘텐츠의 다운로드 링크 클릭 21명<br>· LinkedIn: 온톨로지 게시물 참여율 23.8%로 당월 최고<br>— 채널별 콘텐츠를 동일 주제로 일원화해 운영하는 가운데 온톨로지 주제가 대내 계열사·대외 고객·SNS 모든 채널에서 높은 반응을 얻어 고객 관심도가 높은 핵심 주제임을 확인했으며, 후속 콘텐츠(사례·설명회 등) 확장 시 우선 검토 대상" },
+      { level: "green", title: "LinkedIn 카드형 전환 첫 달, 참여율 페이지 평균의 1.2배", desc: "클릭·참여율 개선을 위해 당월 게시물 4건을 모두 카드형으로 전환<br>· 당월 평균 참여율 18.41%로 페이지 전체 평균(15.3%)의 1.2배, 4건 중 3건이 참여율 20% 이상<br>— 클릭·참여율 개선을 목표로 진행한 카드형 전환의 효과가 첫 달부터 나타나 카드형을 기본 형식으로 유지할 근거를 확보했으며, 게시물별 편차(7.3%~23.8%)가 커 주제 선정 고도화가 다음 과제" },
+      { level: "green", title: "한화오션, 뉴스레터 클릭과 자료 다운로드 모두 1위", desc: "대내 뉴스레터 7호 클릭 1위(10회) · 10월 대내 자료 다운로드 3건 중 2건(AI Agent)<br>— 뉴스레터를 통한 콘텐츠 접점이 같은 달 특정 솔루션(AI Agent) 자료 요청으로 이어져, 한화오션의 관심이 인지 단계를 넘어 솔루션 검토 단계로 진입한 것으로 해석됨" },
+      { level: "yellow", title: "홈페이지 방문 9월 대비 24.1% 감소(추석 연휴로 영업일 3일↓), 특히 Direct 유입 크게 감소", desc: "활성 사용자 4,756명(9월 6,263명)으로 7~8월 평균(약 4,790명)과 비슷한 수준<br>· Direct(주소 직접 입력·즐겨찾기 등) 세션이 9월 약 4,600에서 10월 3,273으로 약 29% 감소<br>— 감소분 대부분이 Direct 유입에서 발생했고 추석 연휴로 영업일이 3일 적었으며, 9월이 최근 4개월 중 이례적으로 높았던 달인 점을 감안하면 방문 기반 자체가 줄었다고 보기는 어려움" },
+      { level: "yellow", title: "인사이트 리포트 다운로드, 홈페이지에서 뉴스레터로 이동", desc: "홈페이지에서 리포트를 받은 고객은 뉴스레터 대상에 편입하고, 이후 리포트는 뉴스레터에서 바로 받도록 운영<br>· 온톨로지는 뉴스레터에서 38명(대내 17 · 대외 21), Agentic AI는 8명이 다운로드한 반면 홈페이지 다운로드는 두 리포트 모두 0건<br>— 홈페이지 다운로드 감소는 고객이 뉴스레터로 옮겨가는 의도된 흐름이므로, 리포트 성과는 홈페이지와 뉴스레터 다운로드를 합산해 관리할 필요가 있음" },
+      { level: "yellow", title: "뉴스레터 대외 시범 송부 2회 진행", desc: "1차(9/30, 직접 구독자 12명): 열람률 66.7% · 클릭률 16.7%<br>· 2차(10/15, 수신동의자·파트너사 등 107명): 열람률 46.7% · 클릭률 22.4%(발송 다음 날 기준)<br>— 발송 대상과 집계 시점이 달라 현재 수치로 대상별 반응을 비교하기는 이르며, 11월 재집계 결과를 정식 운영 시 발송 대상 선정 기준으로 활용할 필요가 있음" },
       { level: "red", title: "인사이트 리포트 조회 대비 홈페이지 다운로드 약 1%", desc: "리포트 상세 페이지(인사이트 리포트 뷰) 조회 482세션 대비 홈페이지 리포트 다운로드 6건(유의미 2건)<br>— 홈페이지 첫 다운로드가 뉴스레터 편입의 출발점인 만큼, 리포트를 본 신규 방문자가 다운로드로 이어지도록 진행 중인 UI/UX 개편 고도화에서 다운로드 버튼 위치·신청 절차 등 전환 동선 개선이 과제임" }
     ]
   },
@@ -824,14 +831,16 @@ const DATA = {
   // values 입력 형식: visits = 숫자, duration = 초 단위 숫자(예: 2분 10초 → 130), bounce = % 숫자
   // 1군/2군 평균 행은 자동 계산 (값이 있는 회사만 평균)
   benchmark: {
-    hidden: true,   // 🟡 경쟁사 9개사 데이터 확보 전까지 섹션 숨김 (데이터 입력 후 false)
+    hidden: false,  // 🟡 데이터 입력 전에는 "입력 대기"로 보임 — 업로드 전 데이터를 채우거나 true 로 숨김
     title: "[한화시스템/ICT] 선진/경쟁사 홈페이지 유입 비교 분석",
-    period: "기준 기간 입력",          // 🟡 예: "2026년 9월"
-    source: "출처 입력",               // 🟡 분석 도구명
-    columns: [
-      { key: "visits",   label: "월간 방문자 수", format: "number", rank: true },   // rank: 9개사 중 순위 자동 표시
-      { key: "duration", label: "평균 체류시간",  format: "duration" },
-      { key: "bounce",   label: "이탈률",         format: "percent" }
+    period: "2026년 9월(9/1~9/30)",   // Similarweb은 월 단위(1일~말일) 집계 → 보고서 기간(16일~15일)과 가장 많이 겹치는 직전 달 데이터 사용          // 🟡 예: "2026년 9월"
+    source: "Similarweb",               // 🟡 분석 도구명
+    columns: [   // 값이 하나도 없는 컬럼은 표·그래프에서 자동으로 숨김
+      { key: "au78",     label: "7~8월(7/1~8/31)",   format: "number" },
+      { key: "au9",      label: "9월(9/1~9/30)",     format: "number", rank: true },
+      { key: "au10",     label: "10월(9/16~10/15)",  format: "number" },
+      { key: "duration", label: "평균 체류시간",       format: "duration" },
+      { key: "bounce",   label: "이탈률",             format: "percent" }
     ],
     groups: [
       { id: "자사", label: "자사" },
@@ -841,19 +850,45 @@ const DATA = {
     // sources: 유입채널 비중(%) — 아래 sourceMix.categories 와 같은 이름으로 입력
     // keywords: 검색 키워드 상위(최대 5개) — [{ kw: "키워드", share: 12.3 }] 또는 ["키워드", ...]
     rows: [   // 🟡 수치·유입채널·키워드 입력
-      { company: "한화시스템/ICT",    group: "자사", self: true, values: {}, sources: null, keywords: [] },
-      { company: "삼성SDS",           group: "1군", values: {}, sources: null, keywords: [] },
-      { company: "LG CNS",            group: "1군", values: {}, sources: null, keywords: [] },
-      { company: "SK AX",             group: "1군", values: {}, sources: null, keywords: [] },
-      { company: "현대오토에버",       group: "1군", values: {}, sources: null, keywords: [] },
-      { company: "CJ올리브네트웍스",   group: "2군", values: {}, sources: null, keywords: [] },
-      { company: "롯데이노베이트",     group: "2군", values: {}, sources: null, keywords: [] },
-      { company: "포스코DX",          group: "2군", values: {}, sources: null, keywords: [] },
-      { company: "코오롱베니트",       group: "2군", values: {}, sources: null, keywords: [] }
+      { company: "한화시스템/ICT",    group: "자사", self: true, values: { au78: 11000, au9: 5800, au10: 4756 }, sources: { "Direct": 58.67, "검색엔진": 31.06, "AI 검색": 4.22, "광고": 5.57, "Referral": 0.49 }, keywords: [] },
+      { company: "한화시스템(전체)",  group: "자사", values: { au78: 72000, au9: 47163, au10: 42000 }, sources: { "Direct": 50.11, "검색엔진": 41.18, "AI 검색": 1.73, "광고": 0.56, "Referral": 6.41 }, keywords: [] },   // 참고: 한화시스템 전체 도메인
+      { company: "삼성SDS",           group: "1군", values: { au78: 781120, au9: 105663 }, sources: { "Direct": 34.17, "검색엔진": 22.15, "AI 검색": 1.34, "광고": 1.28, "Referral": 40.65, "기타": 0.41 }, keywords: [] },
+      { company: "LG CNS",            group: "1군", values: { au78: 3352244, au9: 288756 }, sources: { "Direct": 43.48, "검색엔진": 4.42, "AI 검색": 0.78, "광고": 0.46, "Referral": 47.55, "기타": 3.31 }, keywords: [] },
+      { company: "SK AX",             group: "1군", values: { au78: 451000, au9: 25129 }, sources: { "Direct": 70.2, "검색엔진": 18.38, "AI 검색": 1.14, "광고": 1.74, "Referral": 4.79, "기타": 3.75 }, keywords: [] },
+      { company: "현대오토에버",       group: "1군", values: { au78: 657940, au9: 61270 }, sources: { "Direct": 27.13, "검색엔진": 21.69, "AI 검색": 0.48, "광고": 0.45, "Referral": 48.83, "기타": 1.42 }, keywords: [] },
+      { company: "CJ올리브네트웍스",   group: "2군", values: { au78: 91150, au9: 22647 }, sources: { "Direct": 41.38, "검색엔진": 45.64, "AI 검색": 2.77, "광고": 0.02, "Referral": 5.88, "기타": 4.31 }, keywords: [] },
+      { company: "롯데이노베이트",     group: "2군", values: { au78: 79135, au9: 8904 }, sources: { "Direct": 47.98, "검색엔진": 32.47, "AI 검색": 2.09, "광고": 0, "Referral": 17.45 }, keywords: [] },
+      { company: "포스코DX",          group: "2군", values: { au78: 60596, au9: 13668 }, sources: { "Direct": 44.81, "검색엔진": 48.84, "AI 검색": 3.1, "광고": 0.02, "Referral": 2.75, "기타": 0.48 }, keywords: [] },
+      { company: "코오롱베니트",       group: "2군", values: { au78: 17842, au9: 4398 }, sources: { "Direct": 22.62, "검색엔진": 63.82, "AI 검색": 0.8, "광고": 2.69, "Referral": 6.56, "기타": 3.51 }, keywords: [] }
     ],
-    sourceMix: {   // 분석 도구의 채널 구분에 맞게 수정 가능
-      categories: ["Direct", "자연검색", "유료검색", "추천", "소셜", "이메일", "디스플레이"],
-      colors:     ["#1A56A0", "#F05A28", "#FFA630", "#00A99D", "#0A66C2", "#2D2D2D", "#B9B4AA"]
+    // ✅ 검색 키워드 (Similarweb 2026-09 · Worldwide · All traffic · Include Subdomains)
+    keywordScope: "Similarweb 2026-09 · Worldwide · All traffic · 주요 4개사(삼성SDS·LG CNS·SK AX·현대오토에버)와 한화시스템",
+    keywordsOrganic: [   // 비브랜드 자연검색 상위 키워드 — share: 5개사 내 클릭 점유
+      { kw: "saas", clicks: 870, share: "삼성SDS 100%" },
+      { kw: "이더리움", clicks: 550, share: "삼성SDS 100%" },
+      { kw: "바이브코딩", clicks: 500, share: "삼성SDS 100%" },
+      { kw: "agentic ai", clicks: 480, share: "삼성SDS 87.5% / LG CNS 12.5%" },
+      { kw: "agi", clicks: 380, share: "삼성SDS 100%" },
+      { kw: "itsm 인증", clicks: 330, share: "한화 100%", self: true },
+      { kw: "국내 업체 클라우드 도입률", clicks: 290, share: "삼성SDS 100%" },
+      { kw: "mes", clicks: 220, share: "SK AX 100%" },
+      { kw: "software defined factory", clicks: 190, share: "현대오토에버 100%" },
+      { kw: "공인전자문서센터", clicks: 180, share: "LG CNS 100%" },
+      { kw: "보안 점검 ai", clicks: 140, share: "LG CNS 100%" },
+      { kw: "computer use", clicks: 140, share: "SK AX 100%" }
+    ],
+    keywordsPaid: [      // 유료 검색 유입 — paid: 도메인 전체 유료 검색 유입(브랜드 포함), terms: 자동 Non-branded 상위 5개 발췌
+      { company: "한화시스템", paid: "1.04K", terms: "로우코드사 (110), 아웃시스템즈 (10), outsystems (10)", self: true },
+      { company: "삼성SDS", paid: "3.44K", terms: "지피티 (1.1K), software used to issue…* (160), 삼성 scp (130)" },
+      { company: "LG CNS", paid: "4.51K", terms: "<span style='color:var(--ink4)'>ㅣㅎ춘 (160)†</span>, 기업 ax 사례 (150), <span style='color:var(--ink4)'>lgcnbs (120)†</span>, 제미나이 (70), 챗gpt (40)" },
+      { company: "SK AX", paid: "1.1K", terms: "aiops (30), ax (20), ai agent platform (20), 클라우드 전환 컨설팅 (20), m365 (20)" },
+      { company: "현대오토에버", paid: "0", terms: "Paid 필터 결과 없음" }
+    ],
+    keywordsPaidNote: "Paid 유입은 브랜드 포함 도메인 전체 유료 검색 유입 · 검색어는 자동 Non-branded 상위 5개 발췌(전체 유료 키워드 목록은 미확보)<br>* † 브랜드명 변형·오기로 보이는 검색어로, 브랜드명 제외 원칙에 따라 분석 대상에서 제외",
+    sourceMix: {   // ✅ Similarweb 9월 유입 채널 비중(%). 합계가 100%에 못 미치는 회사는 나머지를 '기타'로 표시
+      categories: ["Direct", "검색엔진", "AI 검색", "광고", "Referral", "기타"],
+      colors:     ["#1A56A0", "#F05A28", "#FFA630", "#00A99D", "#2D2D2D", "#DEDAD4"],
+      caption: "Referral: 한화시스템/ICT는 뉴스레터, 그 외는 뉴스레터·기사·SNS 등 · 기타: 5개 채널 외 나머지(디스플레이 등)"
     },
     // 비교 인사이트 — 상단 '주요 인사이트'와 같은 Green/Yellow/Red 형식. 순서: green → yellow → red / em-dash 앞에는 <br>
     insights: [   // 🟡 데이터 입력 후 작성
@@ -861,7 +896,7 @@ const DATA = {
       { level: "yellow", title: "[작성 예정] 중립적 관찰",       desc: "점검 후보: 경쟁사 유입 채널 구성 차이, 브랜드/솔루션 키워드 분포<br>— 수치 입력 후 작성" },
       { level: "red",    title: "[작성 예정] 개선이 필요한 신호", desc: "점검 후보: 방문 규모·검색 유입 비중의 1·2군 대비 격차<br>— 수치 입력 후 작성" }
     ],
-    note: "* 외부 분석 도구 추정치 기준(자사 포함 전 사 동일 기준)으로, 상단 01 홈페이지의 GA4 실측값과 집계 방식이 달라 직접 비교 시 유의"
+    note: "* 활성 사용자: 7~8월·9월은 Similarweb 월간 추정치, 10월(9/16~10/15)은 자사 GA 기준 · 타사 10월 데이터는 11월 말 수집 가능<br>* Similarweb 월간 추정치(1일~말일 집계) 기준으로, 본 보고서 기간(9/16~10/15)과 집계 기간이 다름<br>* 자사 포함 전 사 동일 기준 추정치로, 상단 01 홈페이지의 GA4 실측값과 집계 방식이 달라 직접 비교 시 유의"
   },
 
   // 홈페이지 문의(VoC) — 누적 목록. 새 문의는 계속 추가만 하면 됨 (지우지 않음)
@@ -915,9 +950,9 @@ const DATA = {
       signals: ""
     },
     {
-      company: "피에스케이", profile: "반도체 공정 장비생산 기업 · 중견기업", date: "2026-09-02", statusDate: "2026-09-03", priority: "상",
+      company: "피에스케이", profile: "반도체 공정 장비생산 기업 · 중견기업", date: "2026-09-02", statusDate: "2026-10-16", priority: "상",
       solution: "WMS 개발",
-      answered: true, status: "답변 · F/U 진행 결정",
+      answered: false, status: "마케팅 모니터링 통해 10/19 영업 회신 예정으로 확인",
       owners: "이경록 · 김태환 · 이예원", sales: "영업1팀 문화규 · 김태환",
       groups: [ { label: "문의 내용", text: "WMS 개발 관련 문의" } ],
       raw: [],
@@ -1385,7 +1420,7 @@ function render(){
     <div class="mk-row ${item.level}">
       <span class="mk-tag ${item.level}">${levelTag[item.level]}</span>
       <div><div style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:3px">${item.title}</div>
-      <div style="font-size:13.5px;color:var(--ink3);line-height:1.6">${item.desc}</div></div>
+      <div style="font-size:13.5px;color:var(--ink3);line-height:1.6">· ${item.desc}</div></div>
     </div>`).join('');
 
   // BD 리드
@@ -1429,7 +1464,7 @@ function render(){
   document.getElementById('voc-wrap').style.display = vocs.length ? '' : 'none';
   const cur = vocs.filter(v=>inPeriod(v.date));
   const cnt = k => vocs.filter(v=>v.answered===k).length;
-  const fu = vocs.filter(v=>/F\/U/.test(v.status||'')).length;
+  const fu = vocs.filter(v=>v.sales).length;   // F/U 담당 영업이 지정된 건
   // 요약 타일: 기본은 중립 회색, 핵심 지표 2개(당월 접수·F/U 진행)만 강조색
   const tile = (label, n, key) => key
     ? `<div style="background:var(--olt);border:1px solid var(--omid);border-radius:8px;padding:8px 12px;min-width:0"><div style="font-size:11.5px;color:var(--odk);font-weight:600">${label}</div><div style="font-size:22px;font-weight:700;color:var(--o);line-height:1.2">${n}<span style="font-size:12.5px;font-weight:500;color:var(--ink3);margin-left:2px">건</span></div></div>`
@@ -1651,8 +1686,9 @@ function renderCharts(){
 
 /* 참고: 선진/경쟁사 비교 */
 function renderBenchmark(){
-  const B = DATA.benchmark, wrap = document.getElementById('bm-section');
-  if(!B || B.hidden){ wrap.style.display='none'; return; }
+  const B0 = DATA.benchmark, wrap = document.getElementById('bm-section');
+  if(!B0 || B0.hidden){ wrap.style.display='none'; return; }
+  const B = Object.assign({}, B0, { columns: B0.columns.filter(c=>B0.rows.some(r=>typeof (r.values||{})[c.key]==='number')) });
   document.getElementById('bm-title').textContent = B.title;
   document.getElementById('bm-meta').textContent = `${B.period} · Source : ${B.source}`;
   const chipStyle = { "자사":"background:var(--olt);color:var(--odk)", "1군":"background:#E8F0FB;color:#1A56A0", "2군":"background:#EDEBE6;color:var(--ink2)" };
@@ -1694,19 +1730,28 @@ function renderBenchmark(){
   // 유입 채널
   const cats = B.sourceMix.categories, cols = B.sourceMix.colors;
   const legend = `<div style="display:flex;flex-wrap:wrap;gap:4px 12px;font-size:11.5px;color:var(--ink3);margin-bottom:6px">${cats.map((k,i)=>`<span style="display:inline-flex;align-items:center;gap:4px"><span class="legend-sw" style="width:8px;height:8px;background:${cols[i]};border-radius:2px"></span>${k}</span>`).join('')}</div>`;
-  document.getElementById('bm-mix').innerHTML = legend + B.rows.map(r=>{
+  const capt = B.sourceMix.caption ? `<div style="font-size:11.5px;color:var(--ink3);margin:-2px 0 8px">${B.sourceMix.caption}</div>` : '';
+  document.getElementById('bm-mix').innerHTML = legend + capt + B.rows.map(r=>{
     const name = `<div style="font-size:13.5px;${r.self?'font-weight:700;color:var(--odk)':'color:var(--ink2)'}">${r.company}${chip(r.group)}</div>`;
     if(!r.sources) return `<div class="bm-mix-row">${name}<div class="empty-row">입력 대기</div></div>`;
     const bars = cats.map((k,i)=> r.sources[k] ? `<div title="${k} ${r.sources[k]}%" style="width:${r.sources[k]}%;background:${cols[i]};display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;overflow:hidden">${r.sources[k]>=8?r.sources[k]+'%':''}</div>` : '').join('');
-    return `<div class="bm-mix-row">${name}<div style="display:flex;height:16px;border-radius:4px;overflow:hidden;background:var(--bd)">${bars}</div></div>`;
+    const vals = cats.map((k,i)=> r.sources[k]!=null ? `<span style="display:inline-flex;align-items:center;gap:3px;margin-right:10px;white-space:nowrap"><span class="legend-sw" style="width:8px;height:8px;background:${cols[i]};border-radius:2px"></span>${k} ${r.sources[k]}%</span>` : '').join('');
+    return `<div class="bm-mix-row">${name}<div><div style="display:flex;height:16px;border-radius:4px;overflow:hidden;background:var(--bd)">${bars}</div><div style="font-size:11.5px;color:var(--ink2);line-height:1.7;margin-top:3px">${vals}</div></div></div>`;
   }).join('');
 
-  // 검색 키워드
-  document.getElementById('bm-kw').innerHTML = B.rows.map(r=>{
-    const kws = (r.keywords||[]).slice(0,5);
-    const chips = kws.length ? kws.map(k=> typeof k==='string' ? `<span class="bm-kw-chip">${k}</span>` : `<span class="bm-kw-chip">${k.kw}${k.share!=null?` <span style="color:var(--ink4)">${k.share}%</span>`:''}</span>`).join('') : `<div class="empty-row">입력 대기</div>`;
-    return `<div class="bm-kw-card${r.self?' self':''}"><div style="font-size:13.5px;font-weight:600;color:${r.self?'var(--odk)':'var(--ink)'};margin-bottom:6px">${r.company}${chip(r.group)}</div>${chips}</div>`;
-  }).join('');
+  // 검색 키워드 비교: 비브랜드 자연검색 표 + 유료 검색 표
+  document.getElementById('bm-kw-scope').textContent = B.keywordScope || '';
+  const kwEl = document.getElementById('bm-kw');
+  kwEl.style.display = 'block';
+  const org = B.keywordsOrganic || [], paid = B.keywordsPaid || [];
+  const tblWrap = (title, head, body) => `<div style="margin-bottom:12px"><div style="font-size:12.5px;font-weight:600;color:var(--ink);margin:4px 0 6px">${title}</div><div style="overflow-x:auto"><table class="bm-table" style="margin-top:0"><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div></div>`;
+  kwEl.innerHTML =
+    (org.length ? tblWrap('비브랜드 자연검색 키워드 (클릭 상위)', '<th>키워드</th><th>클릭 수</th><th>5개사 내 클릭 점유</th>',
+      org.map(k=>`<tr${k.self?' class="self"':''}><td>${k.kw}</td><td>${k.clicks.toLocaleString('ko-KR')}</td><td style="text-align:left">${k.share}</td></tr>`).join('')) : '') +
+    (paid.length ? tblWrap('유료 검색 유입 키워드', '<th>회사</th><th>Paid 유입</th><th style="text-align:left">주요 검색어 (클릭 수)</th>',
+      paid.map(k=>`<tr${k.self?' class="self"':''}><td>${k.company}</td><td>${k.paid}</td><td style="text-align:left;white-space:normal">${k.terms}</td></tr>`).join('')) +
+      (B.keywordsPaidNote ? `<div style="font-size:11.5px;color:var(--ink3);margin-top:-6px">* ${B.keywordsPaidNote}</div>` : '') : '') ||
+    `<div class="empty-row">입력 대기</div>`;
 
   const lvTag = { green:'GREEN', yellow:'YELLOW', red:'RED' };
   const ins = B.insights || [];
@@ -1721,6 +1766,32 @@ function renderBenchmark(){
         </div>`).join('') : '<div class="empty-row">작성 예정</div>'}
     </div>`;
   document.getElementById('bm-note').innerHTML = B.note || '';
+
+  // 항목별 비교 그래프 (컬럼마다 가로 막대 1개) — 아코디언을 처음 펼칠 때 그림
+  const fmtVal = (v,c) => c.format==='duration' ? (Math.floor(v/60) ? `${Math.floor(v/60)}분 ${Math.round(v%60)}초` : `${Math.round(v)}초`)
+                        : c.format==='percent' ? `${Math.round(v*10)/10}%` : Math.round(v).toLocaleString('ko-KR');
+  document.getElementById('bm-charts').innerHTML = B.columns.filter(c=>B.rows.filter(r=>typeof (r.values||{})[c.key]==='number').length>=3).map(c=>{
+    const has = B.rows.some(r=>typeof (r.values||{})[c.key]==='number');
+    return `<div class="bm-chart-card"><div class="bm-chart-title">${c.label}</div>${has ? `<div style="position:relative;height:${B.rows.length*24+30}px"><canvas id="bm_c_${c.key}"></canvas></div>` : `<div class="empty-row">데이터 입력 후 표시</div>`}</div>`;
+  }).join('');
+  const colorOf = r => r.self ? '#F05A28' : r.group==='1군' ? '#1A56A0' : '#8FB0D9';
+  let drawn = false;
+  const draw = () => {
+    if(drawn || typeof Chart==='undefined') return; drawn = true;
+    B.columns.forEach(c=>{
+      const el = document.getElementById('bm_c_'+c.key); if(!el) return;
+      const rows = B.rows.filter(r=>typeof (r.values||{})[c.key]==='number');
+      new Chart(el,{ type:'bar',
+        data:{ labels: rows.map(r=>r.company), datasets:[{ data: rows.map(r=>r.values[c.key]), backgroundColor: rows.map(colorOf), borderRadius:3,
+          datalabels:{ anchor:'end', align:'right', color:'#444', font:{size:11.5,weight:'600'}, formatter:v=>fmtVal(v,c) } }] },
+        options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, layout:{padding:{right:56}},
+          plugins:{ legend:{display:false}, datalabels:{display:true}, tooltip:{callbacks:{label:d=>fmtVal(d.raw,c)}} },
+          scales:{ x:{ beginAtZero:true, grid:{color:'rgba(0,0,0,.05)'}, ticks:{font:{size:11},color:'#888',callback:v=>fmtVal(v,c)} },
+                   y:{ grid:{display:false}, ticks:{font:{size:12},color:ctx=>rows[ctx.index]&&rows[ctx.index].self?'#C03C10':'#444'} } } } });
+    });
+  };
+  const det = document.querySelector('#bm-section details');
+  if(det){ det.addEventListener('toggle', ()=>{ if(det.open) draw(); }); if(det.open) draw(); }
 }
 
 render();

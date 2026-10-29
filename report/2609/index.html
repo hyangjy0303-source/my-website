@@ -124,9 +124,8 @@ summary::-webkit-details-marker{display:none}
     <div>
       <div class="hd-eye">한화시스템 ICT부문 · 전략마케팅팀</div>
       <div class="hd-ttl">Digital Marketing <span>대시보드</span></div>
-      <!-- ⚠️ URL 패턴: https://hyangjy0303-source.github.io/my-website/report/YYMM/index.html (예: 10월호 = /report/2610/index.html)
-           이번 파일(2609호)은 발행 시 /report/2609/index.html 에 올려주세요 — 10월호의 '이전달' 링크가 이 주소를 가리키게 됩니다. -->
-      <a href="https://hyangjy0303-source.github.io/my-website/report/2608/index.html" style="display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--ink4);text-decoration:none;margin-top:6px">← 이전달(8월) 리포트</a>
+      <!-- 이전달/다음달 링크는 DATA.meta.reportCode 로 자동 계산됩니다 (renderNav 참고) -->
+      <div class="hd-nav" id="hd-nav"></div>
     </div>
     <div class="hd-r" id="hd-period"></div>
   </div>
@@ -688,6 +687,21 @@ const DATA = {
    ══════════════════════════════════════════════════════════════════════ */
 function fmtNum(n){ return n.toLocaleString('ko-KR'); }
 function pct1(n){ return (Math.round(n*10)/10) + '%'; }
+
+  /* 이전달/다음달 링크 자동 계산 — 다음달 링크는 다음달 보고서 기간이 끝난 뒤(그 달 16일)부터 노출 */
+function renderNav(){
+  const code = DATA.meta.reportCode;
+  const yy = +code.slice(0,2), mm = +code.slice(2,4);
+  const pad = n => String(n).padStart(2,'0');
+  const prev = mm===1 ? [yy-1,12] : [yy,mm-1];
+  const next = mm===12 ? [yy+1,1] : [yy,mm+1];
+  const url = ([y,m]) => `${DATA.meta.reportBaseUrl}${pad(y)}${pad(m)}/index.html`;
+  const prevUrl = DATA.meta.prevLinkUrlOverride || url(prev);
+  let html = `<a href="${prevUrl}">← 이전달(${prev[1]}월) 리포트</a>`;
+  const nextVisibleFrom = new Date(2000+next[0], next[1]-1, 16);
+  if(new Date() >= nextVisibleFrom) html += `<a href="${url(next)}">다음달(${next[1]}월) 리포트 →</a>`;
+  document.getElementById('hd-nav').innerHTML = html;
+}
 
 function render(){
   // 헤더

@@ -936,6 +936,7 @@ const DATA = {
 
   // 홈페이지 문의(VoC) — 누적 목록. 새 문의는 계속 추가만 하면 됨 (지우지 않음)
   //   date(접수일)가 meta 기간 안이면 → 상세 카드, 나머지 → 누적 표 (자동 분류)
+  //   종료된 건(고객 연락 두절·검토 중단 등)은 closed: true → 배지 "종료", F/U 진행 집계에서 제외
   //   상태가 바뀌면 answered / status / statusDate 만 수정 → statusDate 가 당월이면 누적 표에 '상태 변경' 표시
   // answered: true(Y, 답변 완료) | false(N, 미답변) | null(정리표 빈칸 = 현재 알 수 없음)
   voc: [
@@ -964,9 +965,9 @@ const DATA = {
       signals: "문의 이후 10/6 같은 부서·직급(ERP개발2팀 과장)에서 HARU(HCM) 다운로드 · 10/15 대외 뉴스레터 0호 2차 오픈 7회"
     },
     {
-      company: "이너시아", profile: "여성 헬스케어 기업 · 중소기업", date: "2026-09-11", statusDate: "2026-10-02", priority: "상",
+      company: "이너시아", profile: "여성 헬스케어 기업 · 중소기업", date: "2026-09-11", statusDate: "2026-10-29", priority: "상",
       solution: "해외물류 스마트솔루션 구축 견적 (미국권 우선, 물량 미확정)",
-      answered: false, status: "F/U 진행 결정",
+      answered: true, closed: true, status: "회신 후 고객이 더 이상 연락을 받지 않아 종료",
       owners: "이경록 · 김태환", sales: "영업1팀 김태환",
       groups: [
         { label: "커머스 운영 자동화", text: "상품·주문 관리, CRM, 프로모션 등 운영 기능과 물류 연동 자동화" },
@@ -1505,8 +1506,9 @@ function render(){
   const ansStyle = a => a===true ? 'background:#E6F3EA;color:#1D7A4F' : a===false ? 'background:#FFF6E0;color:#95650A' : 'background:#EDEBE6;color:var(--ink3)';
   document.getElementById('voc-wrap').style.display = vocs.length ? '' : 'none';
   const cur = vocs.filter(v=>inPeriod(v.date));
-  const cnt = k => vocs.filter(v=>v.answered===k).length;
-  const fu = vocs.filter(v=>v.sales).length;   // F/U 담당 영업이 지정된 건
+  const cnt = k => vocs.filter(v=>!v.closed && v.answered===k).length;
+  const closedN = vocs.filter(v=>v.closed).length;
+  const fu = vocs.filter(v=>v.sales && !v.closed).length;   // F/U 담당 영업이 지정된 진행 중 건 (종료 제외)
   // 요약 타일: 기본은 중립 회색, 핵심 지표 2개(당월 접수·F/U 진행)만 강조색
   const tile = (label, n, key) => key
     ? `<div style="background:var(--olt);border:1px solid var(--omid);border-radius:8px;padding:8px 12px;min-width:0"><div style="font-size:11.5px;color:var(--odk);font-weight:600">${label}</div><div style="font-size:22px;font-weight:700;color:var(--o);line-height:1.2">${n}<span style="font-size:12.5px;font-weight:500;color:var(--ink3);margin-left:2px">건</span></div></div>`
@@ -1519,6 +1521,7 @@ function render(){
     tile('고객 미답변', cnt(false)) +
     (cnt(null) ? tile('답변 여부 미확인', cnt(null)) : '') +   // 미확인 건이 있을 때만 표시
     tile('F/U 진행', fu, true) +
+    (closedN ? tile('종료', closedN) : '') +
     `</div>`;
   document.getElementById('voc-list').innerHTML = cur.length ? cur.map(v=>`
     <div class="voc-card">
@@ -1526,7 +1529,7 @@ function render(){
         <span style="font-size:14px;font-weight:600;color:var(--ink)">${v.company}</span>
         <span style="font-size:11.5px;color:var(--ink3);background:#EDEBE6;border-radius:8px;padding:1px 7px">${v.profile}</span>
         <span class="voc-badge" style="background:var(--olt);color:var(--odk)">우선순위 ${v.priority}</span>
-        <span class="voc-badge" style="${ansStyle(v.answered)}">${ansLabel(v.answered)}</span>
+        <span class="voc-badge" style="${v.closed?'background:#E4E1DB;color:var(--ink2)':ansStyle(v.answered)}">${v.closed?'종료':ansLabel(v.answered)}</span>
         <span style="font-size:11.5px;color:var(--ink3);margin-left:auto">접수 ${md(v.date)}</span>
       </div>
       <div class="voc-row"><span class="voc-k">관심 솔루션</span><span class="voc-v" style="font-weight:500;color:var(--ink)">${v.solution}</span></div>
@@ -1543,7 +1546,7 @@ function render(){
       const tags = (inPeriod(v.date) ? `<span class="voc-tag" style="background:#E6F3EA;color:#1D7A4F">당월</span>` : '') +
                    (!inPeriod(v.date) && inPeriod(v.statusDate) ? `<span class="voc-tag" style="background:var(--olt);color:var(--odk)">상태 변경</span>` : '');
       return `<tr><td class="nw">${md(v.date)}</td><td class="nw"><b style="color:var(--ink);font-weight:600">${v.company}</b>${tags}</td><td>${v.solution}</td><td class="nw">${v.priority}</td>
-        <td class="nw"><span class="voc-badge" style="${ansStyle(v.answered)}">${ansLabel(v.answered)}</span></td>
+        <td class="nw"><span class="voc-badge" style="${v.closed?'background:#E4E1DB;color:var(--ink2)':ansStyle(v.answered)}">${v.closed?'종료':ansLabel(v.answered)}</span></td>
         <td>${v.status ? `<span style="font-weight:600;color:var(--odk)">${(v.statusDate?md(v.statusDate)+' ':'')+v.status}</span>${v.sales?`<div style="font-size:11.5px;color:var(--ink3)">F/U ${v.sales}</div>`:''}` : '-'}</td></tr>`;
     }).join('') + `</tbody>`;
 

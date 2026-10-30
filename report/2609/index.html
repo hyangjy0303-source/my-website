@@ -20,6 +20,9 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
 .hd-ttl{font-size:34px;font-weight:700;letter-spacing:-.03em;line-height:1.15}
 .hd-ttl span{color:var(--o)}
 .hd-r{text-align:right;font-size:13px;color:var(--ink3);line-height:2}
+.hd-nav{display:flex;gap:14px;margin-top:6px}
+.hd-nav a{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;color:var(--ink4);text-decoration:none}
+.hd-nav a:hover{color:var(--ink2)}
 .kpi{display:grid;grid-template-columns:repeat(4,1fr);border:2px solid var(--o);border-radius:14px;overflow:hidden;background:var(--white);margin-bottom:24px}
 .kc{padding:24px 26px;border-right:1px solid var(--bd);position:relative}
 .kc:last-child{border-right:none}
@@ -411,7 +414,10 @@ const DATA = {
   meta: {
     yearMonth: "2026년 9월",                       // 보고서 표지에 쓰이는 연월
     periodLine1: "2026년 8월 16일 – 9월 15일",       // 기간 (당월 16일~익월 15일 원칙)
-    footerDate: "2026년 9월 · 내부 보고용"
+    footerDate: "2026년 9월 · 내부 보고용",
+    reportCode: "2609",                                                   // YYMM — 이전/다음달 링크 계산 기준
+    reportBaseUrl: "https://hyangjy0303-source.github.io/my-website/report/",
+    prevLinkUrlOverride: null                                             // 이전달 주소가 규칙과 다를 때만 전체 URL 입력
   },
 
   kpi: {
@@ -1239,7 +1245,7 @@ function renderCharts(){
     });
   }
 }
-
+renderNav();
 render();
 renderCharts();
 

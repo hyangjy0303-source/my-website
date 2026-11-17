@@ -439,6 +439,27 @@ summary::-webkit-details-marker{display:none}
             <div style="font-size:11.5px;color:var(--ink4);margin-top:6px">* 정렬 기준: 총 다운로드 건수 → 동률 시 최근 활동일<br>* 인원수: 개인 식별자가 없어 소속+직급 조합 기준 추정치</div>
           </div>
         </details>
+      <!-- 리드 후보 — 아코디언 (기본 접힘) -->
+      <details class="lead-acc" id="lead-acc" style="margin:12px 0 0">
+        <summary class="lead-acc-sum"><span class="lead-acc-arrow">▶</span><span id="lead-acc-title">🎯 리드 후보</span></summary>
+      <div style="font-size:12.5px;color:var(--ink3);margin:10px 0 0">자료 다운로드(대내+대외)·뉴스레터 로그를 종합해, <strong>복수 접점이 확인되거나 여러 자료를 받아간 경우</strong>(제품 전반을 검토 중인 신호)를 우선 선별했습니다.</div>
+      <div class="lead-grid" style="margin-top:10px">
+        <div>
+          <div class="lead-col-hd">🎯 리드 후보 — 대내(계열사) <span id="bd-leads-internal-n"></span></div>
+          <div id="bd-leads-internal"></div>
+        </div>
+        <div>
+          <div class="lead-col-hd">🎯 리드 후보 — 대외 <span id="bd-leads-external-n"></span> <span style="font-weight:400;color:var(--ink4);letter-spacing:0">(매출 규모 순)</span></div>
+          <div id="bd-leads-external"></div>
+        </div>
+      </div>
+      <div class="dv" style="margin:14px 0"></div>
+
+      <div style="font-size:12.5px;font-weight:600;color:var(--ink3);margin-bottom:8px;letter-spacing:.02em">⚠️ 참고 — 경쟁 SI 벤치마킹 추정 (영업 리드 아님)</div>
+      <div id="bd-competitors"></div>
+
+      <div class="ib gray" id="bd-note" style="margin-top:14px"></div>
+      </details>
       </div>
     </div>
   </div>
@@ -568,35 +589,14 @@ summary::-webkit-details-marker{display:none}
     </div>
   </div>
 
-  <div style="display:flex;align-items:center;gap:8px;margin:20px 0 10px">
+  <div id="bd-b-head" style="display:flex;align-items:center;gap:8px;margin:20px 0 10px">
     <span style="width:22px;height:22px;border-radius:50%;background:#1D7A4F;color:#fff;font-size:13.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">B</span>
-    <span style="font-size:14px;font-weight:700;color:var(--ink)">BD/영업 참고 — 리드 후보 · 경쟁 SI</span>
+    <span style="font-size:14px;font-weight:700;color:var(--ink)">BD/영업 참고 — 이벤트 후속 F/up</span>
   </div>
-  <div class="ch">
+  <div class="ch" id="bd-b-sec">
     <div class="chb" style="display:block;border-left-color:#1D7A4F;background:#F7FBF8">
 
 
-      <!-- 리드 후보 — 아코디언 (기본 접힘) -->
-      <details class="lead-acc" id="lead-acc">
-        <summary class="lead-acc-sum"><span class="lead-acc-arrow">▶</span><span id="lead-acc-title">🎯 리드 후보</span></summary>
-      <div style="font-size:12.5px;color:var(--ink3);margin:10px 0 0">자료 다운로드(대내+대외)·뉴스레터 로그를 종합해, <strong>복수 접점이 확인되거나 여러 자료를 받아간 경우</strong>(제품 전반을 검토 중인 신호)를 우선 선별했습니다.</div>
-      <div class="lead-grid" style="margin-top:10px">
-        <div>
-          <div class="lead-col-hd">🎯 리드 후보 — 대내(계열사) <span id="bd-leads-internal-n"></span></div>
-          <div id="bd-leads-internal"></div>
-        </div>
-        <div>
-          <div class="lead-col-hd">🎯 리드 후보 — 대외 <span id="bd-leads-external-n"></span> <span style="font-weight:400;color:var(--ink4);letter-spacing:0">(매출 규모 순)</span></div>
-          <div id="bd-leads-external"></div>
-        </div>
-      </div>
-      <div class="dv" style="margin:14px 0"></div>
-
-      <div style="font-size:12.5px;font-weight:600;color:var(--ink3);margin-bottom:8px;letter-spacing:.02em">⚠️ 참고 — 경쟁 SI 벤치마킹 추정 (영업 리드 아님)</div>
-      <div id="bd-competitors"></div>
-
-      <div class="ib gray" id="bd-note" style="margin-top:14px"></div>
-      </details>
 
 
       <!-- 이벤트 후속 F/up: DATA.axFollowup 이 null 이면 이 블록 전체가 숨겨집니다 -->
@@ -892,7 +892,7 @@ const DATA = {
   sns: {
     summary: [
       "당월 게시물 4건, 노출 5,904 · 도달 3,594, 평균 참여율 13.38%(마케팅 누적 평균 14.97%)",
-      "사례 기반 게시물 3건 참여율 14.3~15.8%, HX레터 구독 안내 게시물 8.4%로 당월 최저"
+      "홈페이지 인기 리포트(온톨로지·Physical AI·MMDM) 기반 게시물 3건 참여율 14.3~15.8%, HX레터 구독 안내 게시물 8.4%로 당월 최저"
     ],
     // ✅ LinkedIn 집계표 기준 — 당월(10/16~11/15) 마케팅 게시물 4건 / 누적(6/12~11/15) 22건
     //    도달은 집계표 당월·누적 값이 서로 바뀌어 기재된 것으로 보고 정정(당월 3,594 · 누적 35,862)
@@ -934,11 +934,11 @@ const DATA = {
     // ✅ 11월 인사이트. 순서: green → yellow → red / em-dash 앞에는 <br>
     marketing: [
       { level: "green", title: "AI 검색 유입 20.2%·검색엔진 유입 9.4% 증가, 검색 경유 VoC 문의까지 연결", desc: "AI 검색 세션 10월 243건에서 11월 292건으로 20.2% 증가, 유입 비중 4.1%에서 4.4%로 상승(ChatGPT 266건)<br>· 검색엔진 세션도 1,876건에서 2,053건으로 9.4% 증가<br>· 당월 접수 홈페이지 문의 2건(KDB생명보험·AI KOREA) 모두 검색엔진 검색으로 유입<br>— AI 검색 유입 확대를 목표로 진행 중인 홈페이지 최적화(SEO·GEO)의 효과가 세션 증가를 넘어 실제 고객 문의 유입으로까지 이어지고 있어, 검색 채널이 신규 고객 접점으로 자리잡는 흐름" },
-      { level: "green", title: "대외 자료 다운로드 기업·기관 13곳으로 확대, 그룹 계열 경쟁 SI까지 자료 탐색", desc: "코오롱인더스트리·한국콜마 등 제조 기업 중심으로 대외 고객 다운로드 13곳 등 대외 자료 다운로드 확대<br>· LG CNS·롯데이노베이트·CJ올리브네트웍스·현대오토에버가 온톨로지·Agentic AI·Smart Factory·HARU(HCM)·프라이빗 GPUaaS 자료 다운로드<br>· 그간 중소 IT·SW사 위주에서 그룹 계열 IT서비스사로 확대<br>— 홈페이지 최적화와 솔루션 콘텐츠 강화를 이어오는 가운데, 대외 고객뿐 아니라 주요 경쟁 SI까지 당사 주력 솔루션 자료를 찾아볼 만큼 한화시스템/ICT 홈페이지가 업계에 알려지고 있음" },
-      { level: "green", title: "홈페이지 뷰 데이터로 발굴한 '고객사례', 원소스 멀티유즈로 전 채널 반응 확인", desc: "[발굴] 홈페이지 뷰 데이터 분석으로 '고객사례'를 핵심 콘텐츠로 선정 → 고객사례집으로 정리해 대외 뉴스레터 창간호·LinkedIn 콘텐츠로 원소스 멀티유즈<br>· [홈페이지] 고객사례 뷰 1,237세션 → 1,767세션(+42.8%) 인기 페이지 1위, 고객사례 목록 408세션 4위<br>· [대외 뉴스레터] 고객사례집 창간호 열람률 40.6% · 클릭률 15.7%, 사례집 다운로드 30명(71건)<br>· [LinkedIn] 사례 기반 게시물 3건(온톨로지·Physical AI·MMDM) 참여율 14.3~15.8%<br>— 데이터 기반 콘텐츠 발굴 → 원소스 멀티유즈 운영으로 홈페이지 방문·뉴스레터 다운로드·SNS 참여까지 전 채널에서 반응을 확인해 사례 기반 콘텐츠 확대의 근거 확보, 사례 페이지에서 다운로드·문의로 이어지는 동선 보완은 병행 필요" },
+      { level: "green", title: "대외 자료 다운로드 기업·기관 13곳으로 확대, 그룹 계열 경쟁 SI까지 자료 탐색", desc: "코오롱인더스트리·한국콜마 등 제조 기업 중심으로 대외 고객 다운로드 13곳 등 대외 자료 다운로드 확대<br>· LG CNS·롯데이노베이트·CJ올리브네트웍스·현대오토에버가 온톨로지·Agentic AI·Smart Factory·HARU(HCM)·프라이빗 GPUaaS 자료 다운로드<br>— 홈페이지 최적화와 솔루션 콘텐츠 강화를 이어오는 가운데, 대외 고객뿐 아니라 주요 경쟁 SI까지 당사 주력 솔루션 자료를 찾아볼 만큼 한화시스템/ICT 홈페이지가 업계에 알려지고 있음" },
+      { level: "green", title: "홈페이지 데이터로 발굴한 콘텐츠, 원소스 멀티유즈로 전 채널 반응 확인", desc: "홈페이지 뷰 데이터로 '고객사례'·인기 리포트(온톨로지·Physical AI·MMDM)를 선정 → 뉴스레터 창간호(고객사례집)·LinkedIn으로 원소스 멀티유즈<br>· 고객사례 뷰 +42.8%(인기 1위) · 창간호 사례집 다운로드 30명 · LinkedIn 해당 게시물 참여율 14.3~15.8%<br>— 데이터 기반 콘텐츠 발굴·원소스 멀티유즈로 전 채널 반응을 확인해 콘텐츠 확대의 근거를 확보했으며, 사례 페이지의 다운로드·문의 동선 보완은 병행 필요" },
       { level: "yellow", title: "2027년 검색 광고 키워드 운영 준비, 고객 반응 주제 중심으로 전략 키워드 검토 중", desc: "Smart Factory·제조 DI·AI Agent·MRO·제조 데이터·AX 등 홈페이지·뉴스레터 분석을 통해 고객 반응이 확인된 키워드 중심 검토 중<br>— 2027년 검색 광고 운영을 앞두고, 채널별 고객 반응 추이를 지속적으로 주시하며 전략 키워드 후보를 검토하고 있음" },
-      { level: "red", title: "인사이트 리포트 발간 보류로 신규 게시 공백, 조회 대비 다운로드 전환 약 2%", desc: "11월 초 발간 예정이던 정보보안 인사이트 리포트가 정보보호사무국의 요청(개인정보 이슈)으로 발간 보류<br>· 리포트 상세(뷰) 572세션 대비 다운로드 13건<br>— 신규 게시 공백 기간에 리포트 목록 페이지가 인기 페이지 7위 → 10위로 하락해 업데이트 주기가 목록 유입에 일정 부분 영향을 주는 것으로 보여 주기적인 발간·게시가 중요하며, 상세 페이지 방문 대비 다운로드 전환은 낮아 진행 중인 인사이트 리포트 뷰 UI/UX 고도화에서 다운로드 버튼 위치·신청 절차 등 전환 동선 개선이 과제임" },
-      { level: "red", title: "LinkedIn 당월 평균 참여율 13.38%(누적 평균 14.97%), HX레터 구독 안내 게시물 8.4%로 최저", desc: "당월 마케팅 게시물 4건 평균 참여율 13.38%(10월 18.41%)<br>· 사례 기반 게시물 3건은 14.3~15.8%로 누적 평균 수준, HX레터 소개(구독 안내) 게시물은 참여율 8.4% · 클릭률 6.71%<br>— 구독을 직접 요청하는 홍보형 게시물의 낮은 반응이 당월 평균 하락으로 이어져, 구독 유도는 직접적인 방식보다 다른 방향의 검토·기획이 필요함" }
+      { level: "red", title: "인사이트 리포트 발간 보류로 신규 게시 공백, 조회 대비 다운로드 전환 약 2%", desc: "11월 초 발간 예정이던 정보보안 인사이트 리포트가 정보보호사무국의 요청(개인정보 이슈)으로 발간 보류<br>· 기존 리포트 상세 페이지 방문은 572세션으로 이어졌으나, 다운로드는 13건(약 2%)에 그침<br>— 신규 게시 공백 기간에 리포트 목록 페이지가 인기 페이지 7위 → 10위로 하락해 업데이트 주기가 목록 유입에 일정 부분 영향을 주는 것으로 보여 주기적인 발간·게시가 중요하며, 상세 페이지 방문 대비 다운로드 전환은 낮아 진행 중인 인사이트 리포트 뷰 UI/UX 고도화에서 다운로드 버튼 위치·신청 절차 등 전환 동선 개선이 과제임" },
+      { level: "red", title: "LinkedIn 당월 평균 참여율 13.38%(누적 평균 14.97%), HX레터 구독 안내 게시물 8.4%로 최저", desc: "당월 마케팅 게시물 4건 평균 참여율 13.38%(10월 18.41%)<br>· 홈페이지 인기 리포트(온톨로지·Physical AI·MMDM) 기반 게시물 3건은 14.3~15.8%로 누적 평균 수준, HX레터 소개(구독 안내) 게시물은 참여율 8.4% · 클릭률 6.71%<br>— 구독을 직접 요청하는 홍보형 게시물의 낮은 반응이 당월 평균 하락으로 이어져, 구독 유도는 직접적인 방식보다 다른 방향의 검토·기획이 필요함" }
     ]
   },
 
@@ -1545,7 +1545,7 @@ function render(){
   // 대외 뉴스레터 — 직군별 분석 아코디언
   { const SA = DATA.newsletterExternal && DATA.newsletterExternal.segmentAnalysis, el = document.getElementById('nle-seg');
     if(!SA){ if(el) el.style.display='none'; } else {
-      document.getElementById('nle-seg-title').innerHTML = `📊 ${SA.title} <span style="font-weight:400;color:var(--ink3)">— 클릭해서 펼치기</span>`;
+      document.getElementById('nle-seg-title').innerHTML = `📊 ${SA.title}`;
       const tbl = (head, rows, leftCols=[0], foot=null) => `<div style="overflow-x:auto"><table class="seg-tbl"><thead><tr>${head.map((h,i)=>`<th${leftCols.includes(i)?' style="text-align:left"':''}>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map((v,i)=>`<td${leftCols.includes(i)&&i>0?' class="l"':''}>${v}</td>`).join('')}</tr>`).join('')}</tbody>${foot?`<tfoot><tr>${foot.map((v,i)=>`<td${leftCols.includes(i)&&i>0?' class="l"':''}>${v}</td>`).join('')}</tr></tfoot>`:''}</table></div>`;
       // 합계 행 자동 계산 — 숫자 열은 합산, "x% (N명)" 열은 N 합산 후 직전 발송 열 합계로 비율 재계산
       const sumRow = (rows) => { let base = 0; return rows[0].map((_,i)=>{
@@ -1640,7 +1640,7 @@ function render(){
   renderLeadCol(DATA.bdLeads.filter(l=>l.segTag.startsWith('대내')), 'bd-leads-internal');
   renderLeadCol(DATA.bdLeads.filter(l=>!l.segTag.startsWith('대내')), 'bd-leads-external');
   { const nI = DATA.bdLeads.filter(l=>l.segTag.startsWith('대내')).length, nE = DATA.bdLeads.length - nI;
-    document.getElementById('lead-acc-title').innerHTML = `🎯 리드 후보 · 경쟁 SI 참고 <span style="font-weight:400;color:var(--ink3)">대외 ${nE}곳(매출 규모 순) · 대내 ${nI ? nI+'곳' : '당월 해당 없음'} · 경쟁 SI ${DATA.bdCompetitors.length}곳 — 클릭해서 펼치기</span>`; }
+    document.getElementById('lead-acc-title').innerHTML = `🎯 리드 후보 <span style="font-weight:400;color:var(--ink3)">대외 ${nE}곳(매출 규모 순) · 대내 ${nI ? nI+'곳' : '당월 해당 없음'} · 경쟁 SI ${DATA.bdCompetitors.length}곳</span>`; }
   // 대내 리드가 없으면 대내는 한 줄로 줄이고 대외 카드를 두 칸(2열)으로 펼침
   if(!DATA.bdLeads.some(l=>l.segTag.startsWith('대내'))){
     document.querySelector('.lead-grid').style.gridTemplateColumns = '1fr';
@@ -1715,6 +1715,7 @@ function render(){
   // 이벤트 후속 F/up (없으면 숨김)
   const ax = DATA.axFollowup;
   const axWrap = document.getElementById('ax-followup-wrap');
+  { const show = !!DATA.axFollowup; ['bd-b-head','bd-b-sec'].forEach(id=>{ const e=document.getElementById(id); if(e) e.style.display = show?'':'none'; }); }
   if(!ax || ax.hidden){ axWrap.style.display='none'; }
   else {
     const renderFollowup = rows => rows.map(p => `

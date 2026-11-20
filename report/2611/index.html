@@ -1091,14 +1091,28 @@ const DATA = {
   // answered: true(Y, 답변 완료) | false(N, 미답변) | null(정리표 빈칸 = 현재 알 수 없음)
   // ✅ 2611: 10/16 이후 신규 2건(KDB생명보험·AI KOREA) 반영, 기존 3건 상태 변경 없음
   vocSummary: [
-    "당월 신규 문의 2건(KDB생명보험·AI KOREA), 모두 검색엔진 검색으로 유입",
-    "KDB생명보험은 사업 범위상 참여 불가로 종료, AI KOREA는 구매/물류사업팀 F/U 진행 중"
+    "당월 신규 문의 2건(KDB생명보험·AI KOREA)에 보고 기간 이후 슈프리마(그룹웨어 교체 검토) 1건 추가 접수, 3건 모두 검색엔진 검색으로 유입",
+    "KDB생명보험은 사업 범위상 참여 불가로 종료, AI KOREA는 11/18 초도 미팅 진행 · 피에스케이는 11/27까지 제안서 발송 예정"
   ],
   voc: [
     {
-      company: "AI KOREA", profile: "산업 자동화 설비 공급 기업 · 중소기업", date: "2026-11-12", statusDate: "2026-11-12", priority: "중",
+      company: "슈프리마", profile: "정보시스템팀 · 주임 문의", date: "2026-11-18", statusDate: "2026-11-18", priority: "상",
+      solution: "코비젼 그룹웨어(구축형) → 한화 그룹웨어(Cleverse) 교체 검토 (약 500명, 2027년 목표, 구축형)",
+      answered: false, status: "그룹웨어사업팀 F/U 담당자 지정 중",
+      owners: "황진석 · 김찬린 · 노경숙", sales: "영업2팀 김찬린 · 황진석",
+      groups: [
+        { label: "가견적", text: "약 500명·구축형(On-premise) 기준, 라이선스·설치 구축·연간 유지보수 비용 분리, 서버 등 인프라 권장 사양" },
+        { label: "현재 사용 기능", text: "전자결재(자체 양식·사내 시스템 연동), 조직도, 게시판·공지, 일정, 메일(Exchange 연동), 근태·외근, 모바일(결재·알림)" },
+        { label: "추가 확인", text: "전자결재 양식·결재 후 외부 연동 직접 수정·개발 방법, 조직 변경 시 결재자 자동 반영, 기존 결재 문서 이관 지원" },
+        { label: "요청", text: "가견적과 함께 온라인 미팅·데모 일정 문의 (소개서 확인 후 문의)" }
+      ],
+      raw: [],
+      signals: "유입 경로: 검색엔진 검색(구글·네이버·Bing 등)"
+    },
+    {
+      company: "AI KOREA", profile: "산업 자동화 설비 공급 기업 · 중소기업", date: "2026-11-12", statusDate: "2026-11-16", priority: "중",
       solution: "스마트팩토리 및 창고 물류자동화 솔루션 (화장품 회사 창고·공장 물류자동화)",
-      answered: false, status: "구매/물류사업팀 컨택 후 진행 여부 판단, 필요 시 유관부서 요청",
+      answered: false, status: "구매/물류사업팀 컨택 · 11/18(수) 고객사 영업 상무와 협업 방안 초도 미팅 진행",
       owners: "조병길(구매/물류기술팀) · 고형석(구매/물류사업팀)", sales: "구매/물류사업팀 고형석",
       groups: [ { label: "문의 내용", text: "화장품 회사 창고 물류자동화·스마트팩토리 공장 물류자동화 솔루션 도입 및 협업을 위한 HW·SW·컨설팅 관련 미팅 요청" } ],
       raw: [],
@@ -1117,9 +1131,9 @@ const DATA = {
       signals: "유입 경로: 검색엔진 검색(구글·네이버·Bing 등)"
     },
     {
-      company: "대상정보기술", profile: "대상그룹 IT계열사 · 중견기업", date: "2026-09-18", statusDate: "2026-10-14", priority: "상",
+      company: "대상정보기술", profile: "대상그룹 IT계열사 · 중견기업", date: "2026-09-18", statusDate: "2026-11-12", priority: "상",
       solution: "SAP S/4HANA PCE HCM → 한화 인사솔루션(HARU) 전환 (검토 배경: SAP 유지비용 부담)",
-      answered: true, status: "고객 메일 회신 · 오프라인 회의 제안 (F/U 진행)",
+      answered: true, closed: true, status: "잠정 종료 — 고객사 검토 초기 단계로 실제 추진까지 시간이 걸릴 것으로 회신, 향후 진행 시 재연락하기로 함",
       owners: "박성문 · 김성원 · 강대성 · 장주호", sales: "영업2팀 김환희 · 김찬린",
       groups: [
         { label: "구현 범위", text: "현재 기능 전체 전환 가능 여부, SAP BSP 기반 화면 구현, 연말정산 패치·모바일 기능" },
@@ -1162,10 +1176,10 @@ const DATA = {
       signals: ""
     },
     {
-      company: "피에스케이", profile: "반도체 공정 장비생산 기업 · 중견기업", date: "2026-09-02", statusDate: "2026-10-19", priority: "상",
+      company: "피에스케이", profile: "반도체 공정 장비생산 기업 · 중견기업", date: "2026-09-02", statusDate: "2026-11-17", priority: "상",
       solution: "WMS 개발",
-      answered: true, status: "구매/물류사업팀과 관리체계 전반 진단 제안, 고객 내부 검토 중(Cold call 접수 건으로 고객 검토 초기 단계)",
-      owners: "이경록 · 김태환 · 이예원", sales: "영업1팀 문화규 · 김태환",
+      answered: true, status: "11/20(금) 추가 미팅 예정, ~11/27 제안서 발송 예정 (10/19 구매/물류사업팀과 관리체계 전반 진단 제안 후 고객 내부 검토)",
+      owners: "이경록 · 김태환 · 이예원", sales: "구매/물류사업팀 홍승진 · 영업2팀 장승호",
       groups: [ { label: "문의 내용", text: "WMS 개발 관련 문의" } ],
       raw: [],
       signals: ""
@@ -1696,7 +1710,9 @@ function render(){
   const ansLabel = a => a===true ? '고객 답변 완료' : a===false ? '고객 미답변' : '답변 여부 미확인';
   const ansStyle = a => a===true ? 'background:#E6F3EA;color:#1D7A4F' : a===false ? 'background:#FFF6E0;color:#95650A' : 'background:#EDEBE6;color:var(--ink3)';
   document.getElementById('voc-wrap').style.display = vocs.length ? '' : 'none';
+  const after = d => d && d > DATA.meta.periodEnd;   // 보고 기간 이후 접수 — 상세 카드로 함께 표시, 당월 접수 집계에는 미포함
   const cur = vocs.filter(v=>inPeriod(v.date));
+  const cards = vocs.filter(v=>after(v.date)).concat(cur);
   const cnt = k => vocs.filter(v=>!v.closed && v.answered===k).length;
   const closedN = vocs.filter(v=>v.closed).length;
   const fu = vocs.filter(v=>v.sales && !v.closed).length;   // F/U 담당 영업이 지정된 진행 중 건 (종료 제외)
@@ -1714,13 +1730,14 @@ function render(){
     tile('F/U 진행', fu, true) +
     (closedN ? tile('종료', closedN) : '') +
     `</div>`;
-  document.getElementById('voc-list').innerHTML = cur.length ? cur.map(v=>`
+  document.getElementById('voc-list').innerHTML = cards.length ? cards.map(v=>`
     <div class="voc-card">
       <div class="voc-hd">
         <span style="font-size:14px;font-weight:600;color:var(--ink)">${v.company}</span>
         <span style="font-size:11.5px;color:var(--ink3);background:#EDEBE6;border-radius:8px;padding:1px 7px">${v.profile}</span>
         <span class="voc-badge" style="background:var(--olt);color:var(--odk)">우선순위 ${v.priority}</span>
         <span class="voc-badge" style="${v.closed?'background:#E4E1DB;color:var(--ink2)':ansStyle(v.answered)}">${v.closed?'종료':ansLabel(v.answered)}</span>
+        ${after(v.date)?`<span class="voc-badge" style="background:#E8EEF8;color:#1A56A0">보고 기간 이후 접수</span>`:''}
         <span style="font-size:11.5px;color:var(--ink3);margin-left:auto">접수 ${md(v.date)}</span>
       </div>
       <div class="voc-row"><span class="voc-k">관심 솔루션</span><span class="voc-v" style="font-weight:500;color:var(--ink)">${v.solution}</span></div>
@@ -1735,6 +1752,7 @@ function render(){
     `<thead><tr><th>접수</th><th>기업</th><th>관심 솔루션</th><th>우선</th><th>고객 답변</th><th>상태</th></tr></thead><tbody>` +
     vocs.map(v=>{
       const tags = (inPeriod(v.date) ? `<span class="voc-tag" style="background:#E6F3EA;color:#1D7A4F">당월</span>` : '') +
+                   (after(v.date) ? `<span class="voc-tag" style="background:#E8EEF8;color:#1A56A0">기간 이후</span>` : '') +
                    (!inPeriod(v.date) && inPeriod(v.statusDate) ? `<span class="voc-tag" style="background:var(--olt);color:var(--odk)">상태 변경</span>` : '');
       return `<tr><td class="nw">${md(v.date)}</td><td class="nw"><b style="color:var(--ink);font-weight:600">${v.company}</b>${tags}</td><td>${v.solution}</td><td class="nw">${v.priority}</td>
         <td class="nw"><span class="voc-badge" style="${v.closed?'background:#E4E1DB;color:var(--ink2)':ansStyle(v.answered)}">${v.closed?'종료':ansLabel(v.answered)}</span></td>
